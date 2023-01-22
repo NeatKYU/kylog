@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
+import useSWR from 'swr';
 import { LoginForm } from '@/components/login/loginForm';
 import styled from 'styled-components';
+import { loginFetcher } from '@/lib/axios';
 
-export default function login() {
+export default function Login() {
+
+	// const { data, error } = useSWR('/api/auth/login', () => loginFetcher('/api/auth/login', 'test', 'teest1234'));
+
 	return (
 		<Container>
 			<LoginForm/>
