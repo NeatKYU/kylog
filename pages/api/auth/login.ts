@@ -1,6 +1,8 @@
 import type {NextApiRequest, NextApiResponse} from "next";
 import { findUser } from '@/lib/users';
 import { header as jwtHeader, genToken } from '@/lib/jwt';
+import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
+import { serialize } from 'cookie';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
@@ -28,10 +30,21 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			const accessToken = genToken(jwtHeader, payload)
 			const refreshToken = genToken(jwtHeader, refreshPayload)
 
+			const accessCokie = serialize(ACCESSTOKEN, accessToken, {
+				httpOnly: true,
+				path: "/",
+			});
+			const refreshCokie = serialize(REFRESHTOKEN, refreshToken, {
+				httpOnly: true,
+				path: "/",
+			});
+
+			res.setHeader("Set-Cookie", [accessCokie, refreshCokie]);
+
 			return res.status(200).json(
 				{
 					access_token: accessToken,
-					refreshToken: refreshToken
+					refresh_token: refreshToken
 				}
 			);
 		} else {

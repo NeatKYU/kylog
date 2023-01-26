@@ -41,7 +41,7 @@ export const LoginForm = () => {
 			<CustomInput type='password' placeholder='비밀번호를 입력해주세요.' onChange={handlePassword}/>
 			{/* 빈 공간 */}
 			<SizedBox h='20px'/>
-			<div style={{width: '100%', height: '1px', backgroundColor: 'white', }}></div>
+			<div style={{width: '100%', height: '1px', backgroundColor: 'white'}}></div>
 			<SizedBox h='20px'/>
 			{/* 버튼 자리 */}
 			<CustomButton widthFull title={'로그인'} onClick={handleLogin}/>
