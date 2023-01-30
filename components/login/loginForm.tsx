@@ -1,6 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import cutsomAxios from '@/lib/customAxios';
 import { useRouter } from 'next/router';
 import { toRem } from '@/lib/helper';
 import { CustomButton } from '../common/CustomButton';
@@ -22,7 +23,7 @@ export const LoginForm = () => {
 	}
 
 	const handleLogin = async () => {
-		await axios.post('/api/auth/login', {
+		await cutsomAxios.post('/api/auth/login', {
 			name: id,
 			password: password
 		}).then((result) => {

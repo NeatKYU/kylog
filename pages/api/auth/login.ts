@@ -4,6 +4,12 @@ import { header as jwtHeader, genToken } from '@/lib/jwt';
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
 import { serialize } from 'cookie';
 
+/**
+ * api/auht/login api 핸들링 함수
+ * 토큰을 생성해서 쿠키에 넣어주는 역할
+ * @param req NextApiRequest
+ * @param res NextApiResponse
+ */
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
 
 	const {name, password} = req.body;
