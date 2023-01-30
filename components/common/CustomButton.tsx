@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { toRem } from '@/lib/helper';
+import React from 'react';
 
 interface CustomButtonProps {
 	size: 'small' | 'middle' | 'large';
@@ -7,14 +8,15 @@ interface CustomButtonProps {
 	buttonTheme: 'dark' | 'white';
 	title: string;
 	outlined: boolean;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const CustomButton = (props: CustomButtonProps) => {
 
-	const { size, buttonTheme, title, widthFull } = props;
+	const { size, buttonTheme, title, widthFull, onClick } = props;
 
 	return (
-		<Container buttonTheme={buttonTheme} size={size} widthFull={widthFull}>
+		<Container buttonTheme={buttonTheme} size={size} widthFull={widthFull} onClick={onClick}>
 			{title}
 		</Container>
 	)
