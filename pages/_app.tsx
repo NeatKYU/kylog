@@ -4,12 +4,15 @@ import { ThemeProvider } from 'styled-components';
 import theme from '@/styles/theme'; 
 import GlobalStyle from '@/styles/GlobalStyle';
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
+import { Layout } from '@/components/layout';
 
 function App({ Component, pageProps }: AppProps){
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </ThemeProvider>
   )
 }
