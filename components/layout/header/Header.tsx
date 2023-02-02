@@ -5,19 +5,17 @@ import { CustomButton } from '@/components/common/CustomButton';
 interface HeaderProps {
 	logo: string;
 	title: string;
-	menuList: string[];
+	children: React.ReactNode;
 }
 
-export const Header = ({ logo, title, menuList }: HeaderProps) => {
+export const Header = ({ logo, title, children }: HeaderProps) => {
 	return (
 		<Container>
-			<Content>
-				<LogoBox>{ logo }</LogoBox>
-				<TitleBox>{ title }</TitleBox>
+			<Content className='fc'>
+				<LogoBox className='fc'>{ logo }</LogoBox>
+				<TitleBox className='fc'>{ title }</TitleBox>
 				<MenuBox>
-					{ menuList.map((menu, index) => (
-						<CustomButton key={index} onClick={() => {}} title={menu}/>
-					))}
+					{children}
 				</MenuBox>
 			</Content>
 		</Container>
@@ -36,9 +34,6 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-	display: flex;
-	justify-content: center;
-	align-items: center;
 
 	gap: ${toRem(10)};
 
@@ -49,15 +44,12 @@ const Content = styled.div`
 const LogoBox = styled.div`
 	width: ${toRem(90)};
 	height: 100%;
-
-	display: flex;
-	justify-content: center;
-	align-items: center;
 `
 const TitleBox = styled.div`
 	height: 100%;
 
-
+	font-size: 20px;
+	color: white;
 `
 const MenuBox = styled.div`
 	width: 100%;
