@@ -1,16 +1,37 @@
-import '@/styles/globals.css'
+import { useState } from 'react'
 import type { AppContext, AppProps } from 'next/app'
 import { ThemeProvider } from 'styled-components';
 import theme from '@/styles/theme'; 
 import GlobalStyle from '@/styles/GlobalStyle';
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
+import { Layout } from '@/components/layout';
+import { useRouter } from 'next/router'
+import { RecoilRoot } from 'recoil';
 
 function App({ Component, pageProps }: AppProps){
+  const router = useRouter();
+  
+  if(pageProps.accessToken) pageProps = { ...pageProps, isAuth: true }
+
+  const withLayout = (path: string) => {
+    if(path === '/login') {
+      return <Component {...pageProps}/>
+    } else {
+      return (
+        <Layout {...pageProps}>
+          <Component {...pageProps} />
+        </Layout>
+      )
+    }
+  }
+
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        {withLayout(router.pathname)}
+      </ThemeProvider>
+    </RecoilRoot>
   )
 }
 
@@ -41,7 +62,7 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
   appInitialProps = { 
     ...appInitialProps, 
     accessToken: accessToken, 
-    refreshToken: refreshToken 
+    refreshToken: refreshToken,
   };
   // console.log('appInitialProps', appInitialProps)
   return { pageProps: appInitialProps }

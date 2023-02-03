@@ -8,6 +8,12 @@ const GlobalStyle = createGlobalStyle`
 		box-sizing: border-box;
 		background-color: #474747;
 	}
+
+	.fc {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 `
 
 export default GlobalStyle;
