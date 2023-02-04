@@ -39,10 +39,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			const accessCokie = serialize(ACCESSTOKEN, accessToken, {
 				httpOnly: true,
 				path: "/",
+				maxAge: new Date().getTime() + 1 * 60 * 1000,
 			});
+
 			const refreshCokie = serialize(REFRESHTOKEN, refreshToken, {
 				httpOnly: true,
 				path: "/",
+				maxAge: new Date().getTime() + 1000 * 60 * 60 * 24
 			});
 
 			res.setHeader("Set-Cookie", [accessCokie, refreshCokie]);
