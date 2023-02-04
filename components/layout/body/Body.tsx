@@ -25,8 +25,20 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
-	min-width: ${toRem(1080)};
+	min-width: ${({ theme }) => toRem(theme.deviceFixSize.laptop)};
 
 	padding-top: ${toRem(20)};
 	padding-bottom: ${toRem(30)};
+
+	@media ${({ theme }) => theme.device.laptop} {
+		min-width: ${({ theme }) => toRem(theme.deviceFixSize.tablet)};
+	}
+
+	@media ${({ theme }) => theme.device.tablet} {
+		min-width: ${({ theme }) => toRem(theme.deviceFixSize.semiTablet)};
+	}
+
+	@media ${({ theme }) => theme.device.semiTablet} {
+		min-width: ${({ theme }) => toRem(theme.deviceFixSize.mobile)};
+	}
 `
