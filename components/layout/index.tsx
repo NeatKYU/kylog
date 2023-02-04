@@ -5,6 +5,7 @@ import React from 'react';
 import { Header } from '@/components/layout/header/Header';
 import { CustomButton } from '../common/CustomButton';
 import { common } from '@/interface/common';
+import { AiOutlineSearch } from 'react-icons/ai'
 
 // helper
 import { logout } from '@/lib/auth';
@@ -16,6 +17,7 @@ interface LayoutProps extends common{
 
 interface menu {
 	label: string;
+	icon?: React.ReactNode;
 	click: () => void;
 }
 
@@ -24,6 +26,7 @@ export const Layout = ({ children, isAuth }: LayoutProps) => {
 	const router = useRouter();
 
 	const loginMenuList: menu[] = [
+		{ label: '검색', click: () => {}, icon: <AiOutlineSearch/>},
 		{ label: '프로필', click: () => {}},
 		{ label: '로그아웃', click: () => logout(router)},
 	];
@@ -33,7 +36,7 @@ export const Layout = ({ children, isAuth }: LayoutProps) => {
 
 	const menuList = (menuList: menu[]) => {
 		return menuList.map((menu: menu, index: number) => (
-			<CustomButton key={index} onClick={menu.click} title={menu.label}/>
+			<CustomButton key={index} onClick={menu.click} title={menu.label} icon={menu.icon}/>
 		))
 	}
 
