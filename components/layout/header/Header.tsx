@@ -11,9 +11,9 @@ interface HeaderProps {
 export const Header = ({ logo, title, children }: HeaderProps) => {
 	return (
 		<Container>
-			<Content className='fc'>
-				<LogoBox className='fc'>{ logo }</LogoBox>
-				<TitleBox className='fc'>{ title }</TitleBox>
+			<Content className='fcenter'>
+				<LogoBox className='fcenter'>{ logo }</LogoBox>
+				<TitleBox className='fcenter'>{ title }</TitleBox>
 				<MenuBox>
 					{children}
 				</MenuBox>

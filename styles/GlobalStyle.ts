@@ -9,10 +9,26 @@ const GlobalStyle = createGlobalStyle`
 		background-color: #474747;
 	}
 
-	.fc {
+	.fcenter {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+	.fcol {
+		display: flex;
+		flex-direction: column;
+	}
+	.jc-start {
+		justify-content: start;
+	}
+	.jc-end {
+		justify-content: end;
+	}
+	.ai-start {
+		align-items: start;
+	}
+	.ai-end {
+		align-items: end;
 	}
 `
 
