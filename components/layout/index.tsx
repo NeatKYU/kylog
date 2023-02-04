@@ -6,6 +6,7 @@ import { Header } from '@/components/layout/header/Header';
 import { CustomButton } from '../common/CustomButton';
 import { common } from '@/interface/common';
 import { AiOutlineSearch } from 'react-icons/ai'
+import { BodyLayout } from '@/components/layout/body/Body';
 
 // helper
 import { logout } from '@/lib/auth';
@@ -21,7 +22,7 @@ interface menu {
 	click: () => void;
 }
 
-export const Layout = ({ children, isAuth }: LayoutProps) => {
+export const Layout = (props: LayoutProps) => {
 
 	const router = useRouter();
 
@@ -43,9 +44,11 @@ export const Layout = ({ children, isAuth }: LayoutProps) => {
 	return (
 		<>
 			<Header logo='logo image' title='kylog'>
-				{menuList(isAuth ? loginMenuList : logoutMenuList)}
+				{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
 			</Header>
-			{ children }
+			<BodyLayout {...props}>
+				{ props.children }
+			</BodyLayout>
 		</>
 	)
 }
