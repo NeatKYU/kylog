@@ -6,13 +6,11 @@ import GlobalStyle from '@/styles/GlobalStyle';
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
 import { Layout } from '@/components/layout';
 import { useRouter } from 'next/router'
-import { RecoilRoot } from 'recoil';
+import { RecoilRoot, useRecoilState } from 'recoil';
 
 function App({ Component, pageProps }: AppProps){
   const router = useRouter();
   
-  if(pageProps.accessToken) pageProps = { ...pageProps, isAuth: true }
-
   const withLayout = (path: string) => {
     if(path === '/login') {
       return <Component {...pageProps}/>
@@ -63,6 +61,7 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
     ...appInitialProps, 
     accessToken: accessToken, 
     refreshToken: refreshToken,
+    isAuth: true,
   };
   // console.log('appInitialProps', appInitialProps)
   return { pageProps: appInitialProps }

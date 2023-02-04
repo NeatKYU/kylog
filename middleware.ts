@@ -7,7 +7,6 @@
 import { NextResponse } from 'next/server'; 
 import type { NextRequest } from 'next/server';
 import { ACCESSTOKEN } from './lib/const';
-import customAxios from './lib/customAxios';
 
 // https://stackoverflow.com/questions/73229148/uncaught-syntaxerror-expected-expression-got-while-using-next-js-middlewar
 // 그냥 Redirect시 다른 url들도 있는데 그런거 다 무시하는 용도
@@ -20,23 +19,8 @@ export const config = {
 export default function middleware(req: NextRequest) {
 	const token = req.cookies.get(ACCESSTOKEN);
 	const currentUrl = req.nextUrl.pathname;
-	
+
 	if(!token && !currentUrl.includes('/login')) {
 		return NextResponse.redirect('http://localhost:3000/login');
 	}
-	// else if(token){
-	// 	const newHeader = new Headers(req.headers);
-	// 	newHeader.set('x-token', token.value);
-
-	// 	const response = NextResponse.next({
-	// 		request: {
-	// 			// New request headers
-	// 			headers: newHeader,
-	// 		},
-	// 	});
-	// 	customAxios.defaults.headers.Authorization = token.value;
-	// 	// console.log('middeware header', response.headers)
-		
-	// 	return response;
-	// }
 }
