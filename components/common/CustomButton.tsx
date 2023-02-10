@@ -84,14 +84,14 @@ interface containerProps {
 const Container = styled.div<containerProps>`
 	${sizeStyles}
 
-	width: ${(props) => props.widthFull ? '100% !important' : null};
+	/* width: ${(props) => props.widthFull ? '100% !important' : null};
 
 	background-color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.black : props.theme.colors.white };
 	color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.white : props.theme.colors.black};
 
 	svg {
 		background-color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.black : props.theme.colors.white };
-	}
+	} */
 
 	margin: 5px 0px 5px 0px;
 	
@@ -103,12 +103,12 @@ const Container = styled.div<containerProps>`
 
 	cursor: pointer;
 
-	:hover {
+	/* :hover {
 		background-color: ${({theme, buttonTheme}) => buttonTheme === 'dark' ? theme.colors.hoverBlack : theme.colors.hoverWhite};
 		svg {
 			background-color: ${({theme, buttonTheme}) => buttonTheme === 'dark' ? theme.colors.hoverBlack : theme.colors.hoverWhite};
 		}
-	}
+	} */
 `
 
 CustomButton.defaultProps = {

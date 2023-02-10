@@ -19,7 +19,7 @@ export const PostCard = (
 	return (
 		<Container>
 			<ImageContainer className='fcenter'>
-
+				<img src='/example.jpeg' alt=''/>
 			</ImageContainer>
 			<Contents className='fcol'>
 				<AvatarContainer>
@@ -67,6 +67,12 @@ const ImageContainer = styled.div`
 	background-color: aliceblue;
 	border-radius: 10px;
 
+	img {
+		width: 100%;
+		height: 100%;
+
+		border-radius: 10px;
+	}
 `
 
 const AvatarContainer = styled.div`

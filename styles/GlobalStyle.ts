@@ -6,7 +6,6 @@ const GlobalStyle = createGlobalStyle`
 
 	* {
 		box-sizing: border-box;
-		background-color: #474747;
 	}
 
 	.fcenter {

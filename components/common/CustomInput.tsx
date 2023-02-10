@@ -46,12 +46,12 @@ const Container = styled.div`
 	padding: 0px 10px 0px 10px; 
 	margin: 5px 0 5px 0;
 	border-radius: 5px;
-	border: 1px solid ${({theme}) => theme.colors.grey};
+	/* border: 1px solid ${({theme}) => theme.colors.grey};
 	:hover {
 		border-color: ${({theme}) => theme.colors.hoverBlack};
 	}
 
-	background-color: ${({theme}) =>theme.colors.white};
+	background-color: ${({theme}) =>theme.colors.white}; */
 `
 
 const Input = styled.input`
@@ -60,7 +60,7 @@ const Input = styled.input`
 	border: none;
 	outline: none;
 
-	background-color: ${({theme}) =>theme.colors.white};
+	/* background-color: ${({theme}) =>theme.colors.white}; */
 `
 
 CustomInput.defaultProps = {

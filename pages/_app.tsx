@@ -1,12 +1,13 @@
-import { useState } from 'react'
 import type { AppContext, AppProps } from 'next/app'
-import { ThemeProvider } from 'styled-components';
-import theme from '@/styles/theme'; 
-import GlobalStyle from '@/styles/GlobalStyle';
-import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
-import { Layout } from '@/components/layout';
+import GlobalStyle from '@/styles/GlobalStyle'
+import { Layout } from '@/components/layout'
 import { useRouter } from 'next/router'
-import { RecoilRoot, useRecoilState } from 'recoil';
+import { RecoilRoot } from 'recoil'
+import { ChakraProvider } from '@chakra-ui/react'
+import theme from '@/styles/chakraTheme'
+import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const'
+import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
+import styled from 'styled-components'
 
 function App({ Component, pageProps }: AppProps){
   const router = useRouter();
@@ -25,10 +26,13 @@ function App({ Component, pageProps }: AppProps){
 
   return (
     <RecoilRoot>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
+      <GlobalStyle />
+      <ChakraProvider theme={theme}>
+        <Position>
+          <ThemeToggleButton/>
+        </Position>
         {withLayout(router.pathname)}
-      </ThemeProvider>
+      </ChakraProvider>
     </RecoilRoot>
   )
 }
@@ -68,3 +72,9 @@ App.getInitialProps = async ({ Component, ctx }: AppContext) => {
 }
 
 export default App;
+
+const Position = styled.div`
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+`
