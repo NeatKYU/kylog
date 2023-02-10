@@ -31,7 +31,7 @@ const device = {
   laptop: `screen and (max-width: ${deviceSizes.laptop})`,
 };
 
-const theme = {
+export const theme = {
 	colors,
 	deviceFixSize,
 	device,

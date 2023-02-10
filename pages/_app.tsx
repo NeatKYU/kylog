@@ -7,7 +7,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '@/styles/chakraTheme'
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const'
 import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
+import { theme as styledTheme } from '@/styles/theme'
 
 function App({ Component, pageProps }: AppProps){
   const router = useRouter();
@@ -26,13 +27,15 @@ function App({ Component, pageProps }: AppProps){
 
   return (
     <RecoilRoot>
-      <GlobalStyle />
-      <ChakraProvider theme={theme}>
-        <Position>
-          <ThemeToggleButton/>
-        </Position>
-        {withLayout(router.pathname)}
-      </ChakraProvider>
+      <ThemeProvider theme={styledTheme}>
+        <GlobalStyle />
+        <ChakraProvider theme={theme}>
+          <Position>
+            <ThemeToggleButton/>
+          </Position>
+          {withLayout(router.pathname)}
+        </ChakraProvider>
+      </ThemeProvider>
     </RecoilRoot>
   )
 }

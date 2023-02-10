@@ -4,12 +4,14 @@ import cutsomAxios from '@/lib/customAxios';
 import { useRouter } from 'next/router';
 import { toRem } from '@/lib/helper';
 import { SizedBox } from '../common/SizedBox';
-import { Input, Stack, FormControl, Button } from '@chakra-ui/react'
+import { Input, Stack, FormControl, Button, InputGroup, InputRightAddon } from '@chakra-ui/react'
+import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
 
 export const LoginForm = () => {
 
 	const [id, setId] = useState('');
 	const [password, setPassword] = useState('');
+	const [isShow, setIsShow] = useState(false);
 	const router = useRouter();
 
 	const handleId = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,19 +35,33 @@ export const LoginForm = () => {
 		})
 	}
 
+	const handleShowPassword = () => {
+		setIsShow(!isShow);
+	}
+
 	return (
 		<Container>
 			<FormControl>
 				{/* input 자리 */}
 				<Stack>
 					<Input variant='filled' placeholder='아이디를 입력해주세요.' onChange={handleId}/>
-					<Input variant='filled' placeholder='비밀번호를 입력해주세요.' onChange={handlePassword}/>
+					<InputGroup>
+						<Input 
+							variant='filled'
+							type='password'
+							placeholder='비밀번호를 입력해주세요.' 
+							onChange={handlePassword}
+						/>
+						<InputRightAddon onClick={handleShowPassword}>
+							{isShow ? <ViewOffIcon/> : <ViewIcon/>}
+						</InputRightAddon>
+					</InputGroup>
 				{/* 빈 공간 */}
 				<SizedBox h='10px'/>
 				{/* <div style={{width: '100%', height: '1px', backgroundColor: 'black'}}></div> */}
 				{/* <SizedBox h='20px'/> */}
 				{/* 버튼 자리 */}
-					<Button variant='outline'>로그인</Button>
+					<Button variant='outline' onClick={handleLogin}>로그인</Button>
 					<Button 
 						variant='outline' 
 						backgroundColor='#242424' 
