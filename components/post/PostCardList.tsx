@@ -1,29 +1,18 @@
 import { PostCard } from '@/components/post/PostCard'
 import { Divider } from '@chakra-ui/react';
-
-type Post = {
-	postId: string;
-	thumbnail: string;
-	uesrName: string;
-	uesrThumnail: string;
-	createDate: string;
-	desc: string;
-	likes: number;
-	comments: number;
-	contents: string;
-}
+import { post } from '@/interface/post'
 
 interface PostCardListProps {
-	postList: Post[];
+	postList: post[];
 }
 
 export const PostCardList = (props: PostCardListProps) => {
 	const { postList } = props;
 
-	const postListElement = (list: Post[]) => {
-		return list.map((item: Post) => (
+	const postListElement = (list: post[]) => {
+		return list.map((item: post) => (
 			<>
-				<PostCard key={item.postId}/>
+				<PostCard key={item.postId} post={item}/>
 				<Divider/>
 			</>
 		))

@@ -1,36 +1,42 @@
-import { toRem } from '@/lib/helper'
 import styled from 'styled-components'
+import { dateToHowover, toRem } from '@/lib/helper'
+import { post } from '@/interface/post';
+import { Avatar, Button, ButtonGroup, Stack } from '@chakra-ui/react'
+import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
 
-interface postCardProps {
-	thumbnail: string;
-	title: string;
-	description: string;
-	createAt: string;
+interface postCardProps{
+	post: post
 }
 
-export const PostCard = (
-	// {
-	// thumbnail,
-	// title,
-	// description,
-	// createAt,
-	// }: postCardProps
+export const PostCard = ({
+		post
+	}: postCardProps
 ) => {
 	return (
 		<Container>
 			<ImageContainer className='fcenter'>
-				<img src='/example.jpeg' alt=''/>
+				<img src={post.thumbnail ?? '/example.jpeg'} alt=''/>
 			</ImageContainer>
 			<Contents className='fcol'>
-				<AvatarContainer>
-
-				</AvatarContainer>
+				<TitleContainer className='font-20'>
+					{post.title}
+				</TitleContainer>
 				<DescContainer>
-
+					{post.contents}
 				</DescContainer>
-				<EtcContainer>
-
-				</EtcContainer>
+				<Stack direction={'row'} spacing={4} className='ai-center'>
+					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? '/img/logo.png'}/>
+					<span className='font-18 f ai-center'>{post.userName}</span>
+					<span className='font-12 f ai-center'>{dateToHowover(post.createDate)}</span>
+					<ButtonGroup style={{marginLeft: 'auto'}}>
+						<Button size='xs' leftIcon={<AiTwotoneLike/>}>
+							{post.likes}
+						</Button>
+						<Button size='xs' leftIcon={<AiOutlineComment/>}>
+							{post.comments}
+						</Button>
+					</ButtonGroup>
+				</Stack>
 			</Contents>
 		</Container>
 	)
@@ -75,17 +81,19 @@ const ImageContainer = styled.div`
 	}
 `
 
-const AvatarContainer = styled.div`
+const TitleContainer = styled.div`
 	width: 100%;
-	height: ${toRem(50)};
+	height: ${toRem(40)};
+	margin-bottom: 10px;
 `
 
 const DescContainer = styled.div`
 	width: 100%;
-	height: ${toRem(110)};
+	height: ${toRem(90)};
+	margin-bottom: 10px;
 `
 
 const EtcContainer = styled.div`
 	width: 100%;
-	height: ${toRem(30)};
+	height: ${toRem(40)};
 `

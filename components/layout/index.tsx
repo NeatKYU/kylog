@@ -1,6 +1,5 @@
 // lib
 import React from 'react';
-import { SearchIcon } from '@chakra-ui/icons'
 
 // components
 import { Header } from '@/components/layout/header/Header';
@@ -51,12 +50,14 @@ export const Layout = (props: LayoutProps) => {
 
 	return (
 		<>
-			<Header logo='logo image' title='kylog'>
-				{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
-			</Header>
-			<BodyLayout {...props}>
-				{ props.children }
-			</BodyLayout>
+			<div>
+				<Header logo='@/assets/img/logo.png' title='kylog'>
+					{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
+				</Header>
+				<BodyLayout {...props}>
+					{ props.children }
+				</BodyLayout>
+			</div>
 		</>
 	)
 }

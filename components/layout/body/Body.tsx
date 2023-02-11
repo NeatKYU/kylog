@@ -21,6 +21,7 @@ const Container = styled.div`
 	justify-content: center;
 
 	width: 100%;
+	top: ${toRem(60)};
 	min-height: calc(100vh - ${toRem(60)});
 `
 
