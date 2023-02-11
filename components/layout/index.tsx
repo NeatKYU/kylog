@@ -3,8 +3,12 @@ import React from 'react';
 
 // components
 import { Header } from '@/components/layout/header/Header';
-import { CustomButton } from '../common/CustomButton';
 import { common } from '@/interface/common';
+import { AiOutlineSearch } from 'react-icons/ai'
+import { IoLogOutOutline } from 'react-icons/io5'
+import { BiEdit } from 'react-icons/bi'
+import { BodyLayout } from '@/components/layout/body/Body';
+import { Button } from '@chakra-ui/react'
 
 // helper
 import { logout } from '@/lib/auth';
@@ -15,34 +19,45 @@ interface LayoutProps extends common{
 }
 
 interface menu {
+	key: string;
 	label: string;
+	icon?: React.ReactNode;
+	leftIcon?: React.ReactElement;
 	click: () => void;
 }
 
-export const Layout = ({ children, isAuth }: LayoutProps) => {
+export const Layout = (props: LayoutProps) => {
 
 	const router = useRouter();
 
 	const loginMenuList: menu[] = [
-		{ label: '프로필', click: () => {}},
-		{ label: '로그아웃', click: () => logout(router)},
+		{ key: 'edit', label: '글쓰기', click: () => {}, leftIcon: <BiEdit/>},
+		{ key: 'profile', label: '프로필', click: () => {}},
+		{ key: 'search', label: '검색', click: () => {}, icon: <AiOutlineSearch size={20}/>},
+		{ key: 'logout', label: '로그아웃', click: () => logout(router), icon: <IoLogOutOutline size={20}/>},
 	];
 	const logoutMenuList: menu[] = [
-		{ label: '로그인', click: () => {}}
+		{ key: 'login', label: '로그인', click: () => {}}
 	]
 
 	const menuList = (menuList: menu[]) => {
 		return menuList.map((menu: menu, index: number) => (
-			<CustomButton key={index} onClick={menu.click} title={menu.label}/>
+			<Button size='sm' key={index} onClick={menu.click} leftIcon={menu.leftIcon}>
+				{menu.icon ? menu.icon : menu.label}
+			</Button>
 		))
 	}
 
 	return (
 		<>
-			<Header logo='logo image' title='kylog'>
-				{menuList(isAuth ? loginMenuList : logoutMenuList)}
-			</Header>
-			{ children }
+			<div>
+				<Header logo='@/assets/img/logo.png' title='kylog'>
+					{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
+				</Header>
+				<BodyLayout {...props}>
+					{ props.children }
+				</BodyLayout>
+			</div>
 		</>
 	)
 }
