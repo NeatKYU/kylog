@@ -51,7 +51,7 @@ export const Layout = (props: LayoutProps) => {
 	return (
 		<>
 			<div>
-				<Header logo='@/assets/img/logo.png' title='kylog'>
+				<Header logo='@/assets/img/logo.png' title=''>
 					{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
 				</Header>
 				<BodyLayout {...props}>

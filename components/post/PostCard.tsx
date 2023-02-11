@@ -5,15 +5,17 @@ import { Avatar, Button, ButtonGroup, Stack } from '@chakra-ui/react'
 import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
 
 interface postCardProps{
-	post: post
+	post: post;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const PostCard = ({
-		post
+		post,
+		onClick,
 	}: postCardProps
 ) => {
 	return (
-		<Container>
+		<Container onClick={onClick}>
 			<ImageContainer className='fcenter'>
 				<img src={post.thumbnail ?? '/example.jpeg'} alt=''/>
 			</ImageContainer>
@@ -25,7 +27,7 @@ export const PostCard = ({
 					{post.contents}
 				</DescContainer>
 				<Stack direction={'row'} spacing={4} className='ai-center'>
-					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? '/img/logo.png'}/>
+					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? 'https://bit.ly/broken-link'}/>
 					<span className='font-18 f ai-center'>{post.userName}</span>
 					<span className='font-12 f ai-center'>{dateToHowover(post.createDate)}</span>
 					<ButtonGroup style={{marginLeft: 'auto'}}>

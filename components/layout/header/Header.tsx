@@ -13,9 +13,11 @@ export const Header = ({ logo, title, children }: HeaderProps) => {
 		<Container>
 			<Content className='fcenter'>
 				<LogoBox className='fcenter'>
-					<Image src={'/img/logo.png'} alt='logo' width={100} height={60}/>
+					<Image src={'/img/logo_white.png'} alt='logo' width={100} height={60}/>
 				</LogoBox>
-				<TitleBox className='fcenter'>{ title }</TitleBox>
+				<TitleBox className='fcenter'>
+					{ title }
+				</TitleBox>
 				<MenuBox>
 					{children}
 				</MenuBox>
