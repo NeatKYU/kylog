@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from "next";
-import { findUser } from '@/lib/users';
+import { findUser } from '@/lib/db/users';
 import { header as jwtHeader, genToken } from '@/lib/jwt';
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const';
 import { serialize } from 'cookie';

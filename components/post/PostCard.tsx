@@ -29,7 +29,7 @@ export const PostCard = ({
 				<Stack direction={'row'} spacing={4} className='ai-center'>
 					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? 'https://bit.ly/broken-link'}/>
 					<span className='font-18 f ai-center'>{post.userName}</span>
-					<span className='font-12 f ai-center'>{dateToHowover(post.createDate)}</span>
+					<span className='font-12 f ai-center'>{dateToHowover(post.createdate)}</span>
 					<ButtonGroup style={{marginLeft: 'auto'}}>
 						<Button size='xs' leftIcon={<AiTwotoneLike/>}>
 							{post.likes}
