@@ -11,7 +11,7 @@ customAxios.interceptors.request.use(
 	(config) => {
 		// config.headers['Content-type'] = 'application/json; charset=utf-8';
 		// config.headers['Authorization'] = 'Bearer ' + '';
-		console.log('req config = ', config.headers);
+		// console.log('req config = ', config.headers);
 
 		return config;
 	},
@@ -22,7 +22,7 @@ customAxios.interceptors.request.use(
 
 customAxios.interceptors.response.use(
 	(config) => {
-		console.log('response config = ', config.headers)
+		// console.log('response config = ', config.headers)
 		return config;
 	},
 	(error) => {

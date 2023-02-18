@@ -3,19 +3,27 @@ import { dateToHowover, toRem } from '@/lib/helper'
 import { post } from '@/interface/post';
 import { Avatar, Button, ButtonGroup, Stack } from '@chakra-ui/react'
 import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
+import Image from 'next/image'
 
 interface postCardProps{
-	post: post
+	post: post;
+	onClick: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const PostCard = ({
-		post
+		post,
+		onClick,
 	}: postCardProps
 ) => {
 	return (
-		<Container>
+		<Container onClick={onClick}>
 			<ImageContainer className='fcenter'>
-				<img src={post.thumbnail ?? '/example.jpeg'} alt=''/>
+				<Image 
+					src={post.thumbnail === '' ? '/example.jpeg' : post.thumbnail} 
+					alt='' 
+					width={100}
+					height={100}
+				/>
 			</ImageContainer>
 			<Contents className='fcol'>
 				<TitleContainer className='font-20'>
@@ -25,9 +33,9 @@ export const PostCard = ({
 					{post.contents}
 				</DescContainer>
 				<Stack direction={'row'} spacing={4} className='ai-center'>
-					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? '/img/logo.png'}/>
-					<span className='font-18 f ai-center'>{post.userName}</span>
-					<span className='font-12 f ai-center'>{dateToHowover(post.createDate)}</span>
+					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? 'https://bit.ly/broken-link'}/>
+					<span className='font-18 f ai-center'>{post.username}</span>
+					<span className='font-12 f ai-center'>{dateToHowover(post.createdate)}</span>
 					<ButtonGroup style={{marginLeft: 'auto'}}>
 						<Button size='xs' leftIcon={<AiTwotoneLike/>}>
 							{post.likes}

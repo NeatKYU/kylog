@@ -1,12 +1,12 @@
 export interface post {
-	postId: string;
+	post_id: string;
 	title: string;
 	thumbnail: string;
 	likes: number;
 	comments: number;
 	contents: string;
-	createDate: string;
+	createdate: string;
 	
-	userName: string;
+	username: string;
 	uesrThumbnail: string;
 }
