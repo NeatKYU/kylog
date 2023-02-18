@@ -24,7 +24,7 @@ export default function Detail({ post }: detailProps) {
 				<Stack direction='row' spacing={4}>
 					<Avatar/>
 					<div className='fcol'>
-						<div className='font-18 bold'>nick name</div>
+						<div className='font-18 bold'>{post.username}</div>
 						<div className='font-12'>{createAt}</div>
 					</div>
 				</Stack>

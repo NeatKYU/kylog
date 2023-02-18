@@ -7,6 +7,6 @@ export interface post {
 	contents: string;
 	createdate: string;
 	
-	userName: string;
+	username: string;
 	uesrThumbnail: string;
 }
