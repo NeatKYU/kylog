@@ -1,5 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
+import theme from '@/styles/theme';
+import { toRem } from '@/lib/helper';
+
+const laptop = theme.device.laptop;
+const tablet = theme.device.tablet;
+const semiTablet = theme.device.semiTablet;
 
 const GlobalStyle = createGlobalStyle`
 	${reset}
@@ -50,6 +56,22 @@ const GlobalStyle = createGlobalStyle`
 
 	.font-12 {
 		font-size: 12px;
+	}
+
+	.bold {
+		font-weight: bold;
+	}
+
+	.title-font-size {
+		@media ${laptop} {
+			font-size: ${toRem(30)};
+		}
+		@media ${tablet} {
+			font-size: ${toRem(20)};
+		}
+		@media ${semiTablet} {
+			font-size: ${toRem(18)};
+		}
 	}
 `
 
