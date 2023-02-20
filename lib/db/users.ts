@@ -4,7 +4,7 @@ const sql = postgres(process.env.DATABASE_URL as string);
 
 export interface USER {
 	id: string;
-	name: string;
+	user_id: string;
 	password: string;
 	email: string;
 	phone: string;
@@ -16,14 +16,21 @@ export async function users() {
   `
 }
 
-export async function findUser(name: string, password: string) {
+export async function findUser(id: string, password: string) {
 	return await sql<USER[]>`
-		SELECT * FROM blog_user WHERE name=${name} AND password=${password}
+		SELECT * FROM blog_user WHERE user_id=${id} AND password=${password}
 	`
 }
 
-export async function validateUser(name: string) {
+export async function validateUser(id: string) {
 	return await sql<USER[]>`
-		SELECT * FROM blog_user WHERE name=${name}
+		SELECT * FROM blog_user WHERE user_id=${id}
+	`
+}
+
+export async function insertUser(id: string, password: string) {
+	return await sql<USER[]>`
+		INSERT INTO blog_user (user_id, password, phone, email)
+		VALUES(${id}, ${password}, '', '')
 	`
 }

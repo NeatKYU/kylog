@@ -11,8 +11,8 @@ export const RegisterForm = () => {
 	const [isErrorId, setIsErrorId] = useState<boolean>(false);
 	const [isErrorPassword, setIsErrorPassword] = useState<boolean>(false);
 
-	const validateUser = async (name: string) => {
-		const {data} = await customAxios.post('/api/user', { name: name });
+	const validateUser = async (id: string) => {
+		const {data} = await customAxios.post('/api/user', { id: id });
 		return data;
 	}
 
@@ -38,6 +38,17 @@ export const RegisterForm = () => {
 		}
 	}
 
+	const handleRegister = async (id: string, password: string) => {
+		if(!isErrorId && !isErrorPassword) {
+			await customAxios.post('/api/user', {
+				id: id,
+				password: password,
+			});
+		} else {
+			// TODO error alert
+		}
+	}
+
 	return (
 		<div className='fcol'>
 			<FormControl isInvalid={isErrorId} isRequired marginBottom={1}>
@@ -54,10 +65,12 @@ export const RegisterForm = () => {
 				variant='outline' 
 				backgroundColor='#242424' 
 				color='white' 
+				marginTop={3}
 				_hover={{
 					color: 'white',
 					backgroundColor: '#3c3c3c'
 				}}
+				onClick={() => handleRegister(id, password)}
 			>
 				회원가입
 			</Button>
