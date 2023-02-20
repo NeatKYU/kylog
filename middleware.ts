@@ -20,7 +20,7 @@ export default function middleware(req: NextRequest) {
 	const token = req.cookies.get(ACCESSTOKEN);
 	const currentUrl = req.nextUrl.pathname;
 
-	if(!token && !currentUrl.includes('/login')) {
+	if(!token && !currentUrl.includes('/login') && !currentUrl.includes('/register')) {
 		return NextResponse.redirect('http://localhost:3000/login');
 	}
 }

@@ -21,3 +21,9 @@ export async function findUser(name: string, password: string) {
 		SELECT * FROM blog_user WHERE name=${name} AND password=${password}
 	`
 }
+
+export async function validateUser(name: string) {
+	return await sql<USER[]>`
+		SELECT * FROM blog_user WHERE name=${name}
+	`
+}
