@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Input, FormControl, FormLabel, Button, FormErrorMessage } from '@chakra-ui/react'
+import { Input, FormControl, FormLabel, Button, FormErrorMessage, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { validateUser } from '@/lib/db/users';
 import customAxios from '@/lib/customAxios';
@@ -10,6 +10,7 @@ export const RegisterForm = () => {
 	const [password, setPassword] = useState<string>('');
 	const [isErrorId, setIsErrorId] = useState<boolean>(false);
 	const [isErrorPassword, setIsErrorPassword] = useState<boolean>(false);
+	const toast = useToast();
 
 	const validateUser = async (id: string) => {
 		const {data} = await customAxios.post('/api/user', { id: id });
@@ -39,6 +40,14 @@ export const RegisterForm = () => {
 	}
 
 	const handleRegister = async (id: string, password: string) => {
+		if(id === '' || password === '') {
+			toast({
+				description: '아이디, 패스워드를 입력해주세요',
+				title: '회원가입 실패',
+				status: 'error',
+				position: 'top-right',
+			})
+		}
 		if(!isErrorId && !isErrorPassword) {
 			await customAxios.post('/api/user', {
 				id: id,
