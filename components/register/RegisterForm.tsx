@@ -3,6 +3,7 @@ import { Input, FormControl, FormLabel, Button, FormErrorMessage, useToast } fro
 import React, { useState } from 'react'
 import { validateUser } from '@/lib/db/users';
 import customAxios from '@/lib/customAxios';
+import { useRouter } from 'next/router';
 
 export const RegisterForm = () => {
 
@@ -11,6 +12,7 @@ export const RegisterForm = () => {
 	const [isErrorId, setIsErrorId] = useState<boolean>(false);
 	const [isErrorPassword, setIsErrorPassword] = useState<boolean>(false);
 	const toast = useToast();
+	const router = useRouter();
 
 	const validateUser = async (id: string) => {
 		const {data} = await customAxios.post('/api/user', { id: id });
@@ -44,7 +46,7 @@ export const RegisterForm = () => {
 			toast({
 				description: '아이디, 패스워드를 입력해주세요',
 				title: '회원가입 실패',
-				status: 'error',
+				status: 'warning',
 				position: 'top-right',
 			})
 		}
@@ -52,6 +54,14 @@ export const RegisterForm = () => {
 			await customAxios.post('/api/user', {
 				id: id,
 				password: password,
+			}).then(() => {
+				toast({
+					description: '회원이 되신걸 축하드립니다.',
+					title: '가입 성공',
+					status: 'success',
+					position: 'top-right',
+				})
+				router.push('/home');
 			});
 		} else {
 			// TODO error alert
