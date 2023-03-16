@@ -14,7 +14,7 @@ function App({ Component, pageProps }: AppProps){
   const router = useRouter();
   
   const withLayout = (path: string) => {
-    if(path === '/login') {
+    if(path === '/login' || path === '/register') {
       return <Component {...pageProps}/>
     } else {
       return (

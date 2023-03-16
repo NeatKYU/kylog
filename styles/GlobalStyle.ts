@@ -62,6 +62,10 @@ const GlobalStyle = createGlobalStyle`
 		font-weight: bold;
 	}
 
+	.gap-1 {
+		gap: 1rem;
+	}
+
 	.title-font-size {
 		@media ${laptop} {
 			font-size: ${toRem(30)};

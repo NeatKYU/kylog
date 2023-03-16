@@ -21,7 +21,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			const data = result[0];
 
 			const payload = {
-				name: data.name,
+				user_id: data.user_id,
 				email: data.email,
 				phone: data.phone,
 				isAdmin: true,

@@ -12,15 +12,18 @@ import { ACCESSTOKEN } from './lib/const';
 // 그냥 Redirect시 다른 url들도 있는데 그런거 다 무시하는 용도
 export const config = {
   matcher: [
-    '/((?!_next|api/auth).*)(.+)'
+    '/((?!_next|api/auth).*)(.+)',
   ],
 }
+// TODO api로 만들어진 url도 걸리는데 이거 걸러낼 방법 생각해야할듯;;
+const ignoreUrl = ['/login', 'register', '/api/user'];
+const redirectCheck = ignoreUrl.some((url) => ignoreUrl.includes(url));
 
 export default function middleware(req: NextRequest) {
 	const token = req.cookies.get(ACCESSTOKEN);
 	const currentUrl = req.nextUrl.pathname;
 
-	if(!token && !currentUrl.includes('/login')) {
+	if(!token && !redirectCheck) {
 		return NextResponse.redirect('http://localhost:3000/login');
 	}
 }

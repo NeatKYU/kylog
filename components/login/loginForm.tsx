@@ -35,6 +35,10 @@ export const LoginForm = () => {
 		})
 	}
 
+	const handleRegister = () => {
+		router.push('/register')
+	}
+
 	const handleShowPassword = () => {
 		setIsShow(!isShow);
 	}
@@ -63,6 +67,7 @@ export const LoginForm = () => {
 				{/* 버튼 자리 */}
 					<Button variant='outline' onClick={handleLogin}>로그인</Button>
 					<Button 
+						onClick={handleRegister}
 						variant='outline' 
 						backgroundColor='#242424' 
 						color='white' 
@@ -73,8 +78,6 @@ export const LoginForm = () => {
 						회원가입
 					</Button>
 				</Stack>
-				{/* <CustomButton widthFull title={'로그인'} onClick={handleLogin}/>
-				<CustomButton buttonTheme='white' widthFull title={'회원가입'} onClick={() => console.log('go to sign up')}/> */}
 			</FormControl>
 		</Container>
 	)
