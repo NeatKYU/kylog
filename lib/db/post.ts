@@ -15,7 +15,7 @@ export async function postDetail(postId: string) {
 	return await sql<post[]>`
 		SELECT a.*, b.user_id as username
 		FROM post as a, blog_user as b
-		WHERE a.post_id = ${postId}
+		WHERE a.post_uid = ${postId}
 		AND a.user_uid = b.uid
 	`
 }

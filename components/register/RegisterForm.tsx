@@ -1,9 +1,8 @@
-import styled from 'styled-components'
 import { Input, FormControl, FormLabel, Button, FormErrorMessage, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
-import { validateUser } from '@/lib/db/users';
 import customAxios from '@/lib/customAxios';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export const RegisterForm = () => {
 
@@ -49,6 +48,7 @@ export const RegisterForm = () => {
 				status: 'warning',
 				position: 'top-right',
 			})
+			return;
 		}
 		if(!isErrorId && !isErrorPassword) {
 			await customAxios.post('/api/user', {
@@ -93,6 +93,21 @@ export const RegisterForm = () => {
 			>
 				회원가입
 			</Button>
+			<Link href={'/login'}>
+				<Button
+					variant='outline' 
+					backgroundColor='#242424' 
+					color='white' 
+					width='100%'
+					marginTop={3}
+					_hover={{
+						color: 'white',
+						backgroundColor: '#3c3c3c'
+					}}
+				>
+					로그인 하러가기
+				</Button>
+			</Link>
 		</div>
 	)
 }

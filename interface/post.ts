@@ -1,5 +1,5 @@
 export interface post {
-	post_id: string;
+	post_uid: string;
 	title: string;
 	thumbnail: string;
 	likes: number;
