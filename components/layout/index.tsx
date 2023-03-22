@@ -31,7 +31,7 @@ export const Layout = (props: LayoutProps) => {
 	const router = useRouter();
 
 	const loginMenuList: menu[] = [
-		{ key: 'edit', label: '글쓰기', click: () => {}, leftIcon: <BiEdit/>},
+		{ key: 'edit', label: '글쓰기', click: () => {router.push('/post/write')}, leftIcon: <BiEdit/>},
 		{ key: 'profile', label: '프로필', click: () => {}},
 		{ key: 'search', label: '검색', click: () => {}, icon: <AiOutlineSearch size={20}/>},
 		{ key: 'logout', label: '로그아웃', click: () => logout(router), icon: <IoLogOutOutline size={20}/>},

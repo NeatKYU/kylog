@@ -1,3 +1,5 @@
+const removeImports = require('next-remove-imports')();
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   // reactStrictMode를 켜면 아직 버그가 있는모양? 두번 렌더링 된다.
@@ -15,4 +17,5 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+
+module.exports = removeImports(nextConfig)
