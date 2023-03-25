@@ -4,14 +4,13 @@ import { Textarea, Button, Stack } from '@chakra-ui/react'
 import React, { useState } from 'react'
 
 // editor 
-import "@uiw/react-md-editor/markdown-editor.css";
-import "@uiw/react-markdown-preview/markdown.css";
+import 'react-markdown-editor-lite/lib/index.css';
+import ReactMarkdown from 'react-markdown';
 import dynamic from "next/dynamic";
 
-const MDEditor = dynamic(
-  () => import("@uiw/react-md-editor"),
-  { ssr: false }
-);
+const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
+  ssr: false,
+});
 
 export default function Write() {
 
@@ -36,7 +35,7 @@ export default function Write() {
 			</TitleContainer>
 			<Divider />
 			<EditContainer>
-				<MDEditor height={500} value={editorValue} onChange={setEditorValue} />
+				<MdEditor style={{ height: '500px' }} renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>} />
 			</EditContainer>
 			<ControlContainer>
 				<Stack>
@@ -59,12 +58,6 @@ const EditContainer = styled.div`
 	height: auto;
 
 	font-size: ${toRem(25)} !important;
-
-	.w-md-editor-text-pre > code,
-	.w-md-editor-text-input {
-		font-size: 20px !important;
-		line-height: 21px !important;
-	}
 `
 
 const ControlContainer = styled.div`
