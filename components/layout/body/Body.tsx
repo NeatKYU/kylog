@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { common } from '@/interface/common';
 import { toRem } from '@/lib/helper';
 
-interface BodyLayoutProps extends common{
+interface BodyLayoutProps{
 	children: React.ReactNode;
 }
 

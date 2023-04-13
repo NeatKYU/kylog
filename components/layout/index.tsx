@@ -14,7 +14,7 @@ import { Button } from '@chakra-ui/react'
 import { logout } from '@/lib/auth';
 import { useRouter } from 'next/router';
 
-interface LayoutProps extends common{
+interface LayoutProps {
 	children: React.ReactNode;
 }
 
@@ -52,7 +52,7 @@ export const Layout = (props: LayoutProps) => {
 		<>
 			<div>
 				<Header logo='@/assets/img/logo.png' title=''>
-					{menuList(props.isAuth ? loginMenuList : logoutMenuList)}
+					{/* {menuList(props.isAuth ? loginMenuList : logoutMenuList)} */}
 				</Header>
 				<BodyLayout {...props}>
 					{ props.children }
