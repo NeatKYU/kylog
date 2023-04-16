@@ -37,10 +37,10 @@ export default withAuth({
 			// if (req.nextUrl.pathname === "/post/write") {
 			// 	return token?.userRole === "admin"
 			// }
-			// `/me` only requires the user to be logged in
+			// 로그인하지 않았으면 돌려보내기
 			return !!token
 		},
 	},
 })
 
-export const config = { matcher: ["/post/write", "/me"] }
+export const config = { matcher: ["/post/write"] }

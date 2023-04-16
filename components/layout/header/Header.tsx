@@ -72,6 +72,4 @@ const MenuBox = styled.div`
 	display: flex;
 	justify-content: end;
 	align-items: center;
-
-	gap: ${toRem(5)};
 `
