@@ -10,7 +10,11 @@ import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
 import styled, { ThemeProvider } from 'styled-components'
 import { theme as styledTheme } from '@/styles/theme'
 
-function App({ Component, pageProps }: AppProps){
+// next auth config setting
+import { SessionProvider } from "next-auth/react"
+import type { Session } from "next-auth"
+
+function App({ Component, pageProps: { session, ...pageProps } }: AppProps<{ session: Session }>){
   const router = useRouter();
   
   const withLayout = (path: string) => {
@@ -33,46 +37,48 @@ function App({ Component, pageProps }: AppProps){
           <Position>
             <ThemeToggleButton/>
           </Position>
-          {withLayout(router.pathname)}
+          <SessionProvider session={session}>
+            {withLayout(router.pathname)}
+          </SessionProvider>
         </ChakraProvider>
       </ThemeProvider>
     </RecoilRoot>
   )
 }
 
-App.getInitialProps = async ({ Component, ctx }: AppContext) => {
-  let appInitialProps = {};
-  let accessToken;
-  let refreshToken;
-  const cookieString = ctx.req?.headers.cookie;
+// App.getInitialProps = async ({ Component, ctx }: AppContext) => {
+//   let appInitialProps = {};
+//   let accessToken;
+//   let refreshToken;
+//   const cookieString = ctx.req?.headers.cookie;
 
-  if(Component.getInitialProps) {
-    appInitialProps = await Component.getInitialProps(ctx);
-  }
+//   if(Component.getInitialProps) {
+//     appInitialProps = await Component.getInitialProps(ctx);
+//   }
 
-  if(cookieString) {
-    const cookieArr = cookieString.split(';');
-    cookieArr.map((item: string) => {
-      const tempArr = item.trim().split('=');
-      // newArr.push({ key: tempArr[0], value: tempArr[1] });
-      if(tempArr[0] === ACCESSTOKEN) {
-        accessToken = tempArr[1];
-      }
-      if(tempArr[0] === REFRESHTOKEN) {
-        refreshToken = tempArr[1];
-      }
-    })
-  }
+//   if(cookieString) {
+//     const cookieArr = cookieString.split(';');
+//     cookieArr.map((item: string) => {
+//       const tempArr = item.trim().split('=');
+//       // newArr.push({ key: tempArr[0], value: tempArr[1] });
+//       if(tempArr[0] === ACCESSTOKEN) {
+//         accessToken = tempArr[1];
+//       }
+//       if(tempArr[0] === REFRESHTOKEN) {
+//         refreshToken = tempArr[1];
+//       }
+//     })
+//   }
   
-  appInitialProps = { 
-    ...appInitialProps, 
-    accessToken: accessToken, 
-    refreshToken: refreshToken,
-    isAuth: true,
-  };
-  // console.log('appInitialProps', appInitialProps)
-  return { pageProps: appInitialProps }
-}
+//   appInitialProps = { 
+//     ...appInitialProps, 
+//     accessToken: accessToken, 
+//     refreshToken: refreshToken,
+//     isAuth: true,
+//   };
+//   // console.log('appInitialProps', appInitialProps)
+//   return { pageProps: appInitialProps }
+// }
 
 export default App;
 
