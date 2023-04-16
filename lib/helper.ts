@@ -35,7 +35,7 @@ export const dateToHowover = (date: string) => {
   }else if(difference < mon){
     result = Math.trunc(difference / day) + '일 전';
   }else if(difference < year){
-    result = Math.trunc(difference / mon) + '달 전';
+    result = Math.trunc(difference / mon) + '개월 전';
   }else{
     result = Math.trunc(difference / year) + '년 전';
   }
