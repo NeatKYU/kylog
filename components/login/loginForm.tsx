@@ -6,6 +6,8 @@ import { toRem } from '@/lib/helper';
 import { SizedBox } from '../common/SizedBox';
 import { Input, Stack, FormControl, Button, InputGroup, InputRightAddon } from '@chakra-ui/react'
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons'
+import { BsGithub } from 'react-icons/bs'
+import { signIn } from 'next-auth/react'
 
 export const LoginForm = () => {
 
@@ -76,6 +78,9 @@ export const LoginForm = () => {
 							backgroundColor: '#3c3c3c'
 					}}>
 						회원가입
+					</Button>
+					<Button leftIcon={<BsGithub/>} onClick={() => signIn('github', { callbackUrl: '/'})}>
+						Sign in with Github
 					</Button>
 				</Stack>
 			</FormControl>
