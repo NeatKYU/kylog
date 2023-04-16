@@ -5,10 +5,9 @@ import Link from 'next/link'
 
 // components
 import { Header } from '@/components/layout/header/Header'
-import { AiOutlineSearch } from 'react-icons/ai'
 import { IoLogOutOutline } from 'react-icons/io5'
 import { BiEdit, BiLogIn } from 'react-icons/bi'
-import { BsPersonCircle } from 'react-icons/bs'
+import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
 import { Avatar, Button, Menu, MenuButton, MenuList, MenuItem, Box, Stack } from '@chakra-ui/react'
 
@@ -36,7 +35,9 @@ export const Layout = (props: LayoutProps) => {
 		</MenuList>
 		:
 		<MenuList>
-			<MenuItem>회원가입</MenuItem>
+			<Link href={'/register'}>
+				<MenuItem icon={<BsFillPersonBadgeFill size={20}/>}>회원가입</MenuItem>
+			</Link>
 			<MenuItem 
 				onClick={() => signIn()} 
 				icon={<BiLogIn size={20}/>}
@@ -64,14 +65,6 @@ export const Layout = (props: LayoutProps) => {
 							{authMenuList(status)}
 						</Menu>
 					</Stack>
-					{/* <Button size='sm'>프로필</Button> */}
-					{/* <Button size='sm'><AiOutlineSearch size={20}/></Button> */}
-					{/* {
-						status === 'authenticated' ? 
-						<Button size='sm' onClick={() => signOut()}><IoLogOutOutline size={20}/></Button>
-						:
-						<Button size='sm' onClick={() => signIn()}>로그인</Button>	
-					} */}
 				</Header>
 				<BodyLayout {...props}>
 					{ props.children }
