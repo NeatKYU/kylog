@@ -2,32 +2,30 @@ import styled from 'styled-components'
 import { common } from '@/interface/common';
 import { PostCardList } from '@/components/post/PostCardList'
 import { post } from '@/interface/post';
-import { posts } from '@/lib/db/post';
-import { Inter } from '@next/font/google'
+// import { posts } from '@/lib/db/post';
+import { PrismaClient } from '@prisma/client'
 
-const inter = Inter({ subsets: ['latin'] })
+// interface homeProps extends common{
+// 	posts: 
+// }
 
-interface homeProps extends common{
-	posts: post[]
-}
-
-export default function Home({posts}: homeProps) {
+export default function Home({posts}: {posts: any}) {
 
 	return (
 		<Container className='fcenter'>
-			<PostCardList postList={posts}/>
+			{posts}
+			{/* <PostCardList postList={posts}/> */}
 		</Container>
 	)
 }
 
 export const getStaticProps = async () => {
-		const resultPosts = await posts();
-		const convertPosts = JSON.parse(JSON.stringify(resultPosts));
-		return {
-			props: {
-				posts: convertPosts,
-			}
-		};
+	const prisma = new PrismaClient()
+	const posts = await prisma.post.findMany()
+	
+	return {
+		props : { posts }
+	}
 }
 
 const Container = styled.div`
