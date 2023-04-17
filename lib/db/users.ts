@@ -1,36 +1,20 @@
-import postgres from 'postgres';
+// userFunctions.js
+import prisma from '@/pages/api/prismaClient';
 
-const sql = postgres(process.env.DATABASE_URL as string);
+async function findUserByEmail(email: string) {
+	console.log('findUserbyEmail ', email)
+  	try {
+		const user = await prisma.user.findUnique({
+			where: {
+				email: email,
+			},
+		});
 
-export interface USER {
-	id: string;
-	user_id: string;
-	password: string;
-	email: string;
-	phone: string;
+		return user;
+	} catch (error) {
+		console.error("Error finding user:", error);
+		throw error;
+	}
 }
 
-export async function users() {
-  return await sql<USER[]>`
-    SELECT * FROM blog_user
-  `
-}
-
-export async function findUser(id: string, password: string) {
-	return await sql<USER[]>`
-		SELECT * FROM blog_user WHERE user_id=${id} AND password=${password}
-	`
-}
-
-export async function validateUser(id: string) {
-	return await sql<USER[]>`
-		SELECT * FROM blog_user WHERE user_id=${id}
-	`
-}
-
-export async function insertUser(id: string, password: string) {
-	return await sql<USER[]>`
-		INSERT INTO blog_user (user_id, password, phone, email)
-		VALUES(${id}, ${password}, '', '')
-	`
-}
+export { findUserByEmail };
