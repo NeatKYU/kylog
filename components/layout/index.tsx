@@ -35,9 +35,9 @@ export const Layout = (props: LayoutProps) => {
 		</MenuList>
 		:
 		<MenuList>
-			<Link href={'/register'}>
-				<MenuItem icon={<BsFillPersonBadgeFill size={20}/>}>회원가입</MenuItem>
-			</Link>
+			<MenuItem icon={<BsFillPersonBadgeFill size={20}/>}>
+				<Link href={'/register'}>회원가입</Link>
+			</MenuItem>
 			<MenuItem 
 				onClick={() => signIn()} 
 				icon={<BiLogIn size={20}/>}
@@ -51,7 +51,7 @@ export const Layout = (props: LayoutProps) => {
 		<>
 			<div>
 				<Header logo='@/assets/img/logo.png' title=''>
-					<Stack spacing={4} direction={'row'}>
+					{/* <Stack spacing={4} direction={'row'}> */}
 						<Link href={'/post/write'} >
 							<Button size='sm' leftIcon={<BiEdit/>} >글쓰기</Button>
 						</Link>
@@ -64,7 +64,7 @@ export const Layout = (props: LayoutProps) => {
 							</MenuButton>
 							{authMenuList(status)}
 						</Menu>
-					</Stack>
+					{/* </Stack> */}
 				</Header>
 				<BodyLayout {...props}>
 					{ props.children }

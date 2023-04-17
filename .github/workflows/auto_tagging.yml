@@ -2,7 +2,7 @@ name: update tag
 on:
   push:
     branches:
-      - master # master branch로 push될 때 아래 action이 실행된다.
+      - main # master branch로 push될 때 아래 action이 실행된다.
 jobs:
   build:
     runs-on: ubuntu-latest

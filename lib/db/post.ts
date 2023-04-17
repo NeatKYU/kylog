@@ -1,21 +1,23 @@
-import postgres from 'postgres';
-import { post } from '@/interface/post';
+// postFunctions.js
+import prisma from '@/pages/api/prismaClient';
 
-const sql = postgres(process.env.DATABASE_URL as string);
+async function createPost(title: string, content: string, authorId: string, thumbnail: string) {
+	try {
+		const newPost = await prisma.post.create({
+			data: {
+				title: title,
+				content: content,
+				authorId: authorId,
+				thumbnail: thumbnail,
+				likes: 0,
+			},
+		});
 
-export async function posts() {
-  return await sql<post[]>`
-		SELECT a.*, b.user_id as username
-		FROM post as a
-		LEFT OUTER JOIN blog_user as b ON a.user_uid = b.uid
-  `
+		return newPost;
+	} catch (error) {
+		console.error("Error creating post:", error);
+		throw error;
+	}
 }
 
-export async function postDetail(postId: string) {
-	return await sql<post[]>`
-		SELECT a.*, b.user_id as username
-		FROM post as a, blog_user as b
-		WHERE a.post_uid = ${postId}
-		AND a.user_uid = b.uid
-	`
-}
+export { createPost };
