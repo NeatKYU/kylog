@@ -76,7 +76,6 @@ const TitleContainer = styled.div`
 const EditContainer = styled.div`
 	width: 100%;
 	height: auto;
-	
 	font-size: ${toRem(25)} !important;
 `
 
