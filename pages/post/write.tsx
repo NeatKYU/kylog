@@ -33,6 +33,22 @@ export default function Write() {
 		})
 	}
 
+	const uploadFile = async (file: File) => {
+		const { data } = await axios.post('/api/s3/upload', {
+		  name: file.name,
+		  type: file.type,
+		})
+	
+		await axios.put(data.signedUrl, file, {
+		  headers: {
+			'Content-Type': file.type,
+			'Access-Control-Allow-Origin': '*',
+		  },
+		});
+	
+		return data.cleanUrl;
+	  }
+
 	return (
 		<div>
 			<TitleContainer>
@@ -55,6 +71,7 @@ export default function Write() {
 					value={editorValue}
 					onChange={(v) => setEditorValue(v.text)}
 					renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>} 
+					onImageUpload={uploadFile}
 				/>
 			</EditContainer>
 			<ControlContainer>
