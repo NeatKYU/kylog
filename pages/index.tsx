@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { common } from '@/interface/common';
 import { PostCardList } from '@/components/post/PostCardList'
 import { post } from '@/interface/post';
 // import { posts } from '@/lib/db/post';
@@ -13,18 +12,23 @@ export default function Home({posts}: {posts: any}) {
 
 	return (
 		<Container className='fcenter'>
-			{posts}
-			{/* <PostCardList postList={posts}/> */}
+			<PostCardList postList={posts}/>
 		</Container>
 	)
 }
 
 export const getStaticProps = async () => {
 	const prisma = new PrismaClient()
-	const posts = await prisma.post.findMany()
+	const posts = await prisma.post.findMany({
+		include: {
+			author: true,
+		}
+	})
+	console.log(posts)
 	
 	return {
-		props : { posts }
+		// props: { }
+		props : { posts: JSON.parse(JSON.stringify(posts)) }
 	}
 }
 

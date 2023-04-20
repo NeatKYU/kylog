@@ -7,7 +7,7 @@ export const toRem = (px: number): string => {
 	return px/REM_NUMBER + 'rem';
 }
 
-export const dateToHowover = (date: string) => {
+export const dateToHowover = (date: string | Date) => {
 	const seconds = 1;
 	const minute = seconds * 60;
 	const hour = minute * 60;
@@ -16,7 +16,7 @@ export const dateToHowover = (date: string) => {
 	const year = mon * 12;
 
 	//현재시간
-	const now = new Date(); 
+	const now = new Date();
 	//기준시간 
 	const writeDay = new Date(date);
 	//현재 시간과 기준시간의 차이를 getTime을 통해 구한다 

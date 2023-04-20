@@ -30,18 +30,18 @@ export const PostCard = ({
 					{post.title}
 				</TitleContainer>
 				<DescContainer>
-					{post.contents}
+					{post.content}
 				</DescContainer>
 				<Stack direction={'row'} spacing={4} className='ai-center'>
-					<Avatar marginTop={1} size='sm' src={post.uesrThumbnail ?? 'https://bit.ly/broken-link'}/>
-					<span className='font-18 f ai-center'>{post.username}</span>
-					<span className='font-12 f ai-center'>{dateToHowover(post.createdate)}</span>
+					<Avatar marginTop={1} size='sm' src={post.author!.image ?? 'https://bit.ly/broken-link'}/>
+					<span className='font-18 f ai-center'>{post.author!.name}</span>
+					<span className='font-12 f ai-center'>{dateToHowover(post.createdAt)}</span>
 					<ButtonGroup style={{marginLeft: 'auto'}}>
 						<Button size='xs' leftIcon={<AiTwotoneLike/>}>
 							{post.likes}
 						</Button>
 						<Button size='xs' leftIcon={<AiOutlineComment/>}>
-							{post.comments}
+							{/* {post.comments} */}
 						</Button>
 					</ButtonGroup>
 				</Stack>

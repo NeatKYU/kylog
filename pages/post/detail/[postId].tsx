@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { post } from '@/interface/post';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { postDetail } from '@/lib/db/post';
 import { toRem } from '@/lib/helper';
 import { Avatar, Stack } from '@chakra-ui/react';
 import { dateToHowover } from '@/lib/helper';
@@ -13,7 +12,7 @@ interface detailProps {
 
 export default function Detail({ post }: detailProps) {
 
-	const createAt = dateToHowover(post.createdate);
+	const createAt = dateToHowover(post.createdAt);
 
 	return (
 		<Container>
@@ -24,13 +23,13 @@ export default function Detail({ post }: detailProps) {
 				<Stack direction='row' spacing={4}>
 					<Avatar/>
 					<div className='fcol'>
-						<div className='font-18 bold'>{post.username}</div>
+						<div className='font-18 bold'>{post.author!.name}</div>
 						<div className='font-12'>{createAt}</div>
 					</div>
 				</Stack>
 			</UserInfoContainer>
 			<ContentsContainer>
-				{post.contents}
+				{post.content}
 			</ContentsContainer>
 			<RemoteControler likes={post.likes}/>
 		</Container>
@@ -47,15 +46,15 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	// console.log('params', params);
-	if(context.params?.postId) {
-		const postId = context.params.postId.toString();
-		const res = JSON.parse(JSON.stringify(await postDetail(postId)));
-		return {
-			props: {
-				post: res[0],
-			}
-		}
-	}
+	// if(context.params?.postId) {
+	// 	const postId = context.params.postId.toString();
+	// 	const res = JSON.parse(JSON.stringify(await postDetail(postId)));
+	// 	return {
+	// 		props: {
+	// 			post: res[0],
+	// 		}
+	// 	}
+	// }
 	return {
 		props: {
 			post: undefined,

@@ -19,9 +19,9 @@ export const PostCardList = (props: PostCardListProps) => {
 		return list.map((item: post) => (
 			<>
 				<PostCard 
-					key={item.post_uid} 
+					key={item.id} 
 					post={item} 
-					onClick={() => handleDetailPage(item.post_uid)}
+					onClick={() => handleDetailPage(item.id)}
 				/>
 				<Divider/>
 			</>
