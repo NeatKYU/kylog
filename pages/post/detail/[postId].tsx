@@ -5,6 +5,7 @@ import { toRem } from '@/lib/helper';
 import { Avatar, Stack } from '@chakra-ui/react';
 import { dateToHowover } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
+import ReactMarkdown from 'react-markdown'
 
 interface detailProps {
 	post: post
@@ -12,26 +13,29 @@ interface detailProps {
 
 export default function Detail({ post }: detailProps) {
 
-	const createAt = dateToHowover(post.createdAt);
+	// const createAt = dateToHowover(post.createdAt);
 
 	return (
 		<Container>
 			<TitleContainer className='title-font-size'>
-				{post.title}
+				{/* {post.title} */}
 			</TitleContainer>
 			<UserInfoContainer className='f fc-start'>
-				<Stack direction='row' spacing={4}>
+				{/* <Stack direction='row' spacing={4}>
 					<Avatar/>
 					<div className='fcol'>
 						<div className='font-18 bold'>{post.author!.name}</div>
 						<div className='font-12'>{createAt}</div>
 					</div>
-				</Stack>
+				</Stack> */}
 			</UserInfoContainer>
 			<ContentsContainer>
-				{post.content}
+				<ReactMarkdown>
+					{`## h2`}
+					{/* {post.content} */}
+				</ReactMarkdown>
 			</ContentsContainer>
-			<RemoteControler likes={post.likes}/>
+			{/* <RemoteControler likes={post.likes}/> */}
 		</Container>
 	)
 }
@@ -57,7 +61,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	// }
 	return {
 		props: {
-			post: undefined,
+			post: '',
 		}
 	}
 }
@@ -66,10 +70,6 @@ const Container = styled.div`
 	width: 100%;
 	max-width: ${toRem(1024)};
 	height: auto;
-
-	@media ${({ theme }) => theme.device.laptop} {
-		padding: 0 ${toRem(20)};
-	}
 `
 
 const TitleContainer = styled.div`
@@ -77,16 +77,6 @@ const TitleContainer = styled.div`
 	font-size: ${toRem(35)};
 	font-weight: bold;
 	margin-bottom: ${toRem(30)};
-
-	/* @media ${({ theme }) => theme.device.laptop} {
-		font-size: ${toRem(30)};
-	}
-	@media ${({ theme }) => theme.device.tablet} {
-		font-size: ${toRem(20)};
-	}
-	@media ${({ theme }) => theme.device.semiTablet} {
-		font-size: ${toRem(18)};
-	} */
 `
 
 const UserInfoContainer = styled.div`

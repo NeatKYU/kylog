@@ -1,5 +1,4 @@
 import type { AppContext, AppProps } from 'next/app'
-import GlobalStyle from '@/styles/GlobalStyle'
 import { Layout } from '@/components/layout'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
@@ -8,7 +7,7 @@ import theme from '@/styles/chakraTheme'
 import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const'
 import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
 import styled, { ThemeProvider } from 'styled-components'
-import { theme as styledTheme } from '@/styles/theme'
+import { NextUIProvider } from '@nextui-org/react';
 
 // next auth config setting
 import { SessionProvider } from "next-auth/react"
@@ -31,17 +30,14 @@ function App({ Component, pageProps: { session, ...pageProps } }: AppProps<{ ses
 
   return (
     <RecoilRoot>
-      <ThemeProvider theme={styledTheme}>
-        <GlobalStyle />
-        <ChakraProvider theme={theme}>
-          <Position>
-            <ThemeToggleButton/>
-          </Position>
-          <SessionProvider session={session}>
-            {withLayout(router.pathname)}
-          </SessionProvider>
-        </ChakraProvider>
-      </ThemeProvider>
+      <NextUIProvider>
+        <Position>
+          <ThemeToggleButton/>
+        </Position>
+        <SessionProvider session={session}>
+          {withLayout(router.pathname)}
+        </SessionProvider>
+      </NextUIProvider>
     </RecoilRoot>
   )
 }

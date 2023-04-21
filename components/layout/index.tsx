@@ -9,7 +9,7 @@ import { IoLogOutOutline } from 'react-icons/io5'
 import { BiEdit, BiLogIn } from 'react-icons/bi'
 import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
-import { Avatar, Button, Menu, MenuButton, MenuList, MenuItem, Box, Stack } from '@chakra-ui/react'
+import { Avatar, Button, Dropdown } from '@nextui-org/react';
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -22,49 +22,43 @@ export const Layout = (props: LayoutProps) => {
 
 	const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
 		return status === 'authenticated' ? 
-		<MenuList>
-			<MenuItem icon={<BsPersonCircle size={20}/>}>
-				프로필
-			</MenuItem>
-			<MenuItem 
-				onClick={() => signOut()} 
-				icon={<IoLogOutOutline size={20}/>}
-			>
-				로그아웃
-			</MenuItem>
-		</MenuList>
+		<Dropdown.Menu>
+			<Dropdown.Item icon={<BsPersonCircle size={20} />}>
+				<span>프로필</span>
+			</Dropdown.Item>
+			<Dropdown.Item icon={<IoLogOutOutline size={20} />}>
+				<span onClick={() => signOut()}>로그아웃</span>
+			</Dropdown.Item>
+		</Dropdown.Menu>
 		:
-		<MenuList>
-			<MenuItem icon={<BsFillPersonBadgeFill size={20}/>}>
+		<Dropdown.Menu>
+			<Dropdown.Item icon={<BsFillPersonBadgeFill size={20}/>}>
 				<Link href={'/register'}>회원가입</Link>
-			</MenuItem>
-			<MenuItem 
-				onClick={() => signIn()} 
-				icon={<BiLogIn size={20}/>}
-			>
-				로그인
-			</MenuItem>
-		</MenuList>
+			</Dropdown.Item>
+			<Dropdown.Item icon={<BiLogIn size={20}/>} >
+				{/* TODO 버튼 만들어야함 */}
+				{/* <Dropdown onClick={() => signIn()}>로그인</Dropdown> */}
+			</Dropdown.Item>
+		</Dropdown.Menu>
 	}
 
 	return (
 		<>
 			<div>
 				<Header logo='@/assets/img/logo.png' title=''>
-					{/* <Stack spacing={4} direction={'row'}> */}
-						<Link href={'/post/write'} >
-							<Button size='sm' leftIcon={<BiEdit/>} >글쓰기</Button>
-						</Link>
-						<Menu>
-							<MenuButton style={{cursor: 'point'}}>
-								<Avatar 
-									size={'sm'} 
-									src={status === 'authenticated' ? session.user.image : 'https://bit.ly/broken-link'} 
-								/>
-							</MenuButton>
-							{authMenuList(status)}
-						</Menu>
-					{/* </Stack> */}
+					<Link href={'/post/write'} >
+						<Button auto icon={<BiEdit/>} >글쓰기</Button>
+					</Link>
+					<Dropdown>
+						<Dropdown.Trigger>
+							<Avatar 
+								squared
+								pointer
+								src={status === 'authenticated' ? session.user.image : ''} 
+							/>
+						</Dropdown.Trigger>
+						{authMenuList(status)}
+					</Dropdown>
 				</Header>
 				<BodyLayout {...props}>
 					{ props.children }

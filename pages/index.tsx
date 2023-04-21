@@ -18,17 +18,17 @@ export default function Home({posts}: {posts: any}) {
 }
 
 export const getStaticProps = async () => {
-	const prisma = new PrismaClient()
-	const posts = await prisma.post.findMany({
-		include: {
-			author: true,
-		}
-	})
-	console.log(posts)
+	// const prisma = new PrismaClient()
+	// const posts = await prisma.post.findMany({
+	// 	include: {
+	// 		author: true,
+	// 	}
+	// })
+	// console.log(posts)
 	
 	return {
-		// props: { }
-		props : { posts: JSON.parse(JSON.stringify(posts)) }
+		props: { }
+		// props : { posts: JSON.parse(JSON.stringify(posts)) }
 	}
 }
 
