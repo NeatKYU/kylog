@@ -6,8 +6,6 @@ import Document, {
   DocumentContext,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
-import { ColorModeScript } from '@chakra-ui/react'
-import theme from '@/styles/chakraTheme';
 import { CssBaseline } from '@nextui-org/react';
 import React from 'react';
 import { NextPageContext } from 'next';

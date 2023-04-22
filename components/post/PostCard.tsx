@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import { dateToHowover, toRem } from '@/lib/helper'
 import { post } from '@/interface/post';
-import { Avatar, Button, ButtonGroup, Stack } from '@chakra-ui/react'
 import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
 import Image from 'next/image'
+import { Avatar, Button } from '@nextui-org/react'
 
 interface postCardProps{
 	post: post;
@@ -16,8 +16,9 @@ export const PostCard = ({
 	}: postCardProps
 ) => {
 	return (
-		<Container onClick={onClick}>
-			<ImageContainer className='fcenter'>
+		<div className={'w-full h-24'} onClick={onClick}>
+			sdf
+			{/* <ImageContainer className='fcenter'>
 				<Image 
 					src={post.thumbnail === '' ? '/example.jpeg' : post.thumbnail} 
 					alt='' 
@@ -33,20 +34,19 @@ export const PostCard = ({
 					{post.content}
 				</DescContainer>
 				<Stack direction={'row'} spacing={4} className='ai-center'>
-					<Avatar marginTop={1} size='sm' src={post.author!.image ?? 'https://bit.ly/broken-link'}/>
+					<Avatar size='md' src={post.author!.image ?? 'https://bit.ly/broken-link'}/>
 					<span className='font-18 f ai-center'>{post.author!.name}</span>
 					<span className='font-12 f ai-center'>{dateToHowover(post.createdAt)}</span>
 					<ButtonGroup style={{marginLeft: 'auto'}}>
-						<Button size='xs' leftIcon={<AiTwotoneLike/>}>
+						<Button auto icon={<AiTwotoneLike/>}>
 							{post.likes}
 						</Button>
-						<Button size='xs' leftIcon={<AiOutlineComment/>}>
-							{/* {post.comments} */}
+						<Button auto icon={<AiOutlineComment/>}>
 						</Button>
 					</ButtonGroup>
 				</Stack>
-			</Contents>
-		</Container>
+			</Contents> */}
+		</div>
 	)
 }
 

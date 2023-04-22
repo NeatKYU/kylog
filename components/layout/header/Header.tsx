@@ -9,9 +9,10 @@ interface HeaderProps {
 
 export const Header = ({ logo, title, children }: HeaderProps) => {
 	return (
-		<Navbar variant={'sticky'}>
+		<Navbar variant={'sticky'} disableBlur>
 			<Navbar.Brand>
-				<Image src={'/img/logo_white.png'} alt='logo' width={100} height={60}/>
+				{/* <Image src={'/img/logo_white.png'} alt='logo' width={100} height={60}/> */}
+				<span>KYLOG</span>
 			</Navbar.Brand>
 			<Navbar.Content>
 				{children}
