@@ -9,4 +9,16 @@ export interface post {
 	author?: user;
 	thumbnail: string;
 	likes: number;
+	comments?: comment[];
+}
+
+export interface comment {
+	id: string;
+	content: string;
+	author?: user;
+	authorId: string;
+	post?: post;
+	postId: string;
+	createdAt: string;
+	updatedAt: string;
 }

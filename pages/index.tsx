@@ -9,7 +9,7 @@ import prisma from '@/pages/api/prismaClient'
 export default function Home({posts}: {posts: any}) {
 
 	return (
-		<div className='flex-center w-full'>
+		<div className='w-full'>
 			<PostCardList postList={posts}/>
 		</div>
 	)
@@ -20,6 +20,7 @@ export const getStaticProps = async () => {
 	const posts = await prisma.post.findMany({
 		include: {
 			author: true,
+			comments: true,
 		}
 	})
 	// console.log(posts)

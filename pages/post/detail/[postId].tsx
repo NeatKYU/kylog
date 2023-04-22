@@ -5,6 +5,7 @@ import { toRem } from '@/lib/helper';
 import { dateToHowover } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
 import ReactMarkdown from 'react-markdown'
+import prisma from '@/pages/api/prismaClient'
 
 interface detailProps {
 	post: post
@@ -30,8 +31,7 @@ export default function Detail({ post }: detailProps) {
 			</UserInfoContainer>
 			<ContentsContainer>
 				<ReactMarkdown>
-					{`## h2`}
-					{/* {post.content} */}
+					{post.content}
 				</ReactMarkdown>
 			</ContentsContainer>
 			{/* <RemoteControler likes={post.likes}/> */}
@@ -51,16 +51,24 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	// console.log('params', params);
 	if(context.params?.postId) {
 		const postId = context.params.postId.toString();
-		const res = JSON.parse(JSON.stringify(await postDetail(postId)));
+		const post = await prisma.post.findUnique({
+			where: {
+				id: postId
+			},
+			include: {
+				author: true,
+			}
+		})
+
 		return {
 			props: {
-				post: res[0],
+				post: JSON.parse(JSON.stringify(post)),
 			}
 		}
 	}
 	return {
 		props: {
-			post: '',
+			post: ''
 		}
 	}
 }

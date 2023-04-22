@@ -27,8 +27,8 @@ export const PostCardList = (props: PostCardListProps) => {
 	}
 
 	return (
-		<>
+		<div className='flex flex-wrap'>
 			{postListElement(postList)}
-		</>
+		</div>
 	)
 }
