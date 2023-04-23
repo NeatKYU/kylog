@@ -4,14 +4,14 @@ import cutsomAxios from '@/lib/customAxios';
 import { useRouter } from 'next/router';
 import { toRem } from '@/lib/helper';
 import { SizedBox } from '../common/SizedBox';
-import { BsGithub } from 'react-icons/bs'
+import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { signIn } from 'next-auth/react'
+import { Input, Spacer, Button } from '@nextui-org/react'
 
 export const LoginForm = () => {
 
 	const [id, setId] = useState('');
 	const [password, setPassword] = useState('');
-	const [isShow, setIsShow] = useState(false);
 	const router = useRouter();
 
 	const handleId = (e: ChangeEvent<HTMLInputElement>) => {
@@ -39,49 +39,48 @@ export const LoginForm = () => {
 		router.push('/register')
 	}
 
-	const handleShowPassword = () => {
-		setIsShow(!isShow);
-	}
-
 	return (
-		<Container>
-			{/* <FormControl>
-				<Stack>
-					<Input variant='filled' placeholder='아이디를 입력해주세요.' onChange={handleId}/>
-					<InputGroup>
-						<Input 
-							variant='filled'
-							type='password'
-							placeholder='비밀번호를 입력해주세요.' 
-							onChange={handlePassword}
-						/>
-						<InputRightAddon onClick={handleShowPassword}>
-							{isShow ? <ViewOffIcon/> : <ViewIcon/>}
-						</InputRightAddon>
-					</InputGroup>
-				<SizedBox h='10px'/>
-					<Button variant='outline' onClick={handleLogin}>로그인</Button>
-					<Button 
-						onClick={handleRegister}
-						variant='outline' 
-						backgroundColor='#242424' 
-						color='white' 
-						_hover={{
-							color: 'white',
-							backgroundColor: '#3c3c3c'
-					}}>
-						회원가입
-					</Button>
-					<Button leftIcon={<BsGithub/>} onClick={() => signIn('github', { callbackUrl: '/'})}>
-						Sign in with Github
-					</Button>
-				</Stack>
-			</FormControl> */}
-		</Container>
+		<div className='w-80'>
+			<Input 
+				fullWidth 
+				size='lg' 
+				placeholder='아이디를 입력해주세요.' 
+				onInput={handleId}
+			/>
+			<Spacer y={1}/>
+			<Input.Password 
+				fullWidth
+				size='lg'
+				placeholder='비밀번호를 입력해주세요.' 
+				onInput={handlePassword}
+				visibleIcon={<BsEyeFill/>}
+				hiddenIcon={<BsEyeSlashFill/>}
+			/>
+			<Spacer y={2} />
+			<Button 
+				className='w-full' 
+				onClick={handleLogin} 
+				color="gradient" 
+				shadow
+			>
+				로그인
+			</Button>
+			<Spacer y={0.5} />
+			<Button 
+				bordered
+				className='w-full'
+				onClick={handleRegister}
+			>
+				회원가입
+			</Button>
+			<Spacer y={3} />
+			<Button 
+				className='w-full'
+				onClick={() => signIn('github', { callbackUrl: '/'})}
+			>
+				<BsGithub className='mr-2'/>
+				Sign in with Github
+			</Button>
+		</div>
 	)
 }
-
-const Container = styled.div`
-	width: ${toRem(300)};
-	height: ${toRem(300)};
-`

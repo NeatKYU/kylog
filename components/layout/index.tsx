@@ -27,7 +27,7 @@ export const Layout = (props: LayoutProps) => {
 				<span>프로필</span>
 			</Dropdown.Item>
 			<Dropdown.Item icon={<IoLogOutOutline size={20} />}>
-				<span onClick={() => signOut()}>로그아웃</span>
+				<div onClick={() => signOut()}>로그아웃</div>
 			</Dropdown.Item>
 		</Dropdown.Menu>
 		:
@@ -37,7 +37,7 @@ export const Layout = (props: LayoutProps) => {
 			</Dropdown.Item>
 			<Dropdown.Item icon={<BiLogIn size={20}/>} >
 				{/* TODO 버튼 만들어야함 */}
-				{/* <Dropdown onClick={() => signIn()}>로그인</Dropdown> */}
+				<div onClick={() => signIn()}>로그인</div>
 			</Dropdown.Item>
 		</Dropdown.Menu>
 	}
