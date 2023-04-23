@@ -5,10 +5,8 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import { ServerStyleSheet } from "styled-components";
 import { CssBaseline } from '@nextui-org/react';
 import React from 'react';
-import { NextPageContext } from 'next';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

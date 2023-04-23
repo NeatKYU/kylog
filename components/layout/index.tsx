@@ -18,7 +18,6 @@ interface LayoutProps {
 
 export const Layout = (props: LayoutProps) => {
 
-	// TODO 유저 정보의 아바타 이미지 여기서 쓰자!!
 	const { data: session, status } = useSession();
 	const router = useRouter();
 
@@ -38,7 +37,6 @@ export const Layout = (props: LayoutProps) => {
 				<div onClick={() => router.push('/register')}>회원가입</div>
 			</Dropdown.Item>
 			<Dropdown.Item icon={<BiLogIn size={20}/>} >
-				{/* TODO 버튼 만들어야함 */}
 				<div onClick={() => router.push('/login')}>로그인</div>
 			</Dropdown.Item>
 		</Dropdown.Menu>

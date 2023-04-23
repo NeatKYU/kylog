@@ -10,7 +10,7 @@ import prisma from '@/pages/api/prismaClient'
 interface detailProps {
 	post: post
 }
-
+// TODO post 디테일 스타일 변경해야함
 export default function Detail({ post }: detailProps) {
 
 	// const createAt = dateToHowover(post.createdAt);

@@ -41,46 +41,8 @@ export const RegisterForm = () => {
 		}
 	}
 
-	// const handleRegister = async (id: string, password: string) => {
-	// 	if(id === '' || password === '') {
-	// 		toast({
-	// 			description: '아이디, 패스워드를 입력해주세요',
-	// 			title: '회원가입 실패',
-	// 			status: 'warning',
-	// 			position: 'top-right',
-	// 		})
-	// 		return;
-	// 	}
-	// 	if(!isErrorId && !isErrorPassword) {
-	// 		await customAxios.post('/api/user', {
-	// 			id: id,
-	// 			password: password,
-	// 		}).then(() => {
-	// 			toast({
-	// 				description: '회원이 되신걸 축하드립니다.',
-	// 				title: '가입 성공',
-	// 				status: 'success',
-	// 				position: 'top-right',
-	// 			})
-	// 			router.push('/home');
-	// 		});
-	// 	} else {
-	// 		// TODO error alert
-	// 	}
-	// }
-
 	return (
 		<div className='flex flex-col w-80 m-auto mt-24'>
-			{/* <FormControl isInvalid={isErrorId} isRequired marginBottom={1}>
-				<FormLabel>ID</FormLabel>
-				<Input onChange={onChangeId} variant='filled'/>
-				<FormErrorMessage>5자리 이상 입력해주세요.</FormErrorMessage>
-			</FormControl>
-			<FormControl isInvalid={isErrorPassword} isRequired marginBottom={1}>
-				<FormLabel>PASSWORD</FormLabel>
-				<Input type={'password'} onChange={onChangePassword} variant='filled'/>
-				<FormErrorMessage>비밀번호는 영문, 숫자, 특수문자를 포함한 6~16자리입니다.</FormErrorMessage>
-			</FormControl> */}
 			<Input 
 				label='아이디'
 				size='lg'

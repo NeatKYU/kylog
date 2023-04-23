@@ -1,10 +1,7 @@
-import type { AppContext, AppProps } from 'next/app'
+import type { AppProps } from 'next/app'
 import { Layout } from '@/components/layout'
 import { useRouter } from 'next/router'
 import { RecoilRoot } from 'recoil'
-import { ACCESSTOKEN, REFRESHTOKEN } from '@/lib/const'
-// import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
-import styled, { ThemeProvider } from 'styled-components'
 import { NextUIProvider } from '@nextui-org/react';
 import '@/styles/globals.css';
 
