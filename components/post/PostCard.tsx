@@ -16,12 +16,20 @@ export const PostCard = ({
 	}: postCardProps
 ) => {
 	return (
-		// <div className={'w-64 h-80 inline-flex m-2 border rounded border-black border-solid'} onClick={onClick}>
-		<Card variant='flat' className='w-64 h-80 relative m-2 rounded'>
-			{/* <div className='w-full h-1/2 flex flex-col relative'> */}
-			{/* <Card.Header css={{ position: "absolute", zIndex: 1, top: 5 }} className='bg-white/80'>
-				{post.title}
-			</Card.Header> */}
+		<Card 
+			isPressable
+			variant='flat' 
+			className='
+				relative 
+				rounded
+				w-[calc(33.3%-10px)]
+				lg:w-[270px]
+				h-80 
+				m-[5px]
+			' 
+			style={{ backgroundColor: '#f7f7f7'}} 
+			onClick={onClick}
+		>
 			<Card.Body className='p-0'>
 				<Card.Image
 					src={post.thumbnail === '' ? '/example.jpeg' : post.thumbnail} 
@@ -45,7 +53,6 @@ export const PostCard = ({
 			<Card.Divider/>
 			<Card.Footer
 				className='py-3'
-				// style={{blur}}
 				css={{
 					zIndex: 1,
 				}}
@@ -65,70 +72,6 @@ export const PostCard = ({
 					</Row>
 				</Row>
 			</Card.Footer>
-			{/* </div> */}
-			{/* <ImageContainer className='fcenter'>
-				<Image 	
-					src={post.thumbnail === '' ? '/example.jpeg' : post.thumbnail} 
-					alt='' 
-					width={100}
-					height={100}
-				/>
-			</ImageContainer> */}
-			{/* <Contents className='fcol'>
-				<TitleContainer className='font-20'>
-					{post.title}
-				</TitleContainer>
-				<DescContainer>
-					{post.content}
-				</DescContainer>
-				<Avatar size='md' src={post.author!.image ?? 'https://bit.ly/broken-link'}/>
-				<span className='font-18 f ai-center'>{post.author!.name}</span>
-				<span className='font-12 f ai-center'>{dateToHowover(post.createdAt)}</span>
-				<Button auto icon={<AiTwotoneLike/>}>
-					{post.likes}
-				</Button>
-				<Button auto icon={<AiOutlineComment/>}>
-				</Button>
-			</Contents> */}
 		</Card>
 	)
 }
-
-const Contents = styled.div`
-	height: 100%;
-
-	flex-grow: 1;
-
-	padding-left: 20px;
-`
-
-const ImageContainer = styled.div`
-	width: ${toRem(250)};
-	height: 100%;
-	background-color: aliceblue;
-	border-radius: 10px;
-
-	img {
-		width: 100%;
-		height: 100%;
-
-		/* border-radius: 10px; */
-	}
-`
-
-const TitleContainer = styled.div`
-	width: 100%;
-	height: ${toRem(40)};
-	margin-bottom: 10px;
-`
-
-const DescContainer = styled.div`
-	width: 100%;
-	height: ${toRem(90)};
-	margin-bottom: 10px;
-`
-
-const EtcContainer = styled.div`
-	width: 100%;
-	height: ${toRem(40)};
-`
