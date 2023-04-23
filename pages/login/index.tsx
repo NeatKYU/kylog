@@ -6,17 +6,17 @@ export default function Login() {
 	return (
 		<Container>
 			<LoginForm/>
-			<div style={{height: '200px', width: '100%'}}/>
+			{/* <div style={{height: '200px', width: '100%'}}/> */}
 		</Container>
 	)
 }
 
 const Container = styled.div`
 	width: 100%;
-	height: 100vh;
+	/* height: 100vh; */
 
-	display: flex;
+	/* display: flex;
 	flex-direction: column;
 	justify-content: center;
-	align-items: center;
+	align-items: center; */
 `

@@ -2,6 +2,7 @@
 import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 // components
 import { Header } from '@/components/layout/header/Header'
@@ -19,6 +20,7 @@ export const Layout = (props: LayoutProps) => {
 
 	// TODO 유저 정보의 아바타 이미지 여기서 쓰자!!
 	const { data: session, status } = useSession();
+	const router = useRouter();
 
 	const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
 		return status === 'authenticated' ? 
@@ -33,11 +35,11 @@ export const Layout = (props: LayoutProps) => {
 		:
 		<Dropdown.Menu>
 			<Dropdown.Item icon={<BsFillPersonBadgeFill size={20}/>}>
-				<Link href={'/register'}>회원가입</Link>
+				<div onClick={() => router.push('/register')}>회원가입</div>
 			</Dropdown.Item>
 			<Dropdown.Item icon={<BiLogIn size={20}/>} >
 				{/* TODO 버튼 만들어야함 */}
-				<div onClick={() => signIn()}>로그인</div>
+				<div onClick={() => router.push('/login')}>로그인</div>
 			</Dropdown.Item>
 		</Dropdown.Menu>
 	}

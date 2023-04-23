@@ -40,7 +40,7 @@ export const LoginForm = () => {
 	}
 
 	return (
-		<div className='w-80'>
+		<div className='w-80 m-auto mt-24'>
 			<Input 
 				fullWidth 
 				size='lg' 
@@ -56,7 +56,7 @@ export const LoginForm = () => {
 				visibleIcon={<BsEyeFill/>}
 				hiddenIcon={<BsEyeSlashFill/>}
 			/>
-			<Spacer y={2} />
+			<Spacer y={1} />
 			<Button 
 				className='w-full' 
 				onClick={handleLogin} 
@@ -73,7 +73,7 @@ export const LoginForm = () => {
 			>
 				회원가입
 			</Button>
-			<Spacer y={3} />
+			<Spacer y={2} />
 			<Button 
 				className='w-full'
 				onClick={() => signIn('github', { callbackUrl: '/'})}
