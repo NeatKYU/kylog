@@ -34,7 +34,7 @@ export default function Detail({ post }: detailProps) {
 					{post.content}
 				</ReactMarkdown>
 			</ContentsContainer>
-			{/* <RemoteControler likes={post.likes}/> */}
+			<RemoteControler likes={post.likes}/>
 		</Container>
 	)
 }

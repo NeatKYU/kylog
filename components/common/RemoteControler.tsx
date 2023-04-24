@@ -1,9 +1,7 @@
-import { toRem } from '@/lib/helper'
-import { Stack, Button, IconButton } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiTwotoneLike } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
-import styled from 'styled-components'
+import { Button, Row, Spacer } from '@nextui-org/react'
 
 interface RemoteControlerProps {
 	likes: number;
@@ -31,33 +29,27 @@ export const RemoteControler = ({likes}: RemoteControlerProps) => {
 	}
 
 	return (
-		<Container className='fcenter'>
-			<Stack direction={'row'}>
+		<div className='flex fixed bottom-8 left-1/2 translate-center'>
+			<Row>
 				<Button
+					auto
 					onClick={updateLike}
 					aria-label='like'
-					variant={'outline'}
-					leftIcon={<AiTwotoneLike/>}
+					icon={<AiTwotoneLike size={20}/>}
 				>
 					{like}
 				</Button>
-				<IconButton 
+				<Spacer x={0.5}/>
+				<Button 
+					auto
 					aria-label='share'
-					variant={'outline'}
-					icon={<BiShareAlt/>}
+					icon={<BiShareAlt size={20}/>}
 				/>
-			</Stack>
-		</Container>
+			</Row>
+		</div>
 	)
 }
 
 RemoteControler.defaultProps = {
 	likes: '0',
 }
-
-const Container = styled.div`
-	position: fixed;
-	bottom: ${toRem(16)};
-	left: 50%;
-	transform: translate(-50%, -50%);
-`
