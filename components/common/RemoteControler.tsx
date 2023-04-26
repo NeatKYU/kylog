@@ -29,7 +29,7 @@ export const RemoteControler = ({likes}: RemoteControlerProps) => {
 	}
 
 	return (
-		<div className='flex fixed bottom-8 left-1/2 translate-center'>
+		<div className='flex fixed bottom-4 left-1/2 translate-center'>
 			<Row>
 				<Button
 					auto

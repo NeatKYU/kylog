@@ -1,11 +1,10 @@
-import styled from 'styled-components'
 import { post } from '@/interface/post';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { toRem } from '@/lib/helper';
-import { dateToHowover } from '@/lib/helper';
+import { dateToHowover, calculateReadingTime } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
 import ReactMarkdown from 'react-markdown'
 import prisma from '@/pages/api/prismaClient'
+import { Avatar } from '@nextui-org/react';
 
 interface detailProps {
 	post: post
@@ -13,42 +12,39 @@ interface detailProps {
 // TODO post 디테일 스타일 변경해야함
 export default function Detail({ post }: detailProps) {
 
-	// const createAt = dateToHowover(post.createdAt);
+	const createdAt = dateToHowover(post.createdAt);
 
 	return (
-		<Container>
-			<TitleContainer className='title-font-size'>
-				{/* {post.title} */}
-			</TitleContainer>
-			<UserInfoContainer className='f fc-start'>
-				{/* <Stack direction='row' spacing={4}>
-					<Avatar/>
-					<div className='fcol'>
-						<div className='font-18 bold'>{post.author!.name}</div>
-						<div className='font-12'>{createAt}</div>
-					</div>
-				</Stack> */}
-			</UserInfoContainer>
-			<ContentsContainer>
+		<div className='w-full h-auto max-w-screen-lg px-[20px] lg:px-0'>
+			<div className='flex mb-[20px] w-full gap-2 items-center'>
+				<Avatar src={post.author!.image}/>
+				<div className='flex flex-col'>
+					<div className='font-bold text-xl'>{post.author!.name}</div>
+					<div>{createdAt} · {calculateReadingTime(post.content)} min read</div>
+				</div>
+			</div>
+			<div className='w-10/12 mb-8 font-bold text-4xl'>
+				{post.title}
+			</div>
+			<div className='w-full'>
 				<ReactMarkdown>
 					{post.content}
 				</ReactMarkdown>
-			</ContentsContainer>
+			</div>
 			<RemoteControler likes={post.likes}/>
-		</Container>
+		</div>
 	)
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
 
 	return {
-			paths: [], //indicates that no page needs be created at build time
-			fallback: 'blocking' //indicates the type of fallback
+		paths: [], //indicates that no page needs be created at build time
+		fallback: 'blocking' //indicates the type of fallback
 	}
 }
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	// console.log('params', params);
 	if(context.params?.postId) {
 		const postId = context.params.postId.toString();
 		const post = await prisma.post.findUnique({
@@ -72,26 +68,3 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		}
 	}
 }
-
-const Container = styled.div`
-	width: 100%;
-	max-width: ${toRem(1024)};
-	height: auto;
-`
-
-const TitleContainer = styled.div`
-	width: 80%;
-	font-size: ${toRem(35)};
-	font-weight: bold;
-	margin-bottom: ${toRem(30)};
-`
-
-const UserInfoContainer = styled.div`
-	width: 100%;
-	margin-bottom: ${toRem(20)};
-`
-
-const ContentsContainer = styled.div`
-	width: 100%;
-
-`

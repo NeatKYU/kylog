@@ -26,6 +26,10 @@ export default function Write() {
 		setTitle(e.target.value);
 	}
 
+	const handleGoBack = () => {
+		router.push('/')
+	}
+
 	const createPost = () => {
 		axios.post('/api/post', {
 			title: title,
@@ -61,7 +65,7 @@ export default function Write() {
 	  }
 
 	return (
-		<div>
+		<div className='w-full'>
 			<Textarea
 				className='my-5'
 				style={{fontSize: '30px'}}
@@ -85,7 +89,7 @@ export default function Write() {
 			</EditContainer>
 			<div className='w-full flex justify-end my-5 gap-3'>
 				<Button auto onClick={createPost}>저장하기</Button>
-				<Button auto>취소</Button>
+				<Button auto onClick={handleGoBack}>취소</Button>
 			</div>
 		</div>
 	)
