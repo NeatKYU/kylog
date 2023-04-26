@@ -42,3 +42,13 @@ export const dateToHowover = (date: string | Date) => {
 
 	return result;
 }
+
+export const calculateReadingTime = (text: string) => {
+	const wordsPerMinute = 200; // 평균적으로 분당 200단어를 읽는 것으로 가정
+	const wordCount = text.trim().split(/\s+/).length; // 공백을 기준으로 단어 수를 계산
+	const readingTimeInMinutes = wordCount / wordsPerMinute;
+
+	// 결과를 반올림하여 분 단위로 반환
+	return Math.ceil(readingTimeInMinutes);
+}
+  
