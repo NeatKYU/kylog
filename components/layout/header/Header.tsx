@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { Navbar, Button } from '@nextui-org/react'
+import { Navbar } from '@nextui-org/react'
+import { useRouter } from 'next/router'
 
 interface HeaderProps {
 	logo: string;
@@ -8,9 +9,15 @@ interface HeaderProps {
 }
 
 export const Header = ({ logo, title, children }: HeaderProps) => {
+	const router = useRouter();
+
+	const goHome = () => {
+		router.push('/')
+	}
+
 	return (
 		<Navbar variant={'sticky'} disableBlur>
-			<Navbar.Brand>
+			<Navbar.Brand onClick={goHome} className='cursor-pointer'>
 				{/* <Image src={'/img/logo_white.png'} alt='logo' width={100} height={60}/> */}
 				<span>KYLOG</span>
 			</Navbar.Brand>
