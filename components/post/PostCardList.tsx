@@ -1,5 +1,4 @@
 import { PostCard } from '@/components/post/PostCard'
-import { Divider } from '@chakra-ui/react';
 import { post } from '@/interface/post'
 import { useRouter } from 'next/router';
 
@@ -16,22 +15,20 @@ export const PostCardList = (props: PostCardListProps) => {
 	}
 
 	const postListElement = (list: post[]) => {
-		return list.map((item: post) => (
+		return list && list.map((item: post) => (
 			<>
 				<PostCard 
-					key={item.post_uid} 
+					key={item.id} 
 					post={item} 
-					onClick={() => handleDetailPage(item.post_uid)}
+					onClick={() => handleDetailPage(item.id)}
 				/>
-				<Divider/>
 			</>
 		))
 	}
 
 	return (
-		<>
-			<Divider/>
+		<div className='flex flex-wrap'>
 			{postListElement(postList)}
-		</>
+		</div>
 	)
 }

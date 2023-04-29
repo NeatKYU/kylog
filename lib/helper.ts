@@ -7,7 +7,7 @@ export const toRem = (px: number): string => {
 	return px/REM_NUMBER + 'rem';
 }
 
-export const dateToHowover = (date: string) => {
+export const dateToHowover = (date: string | Date) => {
 	const seconds = 1;
 	const minute = seconds * 60;
 	const hour = minute * 60;
@@ -16,7 +16,7 @@ export const dateToHowover = (date: string) => {
 	const year = mon * 12;
 
 	//현재시간
-	const now = new Date(); 
+	const now = new Date();
 	//기준시간 
 	const writeDay = new Date(date);
 	//현재 시간과 기준시간의 차이를 getTime을 통해 구한다 
@@ -42,3 +42,18 @@ export const dateToHowover = (date: string) => {
 
 	return result;
 }
+
+/**
+ * 포스트 읽는 시간 계산해주는 함수
+ * @param text 
+ * @returns 
+ */
+export const calculateReadingTime = (text: string) => {
+	const wordsPerMinute = 200; // 평균적으로 분당 200단어를 읽는 것으로 가정
+	const wordCount = text.trim().split(/\s+/).length; // 공백을 기준으로 단어 수를 계산
+	const readingTimeInMinutes = wordCount / wordsPerMinute;
+
+	// 결과를 반올림하여 분 단위로 반환
+	return Math.ceil(readingTimeInMinutes);
+}
+  

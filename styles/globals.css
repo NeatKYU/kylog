@@ -1,0 +1,8 @@
+/* reset 같은 역할인듯 */
+/* @tailwind base;  */
+@tailwind components;
+@tailwind utilities;
+
+.translate-center {
+	transform: translate(-50%, -50%);
+}

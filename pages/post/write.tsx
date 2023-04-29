@@ -1,8 +1,9 @@
 import { toRem } from '@/lib/helper'
 import styled from 'styled-components'
-import { Textarea, Button, Stack } from '@chakra-ui/react'
+import { Textarea, Button } from '@nextui-org/react'
 import React, { useState } from 'react'
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 // editor 
 import 'react-markdown-editor-lite/lib/index.css';
@@ -16,12 +17,17 @@ const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
 
 export default function Write() {
 
+	const router = useRouter();
 	const [title, setTitle] = useState('');
-	const [editorValue, setEditorValue] = useState<string | undefined>('내용을 입력해주세요.');
+	const [editorValue, setEditorValue] = useState<string | undefined>('');
 	const {data: session} = useSession();
 
 	const handleTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
 		setTitle(e.target.value);
+	}
+
+	const handleGoBack = () => {
+		router.push('/')
 	}
 
 	const createPost = () => {
@@ -30,24 +36,47 @@ export default function Write() {
 			content: editorValue,
 			email: session!.user.email,
 			thumbnail: '',
+		}).then((res) => {
+			if(res.status === 200) {
+				router.push('/')
+			} else {
+				// TODO go to error page
+			}
+		}).catch((err) => {
+			console.log(err)
+			// TODO go to error page OR alert error message
 		})
 	}
 
+	const uploadFile = async (file: File) => {
+		const { data } = await axios.post('/api/s3/upload', {
+		  name: file.name,
+		  type: file.type,
+		})
+	
+		await axios.put(data.signedUrl, file, {
+		  headers: {
+			'Content-Type': file.type,
+			'Access-Control-Allow-Origin': '*',
+		  },
+		});
+	
+		return data.cleanUrl;
+	  }
+
 	return (
-		<div>
-			<TitleContainer>
-				<Textarea 
-					placeholder='제목을 입력해주세요.'
-					variant='unstyled' 
-					resize={'none'} 
-					fontSize={40} 
-					fontWeight={'bold'} 
-					overflow={'hidden'}
-					onChange={handleTitle}
-					autoFocus
-				/>
-			</TitleContainer>
-			<Divider />
+		<div className='w-full'>
+			<Textarea
+				className='my-5'
+				style={{fontSize: '30px'}}
+				onInput={handleTitle}
+				rows={2}
+				maxRows={2}
+				placeholder='제목을 입력해주세요.'
+				fullWidth
+				autoFocus
+				aria-label='title textarea'
+			/>
 			<EditContainer>
 				<MdEditor 
 					style={{ height: '500px' }}
@@ -55,14 +84,13 @@ export default function Write() {
 					value={editorValue}
 					onChange={(v) => setEditorValue(v.text)}
 					renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>} 
+					onImageUpload={uploadFile}
 				/>
 			</EditContainer>
-			<ControlContainer>
-				<Stack>
-					<Button onClick={createPost}>저장하기</Button>
-					<Button>취소</Button>
-				</Stack>
-			</ControlContainer>
+			<div className='w-full flex justify-end my-5 gap-3'>
+				<Button auto onClick={createPost}>저장하기</Button>
+				<Button auto onClick={handleGoBack}>취소</Button>
+			</div>
 		</div>
 	)
 }

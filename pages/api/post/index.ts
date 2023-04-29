@@ -19,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 			}
 	  
 			const newPost = await createPost(title, content, author.id, thumbnail);
-			res.status(201).json(newPost);
+			res.status(200).json(newPost);
 		  } catch (error) {
 			console.error('Error creating post:', error);
 			res.status(500).json({ error: 'Error creating post' });

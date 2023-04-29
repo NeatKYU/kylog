@@ -47,6 +47,7 @@ model User {
   sessions      Session[]
   posts         Post[]
   comments      Comment[]
+  likes         Like[]
 }
 
 model VerificationToken {
@@ -66,7 +67,7 @@ model Post {
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
   thumbnail String?
-  likes     Int
+  likes     Like[]
   comments  Comment[]
 }
 
@@ -79,4 +80,16 @@ model Comment {
   authorId  String
   post      Post     @relation(fields: [postId], references: [id])
   postId    String
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+
+  @@unique([userId, postId])
 }

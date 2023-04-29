@@ -1,63 +1,46 @@
-import { toRem } from '@/lib/helper'
-import { Stack, Button, IconButton } from '@chakra-ui/react'
 import { useState } from 'react'
 import { AiTwotoneLike } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
-import styled from 'styled-components'
+import { Button, Row, Spacer } from '@nextui-org/react'
+import usePostLike from '@/hooks/usePostLike';
+import { useSession } from 'next-auth/react';
 
 interface RemoteControlerProps {
 	likes: number;
+	postId: string;
 }
 
-export const RemoteControler = ({likes}: RemoteControlerProps) => {
+export const RemoteControler = ({ likes, postId }: RemoteControlerProps) => {
 
-	const [like, setLike] = useState<number>(likes);
-	const [isUpdate, setIsUpdate] = useState<boolean>(false);
-
-	const updateLike = () => {
-		// TODO api로 연동
-		// useEffect로 끝날때 업데이트 해도 될듯
-		if(!isUpdate) {
-			setLike((prev) => prev+1);
-			setIsUpdate(true);
-		} else {
-			setLike((prev) => prev-1);
-			setIsUpdate(false);
-		}
-	}
+	const { data: session } = useSession();
+	const { like, handleLike } = usePostLike(likes);
 
 	const handleShared = () => {
 		// TODO
 	}
 
 	return (
-		<Container className='fcenter'>
-			<Stack direction={'row'}>
+		<div className='flex fixed bottom-4 left-1/2 translate-center'>
+			<Row>
 				<Button
-					onClick={updateLike}
+					auto
+					onPress={() => handleLike(session?.user.id, postId)}
 					aria-label='like'
-					variant={'outline'}
-					leftIcon={<AiTwotoneLike/>}
+					icon={<AiTwotoneLike size={20}/>}
 				>
 					{like}
 				</Button>
-				<IconButton 
+				<Spacer x={0.5}/>
+				<Button 
+					auto
 					aria-label='share'
-					variant={'outline'}
-					icon={<BiShareAlt/>}
+					icon={<BiShareAlt size={20}/>}
 				/>
-			</Stack>
-		</Container>
+			</Row>
+		</div>
 	)
 }
 
 RemoteControler.defaultProps = {
 	likes: '0',
 }
-
-const Container = styled.div`
-	position: fixed;
-	bottom: ${toRem(16)};
-	left: 50%;
-	transform: translate(-50%, -50%);
-`

@@ -1,34 +1,30 @@
-import styled from 'styled-components'
-import { common } from '@/interface/common';
 import { PostCardList } from '@/components/post/PostCardList'
-import { post } from '@/interface/post';
-// import { posts } from '@/lib/db/post';
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/pages/api/prismaClient'
+import { post } from '@/interface/post'
 
-// interface homeProps extends common{
-// 	posts: 
-// }
+interface homeProps{
+	posts: post[]
+}
 
-export default function Home({posts}: {posts: any}) {
+export default function Home({posts}: homeProps) {
 
 	return (
-		<Container className='fcenter'>
-			{posts}
-			{/* <PostCardList postList={posts}/> */}
-		</Container>
+		<div className='w-full'>
+			<PostCardList postList={posts}/>
+		</div>
 	)
 }
 
 export const getStaticProps = async () => {
-	const prisma = new PrismaClient()
-	const posts = await prisma.post.findMany()
+	const posts = await prisma.post.findMany({
+		include: {
+			author: true,
+			comments: true,
+			likes: true,
+		}
+	})
 	
 	return {
-		props : { posts }
+		props : { posts: JSON.parse(JSON.stringify(posts)) }
 	}
 }
-
-const Container = styled.div`
-	flex-direction: column;
-	gap: 20px;
-`
