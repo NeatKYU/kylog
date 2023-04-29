@@ -1,6 +1,6 @@
 import { dateToHowover } from '@/lib/helper'
 import { post } from '@/interface/post';
-import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
+import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 import Image from 'next/image'
 import { Avatar, Button, Card, Row, Spacer } from '@nextui-org/react'
 import { useSession } from 'next-auth/react';
@@ -23,7 +23,7 @@ export const PostCard = ({
 	return (
 		<Card 
 			isPressable
-			variant='flat' 
+			variant='bordered'
 			className='
 				relative 
 				rounded
@@ -32,7 +32,7 @@ export const PostCard = ({
 				h-80 
 				m-[5px]
 			' 
-			style={{ backgroundColor: '#f7f7f7'}} 
+			style={{ backgroundColor: '#fff'}} 
 			onClick={onClick}
 		>
 			<Card.Body className='p-0'>
@@ -67,11 +67,24 @@ export const PostCard = ({
 					<Spacer x={0.3}/>
 					<div>{post.author!.name}</div>
 					<Row justify='flex-end'>
-						<Button auto size='xs' icon={<AiTwotoneLike/>} onPress={() => handleLike(session?.user.id, post.id)}>
+						<Button 
+							auto 
+							bordered 
+							color='gradient' 
+							size='xs' 
+							icon={<AiOutlineLike/>} 
+							onPress={() => handleLike(session?.user.id, post.id)}
+						>
 							{like}
 						</Button>
 						<Spacer x={0.3}/>
-						<Button auto size='xs' icon={<AiOutlineComment/>}>
+						<Button 
+							auto 
+							bordered 
+							color='gradient' 
+							size='xs' 
+							icon={<AiOutlineComment/>}
+						>
 							{post.comments ? post.comments.length : 0 }
 						</Button>
 					</Row>

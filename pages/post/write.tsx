@@ -88,8 +88,8 @@ export default function Write() {
 				/>
 			</EditContainer>
 			<div className='w-full flex justify-end my-5 gap-3'>
-				<Button auto onClick={createPost}>저장하기</Button>
-				<Button auto onClick={handleGoBack}>취소</Button>
+				<Button auto bordered color='gradient' onClick={createPost}>저장하기</Button>
+				<Button auto bordered color='gradient' onClick={handleGoBack}>취소</Button>
 			</div>
 		</div>
 	)

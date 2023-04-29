@@ -47,7 +47,7 @@ export const Layout = (props: LayoutProps) => {
 			<div>
 				<Header logo='@/assets/img/logo.png' title=''>
 					<Link href={'/post/write'} >
-						<Button auto icon={<BiEdit/>} >글쓰기</Button>
+						<Button auto bordered color='gradient' icon={<BiEdit/>} >글쓰기</Button>
 					</Link>
 					<Dropdown placement='bottom-right'>
 						<Dropdown.Trigger>
