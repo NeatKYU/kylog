@@ -27,7 +27,7 @@ export const dateToHowover = (date: string | Date) => {
 	let result;
 
 	if(difference < minute ){
-    result = Math.trunc(difference / seconds) + '바로 전';
+    result = Math.trunc(difference / seconds) + '초 전';
   }else if(difference < hour){
     result = Math.trunc(difference / minute) + '분 전';
   }else if(difference < day){
