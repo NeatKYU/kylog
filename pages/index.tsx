@@ -20,6 +20,7 @@ export const getStaticProps = async () => {
 		include: {
 			author: true,
 			comments: true,
+			likes: true,
 		}
 	})
 	

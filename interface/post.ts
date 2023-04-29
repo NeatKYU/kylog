@@ -8,7 +8,7 @@ export interface post {
 	authorId: string;
 	author?: user;
 	thumbnail: string;
-	likes: number;
+	likes: like[];
 	comments?: comment[];
 }
 
@@ -21,4 +21,11 @@ export interface comment {
 	postId: string;
 	createdAt: string;
 	updatedAt: string;
+}
+
+export interface like {
+	id: string;
+	userId: string;
+	postId: string;
+	createdAt: string;
 }

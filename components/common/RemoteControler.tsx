@@ -2,27 +2,18 @@ import { useState } from 'react'
 import { AiTwotoneLike } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
 import { Button, Row, Spacer } from '@nextui-org/react'
+import usePostLike from '@/hooks/usePostLike';
+import { useSession } from 'next-auth/react';
 
 interface RemoteControlerProps {
 	likes: number;
+	postId: string;
 }
 
-export const RemoteControler = ({likes}: RemoteControlerProps) => {
+export const RemoteControler = ({ likes, postId }: RemoteControlerProps) => {
 
-	const [like, setLike] = useState<number>(likes);
-	const [isUpdate, setIsUpdate] = useState<boolean>(false);
-
-	const updateLike = () => {
-		// TODO api로 연동
-		// useEffect로 끝날때 업데이트 해도 될듯
-		if(!isUpdate) {
-			setLike((prev) => prev+1);
-			setIsUpdate(true);
-		} else {
-			setLike((prev) => prev-1);
-			setIsUpdate(false);
-		}
-	}
+	const { data: session } = useSession();
+	const { like, handleLike } = usePostLike(likes);
 
 	const handleShared = () => {
 		// TODO
@@ -33,7 +24,7 @@ export const RemoteControler = ({likes}: RemoteControlerProps) => {
 			<Row>
 				<Button
 					auto
-					onClick={updateLike}
+					onPress={() => handleLike(session?.user.id, postId)}
 					aria-label='like'
 					icon={<AiTwotoneLike size={20}/>}
 				>

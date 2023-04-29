@@ -43,6 +43,11 @@ export const dateToHowover = (date: string | Date) => {
 	return result;
 }
 
+/**
+ * 포스트 읽는 시간 계산해주는 함수
+ * @param text 
+ * @returns 
+ */
 export const calculateReadingTime = (text: string) => {
 	const wordsPerMinute = 200; // 평균적으로 분당 200단어를 읽는 것으로 가정
 	const wordCount = text.trim().split(/\s+/).length; // 공백을 기준으로 단어 수를 계산

@@ -1,9 +1,10 @@
-import styled from 'styled-components'
-import { dateToHowover, toRem } from '@/lib/helper'
+import { dateToHowover } from '@/lib/helper'
 import { post } from '@/interface/post';
 import { AiTwotoneLike, AiOutlineComment } from 'react-icons/ai'
 import Image from 'next/image'
 import { Avatar, Button, Card, Row, Spacer } from '@nextui-org/react'
+import { useSession } from 'next-auth/react';
+import usePostLike from '@/hooks/usePostLike';
 
 interface postCardProps{
 	post: post;
@@ -15,6 +16,10 @@ export const PostCard = ({
 		onClick,
 	}: postCardProps
 ) => {
+
+	const { data: session } = useSession();
+	const { like, handleLike } = usePostLike(post.likes.length);
+
 	return (
 		<Card 
 			isPressable
@@ -62,8 +67,8 @@ export const PostCard = ({
 					<Spacer x={0.3}/>
 					<div>{post.author!.name}</div>
 					<Row justify='flex-end'>
-						<Button auto size='xs' icon={<AiTwotoneLike/>}>
-							{post.likes}
+						<Button auto size='xs' icon={<AiTwotoneLike/>} onPress={() => handleLike(session?.user.id, post.id)}>
+							{like}
 						</Button>
 						<Spacer x={0.3}/>
 						<Button auto size='xs' icon={<AiOutlineComment/>}>

@@ -5,11 +5,10 @@ async function createPost(title: string, content: string, authorId: string, thum
 	try {
 		const newPost = await prisma.post.create({
 			data: {
-				title: title,
-				content: content,
-				authorId: authorId,
-				thumbnail: thumbnail,
-				likes: 0,
+				title,
+				content,
+				authorId,
+				thumbnail,
 			},
 		});
 
@@ -20,4 +19,59 @@ async function createPost(title: string, content: string, authorId: string, thum
 	}
 }
 
-export { createPost };
+async function incrementLike(userId: string, postId: string) {
+	try {
+		const like = await prisma.like.findFirst({
+			where: {
+				userId,
+				postId,
+			},
+		});
+
+		// already like
+		if (like) {
+			return await deleteLike(userId, postId)
+		}
+
+		await prisma.like.create({
+			data: {
+				userId,
+				postId,
+			},
+		});
+
+		return 1;
+	} catch (error) {
+		console.error("Error increment like", error);
+		throw error;
+	}
+}
+
+async function deleteLike(userId: string, postId: string) {
+	try {
+		const likeToDelete = await prisma.like.findFirst({
+			where: {
+				userId,
+				postId,
+			},
+		});
+
+		if (!likeToDelete) {
+			console.log('Like not found or already deleted');
+			return 0;
+		}
+	  
+		await prisma.like.delete({
+			where: {
+				id: likeToDelete.id,
+			},
+		});
+
+		return -1;
+	} catch (error) {
+		console.error("Error delete like:", error);
+		throw error;
+	}
+}
+
+export { createPost, incrementLike, deleteLike };

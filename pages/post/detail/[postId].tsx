@@ -31,7 +31,7 @@ export default function Detail({ post }: detailProps) {
 					{post.content}
 				</ReactMarkdown>
 			</div>
-			<RemoteControler likes={post.likes}/>
+			<RemoteControler likes={post.likes.length} postId={post.id}/>
 		</div>
 	)
 }
@@ -53,6 +53,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 			},
 			include: {
 				author: true,
+				likes: true,
 			}
 		})
 
