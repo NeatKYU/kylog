@@ -34,7 +34,7 @@ export default function Detail({ post }: detailProps) {
 			<RemoteControler
 				postId={post.id} 
 				likes={post.likes.length} 
-				comments={post.comments?.length}
+				comments={post.comments}
 			/>
 		</div>
 	)

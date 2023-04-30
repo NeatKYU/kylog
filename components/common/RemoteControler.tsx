@@ -2,12 +2,16 @@ import { useState } from 'react'
 import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
 import { Button, Row, Spacer } from '@nextui-org/react'
-import usePostLike from '@/hooks/usePostLike';
-import { useSession } from 'next-auth/react';
+import usePostLike from '@/hooks/usePostLike'
+import { useSession } from 'next-auth/react'
+import { Sidebar } from '@/components/common/Sidebar'
+import { CommentBox } from '@/components/comments/CommentBox'
+import { Comment } from '@/components/comments/Comment'
+import { comment } from '@/interface/post'
 
 interface RemoteControlerProps {
 	likes: number;
-	comments: number;
+	comments: comment[];
 	postId: string;
 }
 
@@ -15,6 +19,7 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 
 	const { data: session } = useSession();
 	const { like, handleLike } = usePostLike(likes);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const handleShared = () => {
 		// TODO
@@ -22,9 +27,11 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 
 	const handleComment = () => {
 		// TODO
+		setIsOpen(!isOpen)
 	}
 
 	return (
+		<>
 		<div className='flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-50 shadow-2xl'>
 			<Row>
 				<Button
@@ -41,11 +48,12 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 				</div>
 				<Button 
 					auto
+					onPress={handleComment}
 					aria-label='comment'
 					icon={<AiOutlineComment size={20}/>}
 					className='bg-slate-50 px-4 text-black'
 				>
-					{comments}
+					{comments.length}
 				</Button>
 				<div className='w-[1px] h-full flex items-center mx-1'>
 					<div className='w-full h-1/2 bg-black'></div>
@@ -58,6 +66,16 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 				/>
 			</Row>
 		</div>
+		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
+			<CommentBox />
+			{comments.map((commentObj: comment) => (
+				<>
+				<Spacer y={1}/>
+				<Comment key={commentObj.id} comment={commentObj}/>	
+				</>
+			))}
+		</Sidebar>
+		</>
 	)
 }
 
