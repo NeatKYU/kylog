@@ -5,7 +5,7 @@ interface SidebarProps {
 	setIsOpen: (state: boolean) => void,
 	children?: React.ReactNode,
 }
-
+// TODO 무한 스크롤 구현
 export const Sidebar = (props: SidebarProps) => {
 
 	const { isOpen, setIsOpen, children } = props;
