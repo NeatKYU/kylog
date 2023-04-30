@@ -20,6 +20,7 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 	const { data: session } = useSession();
 	const { like, handleLike } = usePostLike(likes);
 	const [isOpen, setIsOpen] = useState(false);
+	const [currentComments, setCurrentComment] = useState<comment[]>(comments);
 
 	const handleShared = () => {
 		// TODO
@@ -53,7 +54,7 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 					icon={<AiOutlineComment size={20}/>}
 					className='bg-slate-50 px-4 text-black'
 				>
-					{comments.length}
+					{currentComments.length}
 				</Button>
 				<div className='w-[1px] h-full flex items-center mx-1'>
 					<div className='w-full h-1/2 bg-black'></div>
@@ -67,8 +68,8 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 			</Row>
 		</div>
 		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
-			<CommentBox postId={postId}/>
-			{comments.map((commentObj: comment) => (
+			<CommentBox postId={postId} comments={currentComments} setComments={setCurrentComment}/>
+			{currentComments.map((commentObj: comment) => (
 				<>
 				<Spacer y={1}/>
 				<Comment key={commentObj.id} comment={commentObj}/>	

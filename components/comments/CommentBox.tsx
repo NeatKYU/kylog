@@ -1,15 +1,18 @@
 import { useState, ChangeEvent } from 'react'
-import { Avatar, Button, Card, Textarea } from '@nextui-org/react'
+import { Avatar, Button, Card, Textarea, useInput } from '@nextui-org/react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
+import { comment } from '@/interface/post'
 
 interface commentBoxProps {
 	postId: string;
+	comments: comment[];
+	setComments: (comments: comment[]) => void;
 }
 
 export const CommentBox = (props: commentBoxProps) => {
-	const { postId } = props;
+	const { postId, comments, setComments } = props;
 	const { data: session } = useSession();
 	const router = useRouter();
 	const [content, setContent] = useState<string>('');
@@ -29,11 +32,20 @@ export const CommentBox = (props: commentBoxProps) => {
 		if(!content) {
 			return;
 		}
-		await axios.post('/api/comment', { authorId, postId, content });
+		const comment = await axios.post('/api/comment', { authorId, postId, content });
+		comment.data = {
+			...comment.data,
+			author: {
+				name: session?.user.name,
+				image: session?.user.image,
+			}
+		}
+		setComments([comment.data, ...comments]);
+		setContent('');
 	}
 
 	return (
-		<Card variant='bordered' onFocus={loginCheck} aria-label='comment-box'>
+		<Card variant='bordered' onFocus={loginCheck} aria-label='comment-box' className='min-h-[204px]'>
 			{
 				session ? 
 				<>
@@ -42,8 +54,9 @@ export const CommentBox = (props: commentBoxProps) => {
 					<span>{session?.user.name}</span>
 				</Card.Header>
 				<Card.Body css={{ padding: '0'}}>
+					{/* TODO FIX 인풋값 초기화하면 깜빡거리는 문제와 한글이 깨지는 문제가 있음 */}
 					<Textarea 
-						placeholder='내용을 입력하세요.' 
+						placeholder='내용을 입력하세요.'
 						css={{ padding: '0 10px'}} 
 						rows={3}
 						onInput={handleContent}
