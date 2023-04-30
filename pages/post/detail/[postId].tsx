@@ -58,7 +58,11 @@ export const getStaticProps: GetStaticProps = async (context) => {
 			include: {
 				author: true,
 				likes: true,
-				comments: true,
+				comments: {
+					include: {
+						author: true,
+					}
+				},
 			}
 		})
 

@@ -67,7 +67,7 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 			</Row>
 		</div>
 		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
-			<CommentBox />
+			<CommentBox postId={postId}/>
 			{comments.map((commentObj: comment) => (
 				<>
 				<Spacer y={1}/>
