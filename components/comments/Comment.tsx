@@ -11,7 +11,7 @@ export const Comment = (props: CommentProps) => {
 	const { comment } = props;
 
 	return (
-		<Card variant='flat' className='bg-slate-50'>
+		<Card variant='flat' className='bg-slate-50 min-h-[10rem]'>
 			<Card.Header className='gap-2'>
 				<Avatar src={comment.author?.image}/>
 				<div className='flex flex-col justify-center'>

@@ -43,6 +43,7 @@ export const Sidebar = (props: SidebarProps) => {
 					py-3
 					flex
 					flex-col
+					overflow-y-auto
 					${isOpen ? 'translate-left-full' : ''}`
 				}
 			>
