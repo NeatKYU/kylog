@@ -69,10 +69,10 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 		</div>
 		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
 			<CommentBox postId={postId} comments={currentComments} setComments={setCurrentComment}/>
-			{currentComments.map((commentObj: comment) => (
+			{currentComments.map((commentObj: comment, index) => (
 				<>
-				<Spacer y={1}/>
-				<Comment key={commentObj.id} comment={commentObj}/>	
+					<Spacer key={index} y={1}/>
+					<Comment key={commentObj.id} comment={commentObj}/>	
 				</>
 			))}
 		</Sidebar>
