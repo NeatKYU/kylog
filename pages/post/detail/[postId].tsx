@@ -59,6 +59,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 				author: true,
 				likes: true,
 				comments: {
+					orderBy: {
+						createdAt: 'desc',
+					},
 					include: {
 						author: true,
 					}
