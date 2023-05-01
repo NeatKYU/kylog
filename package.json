@@ -26,6 +26,7 @@
     "next": "^13.3.0",
     "next-auth": "^4.22.0",
     "next-remove-imports": "^1.0.10",
+    "next-themes": "^0.2.1",
     "postgres": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -11,6 +11,7 @@ import { BiEdit, BiLogIn } from 'react-icons/bi'
 import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
 import { Avatar, Button, Dropdown } from '@nextui-org/react'
+import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -49,6 +50,7 @@ export const Layout = (props: LayoutProps) => {
 					<Link href={'/post/write'} >
 						<Button auto bordered color='gradient' icon={<BiEdit/>} >글쓰기</Button>
 					</Link>
+					<ThemeToggleButton/>
 					<Dropdown placement='bottom-right'>
 						<Dropdown.Trigger>
 							<Avatar 
