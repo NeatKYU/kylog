@@ -1,8 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import styled from 'styled-components';
 import cutsomAxios from '@/lib/customAxios';
 import { useRouter } from 'next/router';
-import { toRem } from '@/lib/helper';
 import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { signIn } from 'next-auth/react'
 import { Input, Spacer, Button } from '@nextui-org/react'

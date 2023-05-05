@@ -1,5 +1,3 @@
-import { toRem } from '@/lib/helper'
-import styled from 'styled-components'
 import { Textarea, Button } from '@nextui-org/react'
 import React, { useState } from 'react'
 import axios from 'axios'
@@ -77,7 +75,7 @@ export default function Write() {
 				autoFocus
 				aria-label='title textarea'
 			/>
-			<EditContainer>
+			<div className='w-full h-auto'>
 				<MdEditor 
 					style={{ height: '500px' }}
 					placeholder='내용을 입력해주세요.'
@@ -86,7 +84,7 @@ export default function Write() {
 					renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>} 
 					onImageUpload={uploadFile}
 				/>
-			</EditContainer>
+			</div>
 			<div className='w-full flex justify-end my-5 gap-3'>
 				<Button auto bordered color='gradient' onClick={createPost}>저장하기</Button>
 				<Button auto bordered color='gradient' onClick={handleGoBack}>취소</Button>
@@ -94,31 +92,3 @@ export default function Write() {
 		</div>
 	)
 }
-
-const TitleContainer = styled.div`
-	width: 100%;
-	height: auto;
-	padding-right: ${toRem(50)};
-`
-
-const EditContainer = styled.div`
-	width: 100%;
-	height: auto;
-	font-size: ${toRem(25)} !important;
-`
-
-const ControlContainer = styled.div`
-	width: 100%;
-	height: ${toRem(50)};
-
-	margin-top: ${toRem(30)};
-`
-
-const Divider = styled.div`
-	width: 100%;
-	height: 3px;
-
-	background-color: #a1a1a1;
-
-	margin: ${toRem(20)} 0;
-`
