@@ -1,17 +1,19 @@
 // lib
-import React from 'react'
+import React, { useState } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 // components
 import { Header } from '@/components/layout/header/Header'
 import { IoLogOutOutline } from 'react-icons/io5'
-import { BiEdit, BiLogIn } from 'react-icons/bi'
+import { BiEdit, BiLogIn, BiSearch } from 'react-icons/bi'
 import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
-import { Avatar, Button, Dropdown } from '@nextui-org/react'
-import { ThemeToggleButton } from '@/components/common/ThemeToggleButton'
+import { Dropdown } from '@nextui-org/react'
+import { ThemeToggleButton } from '../common/ThemeToggleButton'
+import { CButton } from '@/components/common/CustomButton'
+import { CAvatar } from '@/components/common/CustomAvatar'
+import { CInput } from '../common/CustomInput'
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -47,17 +49,14 @@ export const Layout = (props: LayoutProps) => {
 		<>
 			<div>
 				<Header logo='@/assets/img/logo.png' title=''>
-					<Link href={'/post/write'} >
-						<Button auto bordered color='gradient' icon={<BiEdit/>} >글쓰기</Button>
-					</Link>
+					<CInput size='md' icon={<BiSearch/>}/>
 					<ThemeToggleButton/>
+					<CButton size='lg' onClick={() => router.push('/post/write')} leftIcon={<BiEdit/>}>
+						글쓰기
+					</CButton>
 					<Dropdown placement='bottom-right'>
 						<Dropdown.Trigger>
-							<Avatar 
-								squared
-								pointer
-								src={status === 'authenticated' ? session.user.image : ''} 
-							/>
+							<CAvatar src={status === 'authenticated' ? session.user.image : '/deafultUser.jpeg'} size='lg'/>
 						</Dropdown.Trigger>
 						{authMenuList(status)}
 					</Dropdown>

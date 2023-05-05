@@ -1,4 +1,5 @@
 import { AiOutlineClose } from 'react-icons/ai'
+import { ThemeToggleButton } from './ThemeToggleButton';
 
 interface SidebarProps {
 	isOpen: boolean,
@@ -36,7 +37,8 @@ export const Sidebar = (props: SidebarProps) => {
 					top-0
 					w-[500px] 
 					h-full 
-					bg-white 
+					dark:bg-zinc-700
+					bg-slate-200
 					transition 
 					duration-500
 					px-2

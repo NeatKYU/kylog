@@ -1,24 +1,15 @@
 import { useTheme as useNextTheme } from 'next-themes'
-import { Button } from '@nextui-org/react'
-import { useState } from 'react'
 import { RiSunFill, RiMoonFill } from 'react-icons/ri'
+import { CIconButton } from './CustomIconButton';
 
 export const ThemeToggleButton = () => {
-	const { setTheme } = useNextTheme();
-    const [isDark, setIsDark] = useState<boolean>(false);
+	const { theme, setTheme } = useNextTheme();
 
     const handleTheme = () => {
-        setIsDark(!isDark);
-        setTheme(!isDark ? 'light' : 'dark');
+        setTheme(theme === 'dark' ? 'light' : 'dark');
     }
 
-
 	return (
-        <Button
-            auto
-            bordered
-            icon={isDark ? <RiSunFill/> : <RiMoonFill/>}
-            onPress={handleTheme}
-        />
+        <CIconButton onClick={handleTheme} size='sm' icon={theme === 'dark' ? <RiMoonFill/> : <RiSunFill/>}/>
 	)
 }

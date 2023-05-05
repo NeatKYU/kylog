@@ -8,6 +8,8 @@ import { Sidebar } from '@/components/common/Sidebar'
 import { CommentBox } from '@/components/comments/CommentBox'
 import { Comment } from '@/components/comments/Comment'
 import { comment } from '@/interface/post'
+import { CButton } from './CustomButton'
+import { CIconButton } from './CustomIconButton'
 
 interface RemoteControlerProps {
 	likes: number;
@@ -33,39 +35,30 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 
 	return (
 		<>
-		<div className='flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-50 shadow-2xl'>
-			<Row>
-				<Button
-					auto
-					onPress={() => handleLike(session?.user.id, postId)}
-					aria-label='like'
-					icon={<AiOutlineLike size={20}/>}
-					className='bg-slate-50 px-4 text-black'
+		<div className='flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-gray-600 shadow-2xl'>
+			<div className='flex justify-center items-center'>
+				<CButton
+					onClick={() => handleLike(session?.user.id, postId)}
+					leftIcon={<AiOutlineLike size={20}/>}
 				>
 					{like}
-				</Button>
+				</CButton>
 				<div className='w-[1px] h-full flex items-center mx-1'>
 					<div className='w-full h-1/2 bg-black'></div>
 				</div>
-				<Button 
-					auto
-					onPress={handleComment}
-					aria-label='comment'
-					icon={<AiOutlineComment size={20}/>}
-					className='bg-slate-50 px-4 text-black'
+				<CButton 
+					onClick={handleComment}
+					leftIcon={<AiOutlineComment size={20}/>}
 				>
 					{currentComments.length}
-				</Button>
+				</CButton>
 				<div className='w-[1px] h-full flex items-center mx-1'>
 					<div className='w-full h-1/2 bg-black'></div>
 				</div>
-				<Button 
-					auto
-					aria-label='share'
+				<CIconButton 
 					icon={<BiShareAlt size={20}/>}
-					className='bg-slate-50 text-black'
 				/>
-			</Row>
+			</div>
 		</div>
 		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
 			<CommentBox postId={postId} comments={currentComments} setComments={setCurrentComment}/>
