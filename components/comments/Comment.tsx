@@ -1,4 +1,5 @@
-import { Avatar, Button, Card, Textarea } from '@nextui-org/react'
+// import { Avatar, Button, Card, Textarea } from '@nextui-org/react'
+import { CAvatar, CCard, CButton } from '@/components/common'
 import { comment } from '@/interface/post'
 import { dateToHowover } from '@/lib/helper'
 import { AiOutlineLike } from 'react-icons/ai'
@@ -18,26 +19,27 @@ export const Comment = (props: CommentProps) => {
 	}
 
 	return (
-		<Card variant='flat' className='bg-slate-50 min-h-[10rem]'>
-			<Card.Header className='gap-2'>
-				<Avatar src={comment.author?.image}/>
+		<CCard className='h-auto'>
+			<CCard.Header className='gap-2'>
+				<CAvatar src={comment.author?.image || '/deafultUser.jpeg'}/>
 				<div className='flex flex-col justify-center'>
 					<span className='font-bold'>{comment.author?.name}</span>
 					<span className='font-light text-sm'>{dateToHowover(comment.createdAt)}</span>
 				</div>
-			</Card.Header>
-			<Card.Body css={{padding: '0 20px'}}>
+			</CCard.Header>
+			<CCard.Body>
 				<div className={`${isMore ? '' : 'line-clamp-2'}`}>
 					{comment.content}
 				</div>
-			</Card.Body>
-			<Card.Footer>
-				{isMore || !lengthOver() ? <></> : <Button auto light size='sm' onPress={() => setIsMore(!isMore)}>read more..</Button> }
-				<Button auto light size='xs' icon={<AiOutlineLike size={20}/>} className='ml-auto'>
+			</CCard.Body>
+			<CCard.Footer>
+				{/* TODO FIX read more 일단 막아둠 */}
+				{/* {isMore || !lengthOver() ? <></> : <Button auto light size='sm' onPress={() => setIsMore(!isMore)}>read more..</Button> } */}
+				<CButton size='sm' leftIcon={<AiOutlineLike size={20}/>} className='ml-auto'>
 					{/* TODO 댓글의 좋아요 기능 */}
 					0
-				</Button>
-			</Card.Footer>
-		</Card>
+				</CButton>
+			</CCard.Footer>
+		</CCard>
 	)
 }

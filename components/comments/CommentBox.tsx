@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { comment } from '@/interface/post'
+import { CAvatar, CButton, CCard } from '@/components/common'
 
 interface commentBoxProps {
 	postId: string;
@@ -45,39 +46,38 @@ export const CommentBox = (props: commentBoxProps) => {
 	}
 
 	return (
-		<Card variant='bordered' onFocus={loginCheck} aria-label='comment-box' className='min-h-[204px]'>
+		<CCard className='min-h-[204px]'>
 			{
 				session ? 
 				<>
-				<Card.Header className='gap-2 font-bold'>
-					<Avatar src={session?.user.image}/>
+				<CCard.Header className='gap-2 font-bold'>
+					<CAvatar src={session?.user.image || '/defaultUser.jpeg'}/>
 					<span>{session?.user.name}</span>
-				</Card.Header>
-				<Card.Body css={{ padding: '0'}}>
+				</CCard.Header>
+				<CCard.Body>
 					{/* TODO FIX 인풋값 초기화하면 깜빡거리는 문제와 한글이 깨지는 문제가 있음 */}
 					<Textarea 
 						placeholder='내용을 입력하세요.'
-						css={{ padding: '0 10px'}} 
 						rows={3}
 						onInput={handleContent}
+						css={{width: '100%'}}
 					/>
-				</Card.Body>
-				<Card.Footer className='justify-end gap-1'>
-					<Button 
-					auto 
-					shadow 
-					size='sm' 
-					color='gradient' 
-					onPress={() => submitComment(session?.user.id, postId, content)}
-					>제출</Button>
-					<Button size='sm' auto light>취소</Button>
-				</Card.Footer>
+				</CCard.Body>
+				<CCard.Footer className='justify-end gap-1'>
+					<CButton 
+						size='sm' 
+						onClick={() => submitComment(session?.user.id, postId, content)}
+					>
+						제출
+					</CButton>
+					<CButton size='sm'>취소</CButton>
+				</CCard.Footer>
 				</>
 				:
-				<Card.Body>
+				<CCard.Body>
 					<Textarea css={{ padding: '0 10px'}} rows={2}/>
-				</Card.Body>
+				</CCard.Body>
 			}
-		</Card>
+		</CCard>
 	)
 }
