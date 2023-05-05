@@ -1,5 +1,5 @@
 /* reset 같은 역할인듯 */
-/* @tailwind base;  */
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
