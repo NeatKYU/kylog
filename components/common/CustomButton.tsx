@@ -1,25 +1,25 @@
-'use client';
+'use client'
 
-type sizeType = 'sm' | 'md' | 'lg' | 'xl';
+type sizeType = 'sm' | 'md' | 'lg' | 'xl'
 
 interface cButtonProps {
-    size?: sizeType;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
-    children?: React.ReactNode;
-    leftIcon?: React.ReactNode;
-    rightIcon?: React.ReactNode;
-    className?: string;
+    size?: sizeType
+    onClick?: React.MouseEventHandler<HTMLDivElement>
+    children?: React.ReactNode
+    leftIcon?: React.ReactNode
+    rightIcon?: React.ReactNode
+    className?: string
 }
 
 export const CButton = (props: cButtonProps) => {
-    const { size = 'md', children, onClick, leftIcon, rightIcon, className } = props;
+    const { size = 'md', children, onClick, leftIcon, rightIcon, className } = props
 
     const sizeClasses = (size: sizeType) => {
-        if (size === 'sm') return 'min-w-[3.5rem] h-6';
-        if (size === 'md') return 'min-w-[4rem] h-7';
-        if (size === 'lg') return 'min-w-[4.5rem] h-8';
-        if (size === 'xl') return 'min-w-[5rem] h-9';
-    };
+        if (size === 'sm') return 'min-w-[3.5rem] h-6'
+        if (size === 'md') return 'min-w-[4rem] h-7'
+        if (size === 'lg') return 'min-w-[4.5rem] h-8'
+        if (size === 'xl') return 'min-w-[5rem] h-9'
+    }
 
     return (
         <div
@@ -42,5 +42,5 @@ export const CButton = (props: cButtonProps) => {
             {children}
             {rightIcon ? <div className="ml-1">{rightIcon}</div> : ''}
         </div>
-    );
-};
+    )
+}

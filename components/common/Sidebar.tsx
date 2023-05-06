@@ -1,19 +1,19 @@
 // import { AiOutlineClose } from 'react-icons/ai'
-import { XMarkIcon } from '@heroicons/react/24/solid';
-import { ThemeToggleButton } from './ThemeToggleButton';
+import { XMarkIcon } from '@heroicons/react/24/solid'
+import { ThemeToggleButton } from './ThemeToggleButton'
 
 interface SidebarProps {
-    isOpen?: boolean;
-    setIsOpen: (state: boolean) => void;
-    children?: React.ReactNode;
+    isOpen?: boolean
+    setIsOpen: (state: boolean) => void
+    children?: React.ReactNode
 }
 // TODO 무한 스크롤 구현
 export const Sidebar = (props: SidebarProps) => {
-    const { isOpen = false, setIsOpen, children } = props;
+    const { isOpen = false, setIsOpen, children } = props
 
     const handleClose = () => {
-        setIsOpen(false);
-    };
+        setIsOpen(false)
+    }
 
     return (
         <div
@@ -59,5 +59,5 @@ export const Sidebar = (props: SidebarProps) => {
                 {children}
             </div>
         </div>
-    );
-};
+    )
+}

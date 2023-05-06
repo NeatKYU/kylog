@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
 interface cCardProps {
-    className?: string;
-    children?: React.ReactNode;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    className?: string
+    children?: React.ReactNode
+    onClick?: React.MouseEventHandler<HTMLDivElement>
 }
 
 interface cCardChildrenProps {
-    className?: string;
-    children?: React.ReactNode;
+    className?: string
+    children?: React.ReactNode
 }
 
 export const CCard = (props: cCardProps) => {
-    const { className, children, onClick } = props;
+    const { className, children, onClick } = props
 
     return (
         <div
@@ -29,11 +29,11 @@ export const CCard = (props: cCardProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}
 
 const Header = (props: cCardChildrenProps) => {
-    const { children, className } = props;
+    const { children, className } = props
     return (
         <div
             className={`
@@ -44,11 +44,11 @@ const Header = (props: cCardChildrenProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}
 
 const Image = (props: cCardChildrenProps) => {
-    const { children, className } = props;
+    const { children, className } = props
     return (
         <div
             className={`
@@ -59,11 +59,11 @@ const Image = (props: cCardChildrenProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}
 
 const Body = (props: cCardChildrenProps) => {
-    const { children, className } = props;
+    const { children, className } = props
     return (
         <div
             className={`
@@ -74,11 +74,11 @@ const Body = (props: cCardChildrenProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}
 
 const Footer = (props: cCardChildrenProps) => {
-    const { children, className } = props;
+    const { children, className } = props
     return (
         <div
             className={`
@@ -89,12 +89,12 @@ const Footer = (props: cCardChildrenProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}
 
-CCard.Header = Header;
-CCard.Image = Image;
-CCard.Body = Body;
-CCard.Footer = Footer;
+CCard.Header = Header
+CCard.Image = Image
+CCard.Body = Body
+CCard.Footer = Footer
 
-CCard.defalutProps = {};
+CCard.defalutProps = {}

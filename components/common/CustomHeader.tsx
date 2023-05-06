@@ -1,16 +1,16 @@
-'use client';
+'use client'
 
 interface cHeaderProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 interface cHeaderChildrenProps {
-    children?: React.ReactNode;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
-    className?: string;
+    children?: React.ReactNode
+    onClick?: React.MouseEventHandler<HTMLDivElement>
+    className?: string
 }
 
 export const CHeader = (props: cHeaderProps) => {
-    const { children } = props;
+    const { children } = props
     return (
         <div
             className={`
@@ -43,34 +43,28 @@ export const CHeader = (props: cHeaderProps) => {
                 {children}
             </div>
         </div>
-    );
-};
+    )
+}
 
 const Brand = (props: cHeaderChildrenProps) => {
-    const { children, onClick, className } = props;
+    const { children, onClick, className } = props
     return (
-        <div
-            className={'flex justify-center items-center px-2 ' + className}
-            onClick={onClick}
-        >
+        <div className={'flex justify-center items-center px-2 ' + className} onClick={onClick}>
             {children}
         </div>
-    );
-};
+    )
+}
 
 const Content = (props: cHeaderChildrenProps) => {
-    const { children, className, onClick } = props;
+    const { children, className, onClick } = props
     return (
-        <div
-            className={'flex justify-cetner items-center gap-3 ' + className}
-            onClick={onClick}
-        >
+        <div className={'flex justify-cetner items-center gap-3 ' + className} onClick={onClick}>
             {children}
         </div>
-    );
-};
+    )
+}
 
-CHeader.Brand = Brand;
-CHeader.Content = Content;
+CHeader.Brand = Brand
+CHeader.Content = Content
 
-CHeader.defalutProps = {};
+CHeader.defalutProps = {}

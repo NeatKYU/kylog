@@ -1,19 +1,19 @@
-import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { CHeader } from '@/components/common/CustomHeader';
+import Image from 'next/image'
+import { useRouter } from 'next/navigation'
+import { CHeader } from '@/components/common/CustomHeader'
 
 interface HeaderProps {
-    logo: string;
-    title: string;
-    children: React.ReactNode;
+    logo: string
+    title: string
+    children: React.ReactNode
 }
 
 export const Header = ({ logo, title, children }: HeaderProps) => {
-    const router = useRouter();
+    const router = useRouter()
 
     const goHome = () => {
-        router.push('/');
-    };
+        router.push('/')
+    }
 
     return (
         <CHeader>
@@ -22,5 +22,5 @@ export const Header = ({ logo, title, children }: HeaderProps) => {
             </CHeader.Brand>
             <CHeader.Content>{children}</CHeader.Content>
         </CHeader>
-    );
-};
+    )
+}

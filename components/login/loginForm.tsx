@@ -1,45 +1,45 @@
-"use client";
+'use client'
 
-import { ChangeEvent, useState } from "react";
-import cutsomAxios from "@/lib/customAxios";
-import { useRouter } from "next/navigation";
+import { ChangeEvent, useState } from 'react'
+import cutsomAxios from '@/lib/customAxios'
+import { useRouter } from 'next/navigation'
 // import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
-import Github from "@/assets/providers/github.svg";
-import { signIn } from "next-auth/react";
-import { CInput, CButton } from "@/components/common";
+import Github from '@/assets/providers/github.svg'
+import { signIn } from 'next-auth/react'
+import { CInput, CButton } from '@/components/common'
 
 export const LoginForm = () => {
-    const [id, setId] = useState("");
-    const [password, setPassword] = useState("");
-    const router = useRouter();
+    const [id, setId] = useState('')
+    const [password, setPassword] = useState('')
+    const router = useRouter()
 
     const handleId = (e: ChangeEvent<HTMLInputElement>) => {
-        setId(e.target.value);
-    };
+        setId(e.target.value)
+    }
 
     const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
-        setPassword(e.target.value);
-    };
+        setPassword(e.target.value)
+    }
 
     const handleLogin = async () => {
         await cutsomAxios
-            .post("/api/auth/login", {
+            .post('/api/auth/login', {
                 name: id,
                 password: password,
             })
             .then((result) => {
-                console.log("result", result);
-                router.push("/home");
+                console.log('result', result)
+                router.push('/home')
             })
             .catch((error) => {
                 // 아이디 비번 틀렸을 때
-                console.log("error", error);
-            });
-    };
+                console.log('error', error)
+            })
+    }
 
     const handleRegister = () => {
-        router.push("/register");
-    };
+        router.push('/register')
+    }
 
     return (
         <div className="w-80 m-auto mt-24">
@@ -54,7 +54,7 @@ export const LoginForm = () => {
             <CInput
                 size="lg"
                 fullWidth
-                type={"password"}
+                type={'password'}
                 onChange={handlePassword}
                 placeHolder="비밀번호를 입력해주세요."
             />
@@ -74,11 +74,11 @@ export const LoginForm = () => {
             <CButton
                 className="w-full bg-[#333] dark:bg-[#333] text-white hover:bg-[#434343] dark:hover:bg-[#434343]"
                 size="xl"
-                onClick={() => signIn("github", { callbackUrl: "/" })}
+                onClick={() => signIn('github', { callbackUrl: '/' })}
                 leftIcon={<Github className="mr-2" />}
             >
                 Sign in with Github
             </CButton>
         </div>
-    );
-};
+    )
+}
