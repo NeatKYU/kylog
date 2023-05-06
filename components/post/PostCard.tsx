@@ -1,8 +1,6 @@
 import { dateToHowover } from '@/lib/helper'
 import { post } from '@/interface/post';
 import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
-import Image from 'next/image'
-import { Avatar, Button, Card, Row, Spacer } from '@nextui-org/react'
 import { CCard, CButton, CAvatar } from '@/components/common'
 import { useSession } from 'next-auth/react';
 import usePostLike from '@/hooks/usePostLike';
@@ -62,7 +60,7 @@ export const PostCard = ({
 			<CCard.Footer>
 				<div className='flex items-center w-full'>
 					<CAvatar size='sm' src={post.author!.image}/>
-					<Spacer x={0.3}/>
+					<div className='mr-1'/>
 					<div>{post.author!.name}</div>
 					<div className='flex justify-end ml-auto gap-1'>
 						<CButton 

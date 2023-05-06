@@ -1,5 +1,4 @@
 import { useState, ChangeEvent } from 'react'
-import { Avatar, Button, Card, Textarea, useInput } from '@nextui-org/react'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'

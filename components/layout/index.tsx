@@ -9,7 +9,6 @@ import { IoLogOutOutline } from 'react-icons/io5'
 import { BiEdit, BiLogIn, BiSearch } from 'react-icons/bi'
 import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
-import { Dropdown } from '@nextui-org/react'
 import { ThemeToggleButton } from '../common/ThemeToggleButton'
 import { CButton, CAvatar, CInput, CDropdown } from '@/components/common'
 

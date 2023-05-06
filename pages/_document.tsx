@@ -5,7 +5,6 @@ import Document, {
   NextScript,
   DocumentContext,
 } from "next/document";
-import { CssBaseline } from '@nextui-org/react';
 import React from 'react';
 
 class MyDocument extends Document {
@@ -20,7 +19,7 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-        <Head>{CssBaseline.flush()}</Head>
+        <Head></Head>
         <body className='bg-white dark:bg-zinc-800 dark:text-zinc-300'>
           <Main />
           <NextScript />

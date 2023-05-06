@@ -1,4 +1,3 @@
-// import { Avatar, Button, Card, Textarea } from '@nextui-org/react'
 import { CAvatar, CCard, CButton } from '@/components/common'
 import { comment } from '@/interface/post'
 import { dateToHowover } from '@/lib/helper'

@@ -1,9 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Input, Button, Spacer } from '@nextui-org/react'
 import { CInput, CButton } from '@/components/common'
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 
 export const RegisterForm = () => {
 
