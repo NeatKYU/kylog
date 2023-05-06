@@ -46,7 +46,7 @@ export const CommentBox = (props: commentBoxProps) => {
 	}
 
 	return (
-		<CCard className='min-h-[204px]'>
+		<CCard className={`${session ? 'min-h-[204px]' : 'min-h-[110px]'}`}>
 			{
 				session ? 
 				<>
@@ -74,9 +74,18 @@ export const CommentBox = (props: commentBoxProps) => {
 				</CCard.Footer>
 				</>
 				:
-				<CCard.Body>
-					<CTextarea className='px-[20px]' rows={2}/>
-				</CCard.Body>
+				<div onClick={() => router.push('/login')}>
+					<CCard.Header>
+						<span>댓글</span>
+					</CCard.Header>
+					<CCard.Body>
+						<CTextarea 
+							className='px-[20px] w-full' 
+							rows={1} 
+							placeHolder='로그인이 필요한 서비스입니다.'
+						/>
+					</CCard.Body>
+				</div>
 			}
 		</CCard>
 	)
