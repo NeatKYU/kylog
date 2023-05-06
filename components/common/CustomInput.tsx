@@ -7,10 +7,19 @@ interface cInputProps {
 	fullWidth?: boolean;
 	type?: React.HTMLInputTypeAttribute;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
+	className?: string;
 }
 
 export const CInput = (props: cInputProps) => {
-	const { size, icon, onChange, placeHolder, fullWidth, type } = props;
+	const { 
+		size, 
+		icon, 
+		onChange, 
+		placeHolder, 
+		fullWidth, 
+		type, 
+		className, 
+	} = props;
 
 	const sizeClasses = (size: sizeType) => {
 		if(size === 'sm') return fullWidth ? 'w-full h-8' : 'w-64 h-8';
@@ -27,6 +36,7 @@ export const CInput = (props: cInputProps) => {
 				py-2 px-3 border
 				dark:border-zinc-600
 				${sizeClasses(size)}
+				${className ?? ''}
 			`}
 		>
 			<div className='mr-2'>
