@@ -11,19 +11,20 @@ interface cCardChildrenProps {
 
 
 export const CCard = (props:cCardProps) => {
-	const { className, children } = props;
+	const { className, children, onClick } = props;
 
 	return (
 		<div 
 			className={`
-				bg-white
+				bg-zinc-50
 				dark:bg-zinc-600
-				flex flex-col px-3
+				flex flex-col
 				rounded-lg
 				border
 				dark:border-zinc-500
-				${className}
+				${className ?? ''}
 			`}
+			onClick={onClick}
 		>
 			{children}
 		</div>
@@ -35,9 +36,25 @@ const Header = (props: cCardChildrenProps) => {
 	return (
 		<div 
 			className={`
-				flex py-3 items-center
-				${className}
+				flex p-3 items-center basis-3/12
+				${className ?? ''}
 			`}
+			style={{flex: 3}}
+		>
+			{children}
+		</div>
+	)
+}
+
+const Image = (props: cCardChildrenProps) => {
+	const { children, className } = props;
+	return (
+		<div 
+			className={`
+				w-full relative
+				${className ?? ''}	
+			`}
+			style={{flex: 9}}
 		>
 			{children}
 		</div>
@@ -49,9 +66,10 @@ const Body = (props: cCardChildrenProps) => {
 	return (
 		<div 
 			className={`
-				flex py-2 flex-auto
-				${className}
+				flex px-3 py-2
+				${className ?? ''}
 			`}
+			style={{flex: 7}}
 		>
 			{children}
 		</div>
@@ -63,9 +81,10 @@ const Footer = (props: cCardChildrenProps) => {
 	return (
 		<div 
 			className={`
-				flex py-2 flex-1
-				${className}
+				flex px-3 pb-2 pt-1
+				${className ?? ''}
 			`}
+			style={{flex: 1}}
 		>
 			{children}
 		</div>
@@ -73,6 +92,7 @@ const Footer = (props: cCardChildrenProps) => {
 }
 
 CCard.Header = Header;
+CCard.Image = Image;
 CCard.Body = Body;
 CCard.Footer = Footer;
 

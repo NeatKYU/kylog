@@ -26,13 +26,13 @@ export const CButton = (props: cButtonProps) => {
 				text-sm
 				rounded cursor-pointer 
 				bg-slate-200
-				dark:bg-gray-600
+				dark:bg-zinc-600
 				text-black
 				dark:text-white
 				hover:bg-slate-300
-				dark:hover:bg-gray-800
+				dark:hover:bg-zinc-900
 				${sizeClasses(size)}
-				${className}
+				${className ?? ''}
 			`}
 			onClick={onClick}
 		>

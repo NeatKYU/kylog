@@ -13,10 +13,10 @@ export const CAvatar = (props: cAvatarProps) => {
 	const { size, src, onClick } = props;
 
 	const sizeClasses = (size: sizeType) => {
-		if(size === 'sm') return 'w-6 h-6';
-		if(size === 'md') return 'w-8 h-8';
-		if(size === 'lg') return 'w-10 h-10';
-		if(size === 'xl') return 'w-12 h-12';
+		if(size === 'sm') return 'min-w-[1.5rem] w-6 h-6';
+		if(size === 'md') return 'min-w-[2rem] w-8 h-8';
+		if(size === 'lg') return 'min-w-[2.5rem] w-10 h-10';
+		if(size === 'xl') return 'min-w-[3rem] w-12 h-12';
 	}
 
 	return (

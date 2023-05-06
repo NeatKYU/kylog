@@ -22,11 +22,11 @@ export const CIconButton = (props: cIconButtonProps) => {
 				flex p-1 justify-center items-center 
 				rounded cursor-pointer 
 				bg-slate-200
-				dark:bg-gray-600
+				dark:bg-zinc-600
 				text-black
 				dark:text-white
 				hover:bg-slate-300
-				dark:hover:bg-gray-800
+				dark:hover:bg-zinc-900
 				${sizeClasses(size)}
 			`}
 			onClick={onClick}
