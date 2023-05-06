@@ -1,4 +1,4 @@
-import { Textarea, Button } from '@nextui-org/react'
+import { CButton, CTextarea } from '@/components/common'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -64,16 +64,11 @@ export default function Write() {
 
 	return (
 		<div className='w-full'>
-			<Textarea
-				className='my-5'
-				style={{fontSize: '30px'}}
-				onInput={handleTitle}
+			<CTextarea
+				className='my-5 text-3xl w-full'
+				onChange={handleTitle}
 				rows={2}
-				maxRows={2}
-				placeholder='제목을 입력해주세요.'
-				fullWidth
-				autoFocus
-				aria-label='title textarea'
+				placeHolder='제목을 입력해주세요.'
 			/>
 			<div className='w-full h-auto'>
 				<MdEditor 
@@ -86,8 +81,8 @@ export default function Write() {
 				/>
 			</div>
 			<div className='w-full flex justify-end my-5 gap-3'>
-				<Button auto bordered color='gradient' onClick={createPost}>저장하기</Button>
-				<Button auto bordered color='gradient' onClick={handleGoBack}>취소</Button>
+				<CButton size='xl' onClick={createPost}>저장하기</CButton>
+				<CButton size='xl' onClick={handleGoBack}>취소</CButton>
 			</div>
 		</div>
 	)
