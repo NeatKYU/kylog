@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import { comment } from '@/interface/post'
-import { CAvatar, CButton, CCard } from '@/components/common'
+import { CAvatar, CButton, CCard, CTextarea } from '@/components/common'
 
 interface commentBoxProps {
 	postId: string;
@@ -55,14 +55,14 @@ export const CommentBox = (props: commentBoxProps) => {
 					<span>{session?.user.name}</span>
 				</CCard.Header>
 				<CCard.Body>
-					{/* TODO FIX 인풋값 초기화하면 깜빡거리는 문제와 한글이 깨지는 문제가 있음 */}
-					<Textarea 
-						placeholder='내용을 입력하세요.'
-						rows={3}
-						onInput={handleContent}
-						css={{width: '100%'}}
+					<CTextarea 
+						rows={3} 
+						value={content}
+						className='w-full' 
+						onChange={handleContent}
+						placeHolder='내용을 입력하세요.'
 					/>
-				</CCard.Body>
+				</CCard.Body> 
 				<CCard.Footer className='justify-end gap-1'>
 					<CButton 
 						size='sm' 
@@ -75,7 +75,7 @@ export const CommentBox = (props: commentBoxProps) => {
 				</>
 				:
 				<CCard.Body>
-					<Textarea css={{ padding: '0 10px'}} rows={2}/>
+					<CTextarea className='px-[20px]' rows={2}/>
 				</CCard.Body>
 			}
 		</CCard>
