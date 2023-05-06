@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 import { BiShareAlt } from 'react-icons/bi'
-import { Button, Row, Spacer } from '@nextui-org/react'
 import usePostLike from '@/hooks/usePostLike'
 import { useSession } from 'next-auth/react'
 import { Sidebar } from '@/components/common/Sidebar'
@@ -29,7 +28,6 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 	}
 
 	const handleComment = () => {
-		// TODO
 		setIsOpen(!isOpen)
 	}
 
@@ -62,12 +60,14 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 		</div>
 		<Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
 			<CommentBox postId={postId} comments={currentComments} setComments={setCurrentComment}/>
-			{currentComments.map((commentObj: comment, index) => (
-				<>
-					<Spacer key={index} y={1}/>
-					<Comment key={commentObj.id} comment={commentObj}/>	
-				</>
-			))}
+			{currentComments.map((commentObj: comment, index) => {
+				return (
+					<div key={commentObj.id}>
+						<div className='w-full mt-4'/>
+						<Comment comment={commentObj}/>
+					</div>
+				)
+			})}
 		</Sidebar>
 		</>
 	)
