@@ -6,11 +6,12 @@ interface cAvatarProps {
 	src: string;
 	size: sizeType;
 	onClick?: React.MouseEventHandler<HTMLDivElement>;
+	children?: React.ReactNode;
 }
 
 export const CAvatar = (props: cAvatarProps) => {
 
-	const { size, src, onClick } = props;
+	const { size, src, onClick, children } = props;
 
 	const sizeClasses = (size: sizeType) => {
 		if(size === 'sm') return 'min-w-[1.5rem] w-6 h-6';
@@ -40,6 +41,7 @@ export const CAvatar = (props: cAvatarProps) => {
 					cursor-pointer
 				`}
 			/>
+			{children}
 		</div>
 	)
 }

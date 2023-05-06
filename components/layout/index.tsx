@@ -11,7 +11,7 @@ import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import { BodyLayout } from '@/components/layout/body/Body'
 import { Dropdown } from '@nextui-org/react'
 import { ThemeToggleButton } from '../common/ThemeToggleButton'
-import { CButton, CAvatar, CInput } from '@/components/common'
+import { CButton, CAvatar, CInput, CDropdown } from '@/components/common'
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -21,27 +21,41 @@ export const Layout = (props: LayoutProps) => {
 
 	const { data: session, status } = useSession();
 	const router = useRouter();
+	const onClickcheck = () => {
+		console.log('check')
+	}
 
-	// const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
-	// 	return status === 'authenticated' ? 
-	// 	<Dropdown.Menu>
-	// 		<Dropdown.Item icon={<BsPersonCircle size={20} />}>
-	// 			<span>프로필</span>
-	// 		</Dropdown.Item>
-	// 		<Dropdown.Item icon={<IoLogOutOutline size={20} />}>
-	// 			<div onClick={() => signOut()}>로그아웃</div>
-	// 		</Dropdown.Item>
-	// 	</Dropdown.Menu>
-	// 	:
-	// 	<Dropdown.Menu>
-	// 		<Dropdown.Item icon={<BsFillPersonBadgeFill size={20}/>}>
-	// 			<div onClick={() => router.push('/register')}>회원가입</div>
-	// 		</Dropdown.Item>
-	// 		<Dropdown.Item icon={<BiLogIn size={20}/>} >
-	// 			<div onClick={() => router.push('/login')}>로그인</div>
-	// 		</Dropdown.Item>
-	// 	</Dropdown.Menu>
-	// }
+	const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
+		return status === 'authenticated' ? 
+		<CDropdown.Menu>
+			<CDropdown.Item 
+				icon={<BsPersonCircle size={20} />}
+			>
+				<span>프로필</span>
+			</CDropdown.Item>
+			<CDropdown.Item 
+				icon={<IoLogOutOutline size={20} />}
+				onClick={() => signOut()}
+			>
+				<div>로그아웃</div>
+			</CDropdown.Item>
+		</CDropdown.Menu>
+		:
+		<CDropdown.Menu>
+			<CDropdown.Item 
+				icon={<BsFillPersonBadgeFill size={20}/>} 
+				onClick={() => router.push('/register')}
+			>
+				<div>회원가입</div>
+			</CDropdown.Item>
+			<CDropdown.Item 
+				icon={<BiLogIn size={20}/>} 
+				onClick={() => router.push('/login')} 
+			>
+				<div>로그인</div>
+			</CDropdown.Item>
+		</CDropdown.Menu>
+	}
 
 	return (
 		<div>
@@ -51,7 +65,12 @@ export const Layout = (props: LayoutProps) => {
 				<CButton size='lg' onClick={() => router.push('/post/write')} leftIcon={<BiEdit/>}>
 					글쓰기
 				</CButton>
-				<CAvatar src={status === 'authenticated' ? session.user.image : '/deafultUser.jpeg'} size='lg'/>
+				<CDropdown >
+					<CDropdown.Trigger>
+						<CAvatar src={status === 'authenticated' ? session.user.image : '/deafultUser.jpeg'} size='lg'/>
+					</CDropdown.Trigger>
+					{authMenuList(status)}
+				</CDropdown>
 			</Header>
 			<BodyLayout {...props}>
 				{ props.children }

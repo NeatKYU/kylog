@@ -23,6 +23,7 @@ export const CHeader = (props: cHeaderProps) => {
 				top-0
 				border-b
 				dark:border-zinc-600
+				z-[99]
 			`}
 		>
 			<div 
