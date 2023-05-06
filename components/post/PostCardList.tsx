@@ -16,13 +16,11 @@ export const PostCardList = (props: PostCardListProps) => {
 
 	const postListElement = (list: post[]) => {
 		return list && list.map((item: post) => (
-			<>
-				<PostCard 
-					key={item.id} 
-					post={item} 
-					onClick={() => handleDetailPage(item.id)}
-				/>
-			</>
+			<PostCard 
+				key={item.id} 
+				post={item} 
+				onClick={() => handleDetailPage(item.id)}
+			/>
 		))
 	}
 

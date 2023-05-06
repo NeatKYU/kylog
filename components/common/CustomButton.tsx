@@ -1,120 +1,48 @@
-import styled, { css } from 'styled-components';
-import { toRem } from '@/lib/helper';
-import React from 'react';
+type sizeType = 'sm' | 'md' | 'lg' | 'xl';
 
-interface CustomButtonProps {
-	size: 'small' | 'middle' | 'large';
-	widthFull: boolean;
-	buttonTheme: 'dark' | 'white';
-	title: string;
-	outlined: boolean;
-	onClick: React.MouseEventHandler<HTMLDivElement>;
-	icon?: React.ReactNode
+interface cButtonProps {
+	size: sizeType;
+	onClick?: React.MouseEventHandler<HTMLDivElement>;
+	children?: React.ReactNode;
+	leftIcon?: React.ReactNode;
+	rightIcon?: React.ReactNode;
+	className?: string;
 }
 
-export const CustomButton = (props: CustomButtonProps) => {
+export const CButton = (props: cButtonProps) => {
+	const { size, children, onClick, leftIcon, rightIcon, className } = props;
 
-	const { size, buttonTheme, title, widthFull, onClick, icon } = props;
+	const sizeClasses = (size: sizeType) => {
+		if(size === 'sm') return 'min-w-[3.5rem] h-6';
+		if(size === 'md') return 'min-w-[4rem] h-7';
+		if(size === 'lg') return 'min-w-[4.5rem] h-8';
+		if(size === 'xl') return 'min-w-[5rem] h-9';
+	}
 
 	return (
-		<Container 
-			icon={icon} 
-			buttonTheme={buttonTheme} 
-			size={size} 
-			widthFull={widthFull} 
+		<div 
+			className={`
+				flex px-2 py-1 justify-center items-center
+				text-sm
+				rounded cursor-pointer 
+				bg-slate-200
+				dark:bg-zinc-600
+				text-black
+				dark:text-white
+				hover:bg-slate-300
+				dark:hover:bg-zinc-900
+				${sizeClasses(size)}
+				${className ?? ''}
+			`}
 			onClick={onClick}
 		>
-			{icon ? icon : title}
-		</Container>
+			{leftIcon ? <div className='mr-1'>{leftIcon}</div> : ''}
+			{children}
+			{rightIcon ? <div className='ml-1'>{rightIcon}</div> : ''}
+		</div>
 	)
 }
 
-const sizeStyles = css<{size: string, icon: React.ReactNode}>`
-	${props => props.size === 'large' && 
-		css`
-			width: ${toRem(100)};
-			height: ${toRem(50)};
-	`}
-	${props => props.size === 'large' && props.icon && 
-		css`
-			width: ${toRem(50)};
-			height: ${toRem(50)};
-
-			svg {
-				font-size: ${toRem(30)};
-			}
-	`}
-	${props => props.size === 'middle' && 
-		css`
-			width: ${toRem(80)};
-			height: ${toRem(40)};
-	`}
-	${props => props.size === 'middle' && props.icon &&
-		css`
-			width: ${toRem(40)};
-			height: ${toRem(40)};
-
-			svg {
-				font-size: ${toRem(25)};
-			}
-	`}
-	${props => props.size === 'small' && 
-		css`
-			width: ${toRem(60)};
-			height: ${toRem(30)};
-	`}
-	${props => props.size === 'small' && props.icon &&
-		css`
-			width: ${toRem(30)};
-			height: ${toRem(30)};
-
-			svg {
-				font-size: ${toRem(16)};
-			}
-	`}
-`
-
-interface containerProps {
-	buttonTheme: string, 
-	size: string, 
-	widthFull: boolean, 
-	icon: React.ReactNode
-}
-
-const Container = styled.div<containerProps>`
-	${sizeStyles}
-
-	/* width: ${(props) => props.widthFull ? '100% !important' : null};
-
-	background-color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.black : props.theme.colors.white };
-	color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.white : props.theme.colors.black};
-
-	svg {
-		background-color: ${(props) => props.buttonTheme === 'dark' ? props.theme.colors.black : props.theme.colors.white };
-	} */
-
-	margin: 5px 0px 5px 0px;
-	
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	
-	border-radius: 5px;
-
-	cursor: pointer;
-
-	/* :hover {
-		background-color: ${({theme, buttonTheme}) => buttonTheme === 'dark' ? theme.colors.hoverBlack : theme.colors.hoverWhite};
-		svg {
-			background-color: ${({theme, buttonTheme}) => buttonTheme === 'dark' ? theme.colors.hoverBlack : theme.colors.hoverWhite};
-		}
-	} */
-`
-
-CustomButton.defaultProps = {
-	size: 'middle',
-	title: 'button',
-	buttonTheme: 'dark',
-	widthFull: false,
-	outlined: false,
+CButton.defaultProps = {
+	size: 'md'
 }

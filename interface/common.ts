@@ -1,3 +1,5 @@
+export type sizeType = 'sm' | 'md' | 'lg' | 'xl'
+
 export interface common {
 	accessToken: string;
 	refreshToken: string;

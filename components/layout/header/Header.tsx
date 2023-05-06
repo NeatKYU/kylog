@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import { Navbar } from '@nextui-org/react'
 import { useRouter } from 'next/router'
+import { CHeader } from '@/components/common/CustomHeader';
 
 interface HeaderProps {
 	logo: string;
@@ -16,14 +16,13 @@ export const Header = ({ logo, title, children }: HeaderProps) => {
 	}
 
 	return (
-		<Navbar variant={'sticky'} disableBlur>
-			<Navbar.Brand onClick={goHome} className='cursor-pointer'>
-				{/* <Image src={'/img/logo_white.png'} alt='logo' width={100} height={60}/> */}
+		<CHeader>
+			<CHeader.Brand onClick={goHome} className='cursor-pointer'>
 				<span>KYLOG</span>
-			</Navbar.Brand>
-			<Navbar.Content>
+			</CHeader.Brand>
+			<CHeader.Content>
 				{children}
-			</Navbar.Content>
-		</Navbar>
+			</CHeader.Content>
+		</CHeader>
 	)
 }

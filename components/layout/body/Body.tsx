@@ -20,7 +20,8 @@ export const BodyLayout = ({ children }: BodyLayoutProps) => {
 				w-full
 				lg:w-[840px]
 				xl:w-[1120px] 
-				2xl:w-[1400px]'
+				2xl:w-[1400px]
+				'
 		>
 			{children}
 		</div>

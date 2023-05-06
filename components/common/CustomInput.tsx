@@ -1,70 +1,57 @@
-import { toRem } from '@/lib/helper';
-import styled, { css } from 'styled-components'
+import { sizeType } from "@/interface/common"
 
-interface CustomInputProps {
-	size: 'small' | 'middle' | 'large';
-	placeholder: string;
-	onChange: React.ChangeEventHandler<HTMLInputElement>;
-	type: 'password' | 'email' | 'text'
+interface cInputProps {
+	size: sizeType;
+	icon?: React.ReactNode;
+	placeHolder?: string;
+	fullWidth?: boolean;
+	type?: React.HTMLInputTypeAttribute;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
+	className?: string;
 }
 
-export const CustomInput = (props: CustomInputProps) => {
-	const { size, placeholder, onChange, type } = props;
+export const CInput = (props: cInputProps) => {
+	const { 
+		size, 
+		icon, 
+		onChange, 
+		placeHolder, 
+		fullWidth, 
+		type, 
+		className, 
+	} = props;
+
+	const sizeClasses = (size: sizeType) => {
+		if(size === 'sm') return fullWidth ? 'w-full h-8' : 'w-64 h-8';
+		if(size === 'md') return fullWidth ? 'w-full h-10' : 'w-64 h-10';
+		if(size === 'lg') return fullWidth ? 'w-full h-12' : 'w-64 h-12';
+		if(size === 'xl') return fullWidth ? 'w-full h-14' : 'w-64 h-14';
+	}
+
 	return (
-		<Container size={size}>
-			<Input 
-				placeholder={placeholder}
-				onChange={onChange}
+		<div 
+			className={`
+				flex justify-center items-center
+				rounded-lg 
+				py-2 px-3 border
+				dark:border-zinc-600
+				${sizeClasses(size)}
+				${className ?? ''}
+			`}
+		>
+			<div className='mr-2'>
+				{icon}
+			</div>
+			<input 
+				className='w-full outline-none bg-transparent'
 				type={type}
+				placeholder={placeHolder}
+				onChange={onChange}
 			/>
-		</Container>
+		</div>
 	)
 }
 
-const sizeStyles = css<{size: string}>`
-	${props => props.size === 'small' && css`
-		height: ${toRem(30)};
-		input {
-			font-size: ${toRem(14)}
-		}
-	`}
-	${props => props.size === 'middle' && css`
-		height: ${toRem(40)};
-	`}
-	${props => props.size === 'large' && css`
-		height: ${toRem(50)};
-		input {
-			font-size: ${toRem(17)}
-		}
-	`}
-`
-
-const Container = styled.div`
-	${sizeStyles}
-	width: 100%;
-
-	padding: 0px 10px 0px 10px; 
-	margin: 5px 0 5px 0;
-	border-radius: 5px;
-	/* border: 1px solid ${({theme}) => theme.colors.grey};
-	:hover {
-		border-color: ${({theme}) => theme.colors.hoverBlack};
-	}
-
-	background-color: ${({theme}) =>theme.colors.white}; */
-`
-
-const Input = styled.input`
-	width: 100%;
-	height: 100%;
-	border: none;
-	outline: none;
-
-	/* background-color: ${({theme}) =>theme.colors.white}; */
-`
-
-CustomInput.defaultProps = {
-	size: 'middle',
-	placeholder: '입력해주세요.',
-	type: 'text',
+CInput.defalutProps = {
+	size: 'md',
 }

@@ -4,7 +4,7 @@ import { dateToHowover, calculateReadingTime } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
 import ReactMarkdown from 'react-markdown'
 import prisma from '@/pages/api/prismaClient'
-import { Avatar } from '@nextui-org/react';
+import { CAvatar } from '@/components/common/CustomAvatar';
 
 interface detailProps {
 	post: post
@@ -17,7 +17,7 @@ export default function Detail({ post }: detailProps) {
 	return (
 		<div className='w-full h-auto max-w-screen-lg px-[20px] lg:px-0'>
 			<div className='flex mb-[20px] w-full gap-2 items-center'>
-				<Avatar src={post.author!.image}/>
+				<CAvatar src={post.author!.image} size='lg'/>
 				<div className='flex flex-col'>
 					<div className='font-bold text-xl'>{post.author!.name}</div>
 					<div>{createdAt} · {calculateReadingTime(post.content)} min read</div>
@@ -31,7 +31,11 @@ export default function Detail({ post }: detailProps) {
 					{post.content}
 				</ReactMarkdown>
 			</div>
-			<RemoteControler likes={post.likes.length} postId={post.id}/>
+			<RemoteControler
+				postId={post.id} 
+				likes={post.likes.length} 
+				comments={post.comments}
+			/>
 		</div>
 	)
 }
@@ -54,6 +58,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 			include: {
 				author: true,
 				likes: true,
+				comments: {
+					orderBy: {
+						createdAt: 'desc',
+					},
+					include: {
+						author: true,
+					}
+				},
 			}
 		})
 

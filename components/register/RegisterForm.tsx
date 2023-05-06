@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { Input, Button, Spacer } from '@nextui-org/react'
-import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
+import { CInput, CButton } from '@/components/common'
 
 export const RegisterForm = () => {
 
@@ -43,40 +42,41 @@ export const RegisterForm = () => {
 
 	return (
 		<div className='flex flex-col w-80 m-auto mt-24'>
-			<Input 
-				label='아이디'
+			<CInput
 				size='lg'
-				onInput={onChangeId}
-				color={isErrorId ? 'error' : 'success'}
-				status={isErrorId ? 'error' : 'success'}
-			></Input>
-			<Spacer y={0.3}/>
-			<Input.Password 
-				label='비밀번호' 
+				fullWidth
+				onChange={onChangeId}
+				className={`
+					${isErrorId ? 'border-rose-500' : ''}
+				`}
+				placeHolder='아이디'
+			/>
+			<div className='my-1'/>
+			<CInput
 				size='lg'
-				color={isErrorPassword ? 'error' : 'success'}
-				status={isErrorPassword ? 'error' : 'success'}
-				visibleIcon={<BsEyeFill/>}
-				hiddenIcon={<BsEyeSlashFill/>}
-				onInput={onChangePassword}
-			>
-			</Input.Password>
-			<Spacer y={1}/>
-			<Button
+				fullWidth
+				onChange={onChangePassword}
+				className={`
+					${isErrorPassword ? 'border-rose-500' : ''}
+				`}
+				placeHolder='비밀번호'
+			/>
+			<div className='my-4'/>
+			<CButton
+				size='xl'
+				className='shadow-lg'
 				// onClick={() => handleRegister(id, password)}
-				color='gradient'
-				shadow
 			>
 				회원가입
-			</Button>
-			<Spacer y={0.5}/>
-			<Button 
-				className='w-full' 
-				bordered 
+			</CButton>
+			<div className='my-1'/>
+			<CButton 
+				size='xl'
+				className='w-full border bg-transparent dark:bg-transparent' 
 				onClick={() => router.push('/login')}
 			>
 				로그인 하러가기
-			</Button>
+			</CButton>
 		</div>
 	)
 }
