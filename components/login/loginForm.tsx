@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import { signIn } from 'next-auth/react'
 import { Input, Spacer, Button } from '@nextui-org/react'
+import { CInput, CButton } from '@/components/common'
 
 export const LoginForm = () => {
 
@@ -38,46 +39,51 @@ export const LoginForm = () => {
 
 	return (
 		<div className='w-80 m-auto mt-24'>
-			<Input 
+			{/* <Input 
 				fullWidth 
 				size='lg' 
 				placeholder='아이디를 입력해주세요.' 
 				onInput={handleId}
-			/>
-			<Spacer y={1}/>
-			<Input.Password 
+			/> */}
+			<CInput 
+				size='lg' 
 				fullWidth
-				size='lg'
-				placeholder='비밀번호를 입력해주세요.' 
-				onInput={handlePassword}
-				visibleIcon={<BsEyeFill/>}
-				hiddenIcon={<BsEyeSlashFill/>}
+				onChange={handleId} 
+				placeHolder='아이디를 입력해주세요.'
 			/>
-			<Spacer y={1} />
-			<Button 
-				className='w-full' 
-				onClick={handleLogin} 
-				color="gradient" 
-				shadow
+			<div className='my-3'/>
+			<CInput
+				size='lg' 
+				fullWidth
+				type={'password'}
+				onChange={handlePassword} 
+				placeHolder='비밀번호를 입력해주세요.'
+			/>
+			<div className='my-8'/>
+			<CButton
+				className='w-full shadow-lg'
+				size='xl'
+				onClick={handleLogin}
 			>
 				로그인
-			</Button>
-			<Spacer y={0.5} />
-			<Button 
-				bordered
-				className='w-full'
+			</CButton>
+			<div className='my-3'/>
+			<CButton
+				size='xl'
+				className='w-full shadow border bg-transparent dark:bg-transparent'
 				onClick={handleRegister}
 			>
 				회원가입
-			</Button>
-			<Spacer y={2} />
-			<Button 
-				className='w-full'
+			</CButton>
+			<div className='my-10'/>
+			<CButton 
+				className='w-full bg-[#333] dark:bg-[#333] text-white hover:bg-[#434343] dark:hover:bg-[#434343]'
+				size='xl'
 				onClick={() => signIn('github', { callbackUrl: '/'})}
+				leftIcon={<BsGithub className='mr-2'/>}
 			>
-				<BsGithub className='mr-2'/>
 				Sign in with Github
-			</Button>
+			</CButton>
 		</div>
 	)
 }
