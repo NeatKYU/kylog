@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState, useRef, useEffect } from 'react';
 
 interface cDropdownProps {
 	className?: string;
@@ -24,10 +24,25 @@ const DropdownContext = createContext<{
 export const CDropdown = (props: cDropdownProps) => {
 	const { className, children, onClick } = props;
 	const [isShow, setIsShow] = useState<boolean>(false);
+	const dropdownRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsShow(false);
+            }
+        };
+
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
 	return (
 		<DropdownContext.Provider value={{ isShow, setIsShow }}>
 			<div 
+				ref={dropdownRef}
 				className={`
 					${className ?? ''}
 					relative
