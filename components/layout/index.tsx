@@ -67,7 +67,7 @@ export const Layout = (props: LayoutProps) => {
 				</CButton>
 				<CDropdown >
 					<CDropdown.Trigger>
-						<CAvatar src={status === 'authenticated' ? session.user.image : '/deafultUser.jpeg'} size='lg'/>
+						<CAvatar src={status === 'authenticated' ? session.user.image : '/defaultUser.jpeg'} size='lg'/>
 					</CDropdown.Trigger>
 					{authMenuList(status)}
 				</CDropdown>
