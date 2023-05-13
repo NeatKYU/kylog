@@ -1,0 +1,55 @@
+/* reset 같은 역할인듯 */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.translate-center {
+    transform: translate(-50%, -50%);
+}
+.translate-left-full {
+    transform: translateX(-100%);
+}
+.editor-custom {
+    .rc-md-editor {
+        // editor background color
+        background-color: #3f3f46;
+        .rc-md-navigation {
+            // button group background color
+            background-color: #3f3f46;
+            .button-wrap {
+                .drop-wrap {
+                    background-color: #3f3f46;
+                    color: #eaf1f6;
+                    li:hover {
+                        background-color: #52525b;
+                    }
+                }
+            }
+            i {
+                color: #cfd3d9;
+            }
+        }
+        .editor-container {
+            .sec-md {
+                textarea {
+                    background-color: #3f3f46;
+                    color: #eaf1f6;
+                }
+            }
+            .sec-html {
+                .section-container {
+                    .custom-html-style {
+                        color: #eaf1f6;
+                        p {
+                            color: #eaf1f6;
+                        }
+                        pre,
+                        code {
+                            background-color: #4b5767;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
