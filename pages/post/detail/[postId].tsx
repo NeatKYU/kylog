@@ -2,82 +2,78 @@ import { post } from '@/interface/post';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { dateToHowover, calculateReadingTime } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
-import ReactMarkdown from 'react-markdown'
-import prisma from '@/pages/api/prismaClient'
+import ReactMarkdown from 'react-markdown';
+import prisma from '@/pages/api/prismaClient';
 import { CAvatar } from '@/components/common/CustomAvatar';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
 
 interface detailProps {
-	post: post
+    post: post;
 }
 // TODO post 디테일 스타일 변경해야함
 export default function Detail({ post }: detailProps) {
+    const createdAt = dateToHowover(post.createdAt);
 
-	const createdAt = dateToHowover(post.createdAt);
-
-	return (
-		<div className='w-full h-auto max-w-screen-lg px-[20px] lg:px-0'>
-			<div className='flex mb-[20px] w-full gap-2 items-center'>
-				<CAvatar src={post.author!.image} size='lg'/>
-				<div className='flex flex-col'>
-					<div className='font-bold text-xl'>{post.author!.name}</div>
-					<div>{createdAt} · {calculateReadingTime(post.content)} min read</div>
-				</div>
-			</div>
-			<div className='w-10/12 mb-8 font-bold text-4xl'>
-				{post.title}
-			</div>
-			<div className='w-full'>
-				<ReactMarkdown>
-					{post.content}
-				</ReactMarkdown>
-			</div>
-			<RemoteControler
-				postId={post.id} 
-				likes={post.likes.length} 
-				comments={post.comments}
-			/>
-		</div>
-	)
+    return (
+        <div className="w-full h-auto max-w-screen-lg px-[20px] lg:px-0">
+            <div className="flex mb-[20px] w-full gap-2 items-center">
+                <CAvatar src={post.author!.image} size="lg" />
+                <div className="flex flex-col">
+                    <div className="font-bold text-xl">{post.author!.name}</div>
+                    <div>
+                        {createdAt} · {calculateReadingTime(post.content)} min read
+                    </div>
+                </div>
+            </div>
+            <div className="w-10/12 mb-8 font-bold text-4xl">{post.title}</div>
+            <div className="w-full h-auto prose dark:prose-invert">
+                <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                    {post.content}
+                </ReactMarkdown>
+            </div>
+            <RemoteControler postId={post.id} likes={post.likes.length} comments={post.comments} />
+        </div>
+    );
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-
-	return {
-		paths: [], //indicates that no page needs be created at build time
-		fallback: 'blocking' //indicates the type of fallback
-	}
-}
+    return {
+        paths: [], //indicates that no page needs be created at build time
+        fallback: 'blocking', //indicates the type of fallback
+    };
+};
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	if(context.params?.postId) {
-		const postId = context.params.postId.toString();
-		const post = await prisma.post.findUnique({
-			where: {
-				id: postId
-			},
-			include: {
-				author: true,
-				likes: true,
-				comments: {
-					orderBy: {
-						createdAt: 'desc',
-					},
-					include: {
-						author: true,
-					}
-				},
-			}
-		})
+    if (context.params?.postId) {
+        const postId = context.params.postId.toString();
+        const post = await prisma.post.findUnique({
+            where: {
+                id: postId,
+            },
+            include: {
+                author: true,
+                likes: true,
+                comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
+                    include: {
+                        author: true,
+                    },
+                },
+            },
+        });
 
-		return {
-			props: {
-				post: JSON.parse(JSON.stringify(post)),
-			}
-		}
-	}
-	return {
-		props: {
-			post: ''
-		}
-	}
-}
+        return {
+            props: {
+                post: JSON.parse(JSON.stringify(post)),
+            },
+        };
+    }
+    return {
+        props: {
+            post: '',
+        },
+    };
+};
