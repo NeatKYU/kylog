@@ -27,7 +27,7 @@ export default function Detail({ post }: detailProps) {
                 </div>
             </div>
             <div className="w-10/12 mb-8 font-bold text-4xl">{post.title}</div>
-            <div className="w-full h-auto prose dark:prose-invert">
+            <div className="prose dark:prose-invert">
                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                     {post.content}
                 </ReactMarkdown>
