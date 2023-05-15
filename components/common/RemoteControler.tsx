@@ -32,18 +32,19 @@ export const RemoteControler = ({ likes, comments, postId }: RemoteControlerProp
 
     return (
         <>
-            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-gray-600 shadow-2xl">
+            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-zinc-600 shadow-2xl">
                 <div className="flex justify-center items-center">
                     <CButton
                         onClick={() => handleLike(session?.user.id, postId)}
                         leftIcon={<AiOutlineLike size={20} />}
+                        className="!h-10"
                     >
                         {like}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
                         <div className="w-full h-1/2 bg-black"></div>
                     </div>
-                    <CButton onClick={handleComment} leftIcon={<AiOutlineComment size={20} />}>
+                    <CButton onClick={handleComment} leftIcon={<AiOutlineComment size={20} />} className="!h-10">
                         {currentComments.length}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
