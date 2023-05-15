@@ -62,10 +62,12 @@ export const CommentBox = (props: commentBoxProps) => {
                         />
                     </CCard.Body>
                     <CCard.Footer className="justify-end gap-1">
-                        <CButton size="sm" onClick={() => submitComment(session?.user.id, postId, content)}>
+                        <CButton size="sm" bordered onClick={() => submitComment(session?.user.id, postId, content)}>
                             제출
                         </CButton>
-                        <CButton size="sm">취소</CButton>
+                        <CButton bordered size="sm">
+                            취소
+                        </CButton>
                     </CCard.Footer>
                 </>
             ) : (

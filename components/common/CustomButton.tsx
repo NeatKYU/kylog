@@ -7,10 +7,11 @@ interface cButtonProps {
     leftIcon?: React.ReactNode;
     rightIcon?: React.ReactNode;
     className?: string;
+    bordered?: boolean;
 }
 
 export const CButton = (props: cButtonProps) => {
-    const { size, children, onClick, leftIcon, rightIcon, className } = props;
+    const { size, children, onClick, leftIcon, rightIcon, className, bordered } = props;
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return 'min-w-[3.5rem] h-6';
@@ -33,6 +34,7 @@ export const CButton = (props: cButtonProps) => {
 				dark:hover:bg-zinc-900
 				${sizeClasses(size)}
 				${className ?? ''}
+                ${bordered ? 'border' : ''}
 			`}
             onClick={onClick}
         >
@@ -45,4 +47,5 @@ export const CButton = (props: cButtonProps) => {
 
 CButton.defaultProps = {
     size: 'md',
+    bordered: false,
 };
