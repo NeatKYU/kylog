@@ -15,7 +15,7 @@ export default function Home({posts}: homeProps) {
 	)
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
 	const posts = await prisma.post.findMany({
 		include: {
 			author: true,

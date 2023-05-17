@@ -1,5 +1,5 @@
 import { post } from '@/interface/post';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetServerSideProps } from 'next';
 import { dateToHowover, calculateReadingTime } from '@/lib/helper';
 import { RemoteControler } from '@/components/common/RemoteControler';
 import ReactMarkdown from 'react-markdown';
@@ -44,7 +44,7 @@ export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     if (context.params?.postId) {
         const postId = context.params.postId.toString();
         const post = await prisma.post.findUnique({
