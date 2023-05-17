@@ -37,12 +37,12 @@ export default function Detail({ post }: detailProps) {
     );
 }
 
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-    return {
-        paths: [], //indicates that no page needs be created at build time
-        fallback: 'blocking', //indicates the type of fallback
-    };
-};
+// export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
+//     return {
+//         paths: [], //indicates that no page needs be created at build time
+//         fallback: 'blocking', //indicates the type of fallback
+//     };
+// };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     if (context.params?.postId) {
