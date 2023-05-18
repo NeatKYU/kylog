@@ -63,7 +63,7 @@ const Trigger = (props: cDropdownChildrenProps) => {
 
 const Menu = (props: cDropdownChildrenProps) => {
     const { className, children } = props;
-    const { isShow } = useContext(DropdownContext);
+    const { isShow, setIsShow } = useContext(DropdownContext);
 
     return (
         <div
@@ -74,6 +74,7 @@ const Menu = (props: cDropdownChildrenProps) => {
 				text-lg
 				${isShow ? '' : 'hidden'}
 			`}
+            onClick={() => setIsShow(false)}
         >
             {children}
         </div>
@@ -82,6 +83,7 @@ const Menu = (props: cDropdownChildrenProps) => {
 
 const Item = (props: cDropdownChildrenProps) => {
     const { className, children, onClick, icon } = props;
+
     return (
         <div
             className={`
