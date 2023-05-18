@@ -7,3 +7,4 @@ export { CInput } from '@/components/common/CustomInput';
 export { CCard } from '@/components/common/CustomCard';
 export { CTextarea } from '@/components/common/CustomTextarea';
 export { CDropdown } from '@/components/common/CustomDropdown';
+export { Divider } from '@/components/common/Divider';
