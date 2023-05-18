@@ -1,10 +1,9 @@
 // import Image from 'next/image'
-import { BsPersonCircle } from 'react-icons/bs';
 import { sizeType } from '@/interface/common';
 
 interface cAvatarProps {
     src: string;
-    size: sizeType;
+    size: sizeType | 'profile';
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     children?: React.ReactNode;
 }
@@ -12,11 +11,12 @@ interface cAvatarProps {
 export const CAvatar = (props: cAvatarProps) => {
     const { size, src, onClick, children } = props;
 
-    const sizeClasses = (size: sizeType) => {
+    const sizeClasses = (size: sizeType | 'profile') => {
         if (size === 'sm') return 'min-w-[1.5rem] w-6 h-6';
         if (size === 'md') return 'min-w-[2rem] w-8 h-8';
         if (size === 'lg') return 'min-w-[2.5rem] w-10 h-10';
         if (size === 'xl') return 'min-w-[3rem] w-12 h-12';
+        if (size === 'profile') return 'min-w-[5rem] w-40 h-40';
     };
 
     return (
