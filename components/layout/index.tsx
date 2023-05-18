@@ -26,7 +26,7 @@ export const Layout = (props: LayoutProps) => {
     const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
         return status === 'authenticated' ? (
             <CDropdown.Menu>
-                <CDropdown.Item icon={<BsPersonCircle size={20} />}>
+                <CDropdown.Item icon={<BsPersonCircle size={20} />} onClick={() => router.push('/profile')}>
                     <span>프로필</span>
                 </CDropdown.Item>
                 <CDropdown.Item icon={<IoLogOutOutline size={20} />} onClick={() => signOut()}>
