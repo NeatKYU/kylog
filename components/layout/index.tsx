@@ -19,8 +19,9 @@ interface LayoutProps {
 export const Layout = (props: LayoutProps) => {
     const { data: session, status } = useSession();
     const router = useRouter();
-    const onClickcheck = () => {
-        console.log('check');
+
+    const handleSignOut = () => {
+        signOut().then(() => router.push('/'));
     };
 
     const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
@@ -29,7 +30,7 @@ export const Layout = (props: LayoutProps) => {
                 <CDropdown.Item icon={<BsPersonCircle size={20} />} onClick={() => router.push('/profile')}>
                     <span>프로필</span>
                 </CDropdown.Item>
-                <CDropdown.Item icon={<IoLogOutOutline size={20} />} onClick={() => signOut()}>
+                <CDropdown.Item icon={<IoLogOutOutline size={20} />} onClick={handleSignOut}>
                     <div>로그아웃</div>
                 </CDropdown.Item>
             </CDropdown.Menu>
