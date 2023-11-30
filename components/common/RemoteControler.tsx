@@ -45,7 +45,7 @@ export const RemoteControler = ({
                 <div className="flex justify-center items-center">
                     <CButton
                         onClick={() => handleLike(session?.user.id, postId)}
-                        leftIcon={<HandThumbUpIcon />}
+                        leftIcon={<HandThumbUpIcon className="w-5" />}
                     >
                         {like}
                     </CButton>
@@ -54,14 +54,14 @@ export const RemoteControler = ({
                     </div>
                     <CButton
                         onClick={handleComment}
-                        leftIcon={<ChatBubbleLeftRightIcon />}
+                        leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}
                     >
                         {currentComments.length}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
                         <div className="w-full h-1/2 bg-black"></div>
                     </div>
-                    <CIconButton icon={<ShareIcon />} />
+                    <CIconButton icon={<ShareIcon className="w-5" />} />
                 </div>
             </div>
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>

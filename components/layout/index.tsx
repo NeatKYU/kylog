@@ -36,11 +36,11 @@ export const Layout = (props: LayoutProps) => {
     ) => {
         return status === 'authenticated' ? (
             <CDropdown.Menu>
-                <CDropdown.Item icon={<UserCircleIcon />}>
+                <CDropdown.Item icon={<UserCircleIcon className="w-5" />}>
                     <span>프로필</span>
                 </CDropdown.Item>
                 <CDropdown.Item
-                    icon={<ArrowRightOnRectangleIcon />}
+                    icon={<ArrowRightOnRectangleIcon className="w-5" />}
                     onClick={() => signOut()}
                 >
                     <div>로그아웃</div>
@@ -49,13 +49,13 @@ export const Layout = (props: LayoutProps) => {
         ) : (
             <CDropdown.Menu>
                 <CDropdown.Item
-                    icon={<UserGroupIcon />}
+                    icon={<UserGroupIcon className="w-5" />}
                     onClick={() => router.push('/register')}
                 >
                     <div>회원가입</div>
                 </CDropdown.Item>
                 <CDropdown.Item
-                    icon={<ArrowLeftOnRectangleIcon />}
+                    icon={<ArrowLeftOnRectangleIcon className="w-5" />}
                     onClick={() => router.push('/login')}
                 >
                     <div>로그인</div>
@@ -67,12 +67,15 @@ export const Layout = (props: LayoutProps) => {
     return (
         <div>
             <Header logo="@/assets/img/logo.png" title="">
-                <CInput size="md" icon={<MagnifyingGlassIcon />} />
+                <CInput
+                    size="md"
+                    icon={<MagnifyingGlassIcon className="w-5" />}
+                />
                 <ThemeToggleButton />
                 <CButton
                     size="lg"
                     onClick={() => router.push('/post/write')}
-                    leftIcon={<PencilSquareIcon />}
+                    leftIcon={<PencilSquareIcon className="w-5" />}
                 >
                     글쓰기
                 </CButton>

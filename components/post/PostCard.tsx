@@ -63,7 +63,7 @@ export const PostCard = ({ post, onClick }: postCardProps) => {
                         <CButton
                             size="sm"
                             className="dark:bg-zinc-800"
-                            leftIcon={<HandThumbUpIcon />}
+                            leftIcon={<HandThumbUpIcon className="w-5" />}
                             onClick={handleLikeNoneEvent}
                         >
                             {like}
@@ -71,7 +71,9 @@ export const PostCard = ({ post, onClick }: postCardProps) => {
                         <CButton
                             size="sm"
                             className="dark:bg-zinc-800"
-                            leftIcon={<ChatBubbleLeftRightIcon />}
+                            leftIcon={
+                                <ChatBubbleLeftRightIcon className="w-5" />
+                            }
                         >
                             {post.comments ? post.comments.length : 0}
                         </CButton>

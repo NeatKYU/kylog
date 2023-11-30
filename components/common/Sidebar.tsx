@@ -53,7 +53,7 @@ export const Sidebar = (props: SidebarProps) => {
                         onClick={handleClose}
                         className="w-[20px] h-[20px] flex items-center justify-center cursor-pointer m-1"
                     >
-                        <XMarkIcon />
+                        <XMarkIcon className="w-5" />
                     </div>
                 </div>
                 {children}

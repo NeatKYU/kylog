@@ -38,10 +38,10 @@ export const Comment = (props: CommentProps) => {
                 {/* {isMore || !lengthOver() ? <></> : <Button auto light size='sm' onPress={() => setIsMore(!isMore)}>read more..</Button> } */}
                 <CButton
                     size="sm"
-                    leftIcon={<HandThumbUpIcon />}
+                    leftIcon={<HandThumbUpIcon className="w-5" />}
                     className="ml-auto"
                 >
-                    {/* TODO 댓글의 좋아요 기능 */}0
+                    {/* TODO 댓글의 좋아요 기능 */}
                 </CButton>
             </CCard.Footer>
         </CCard>
