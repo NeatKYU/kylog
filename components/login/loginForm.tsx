@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import cutsomAxios from '@/lib/customAxios';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 // import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import Github from '@/assets/providers/github.svg';
 import { signIn } from 'next-auth/react';

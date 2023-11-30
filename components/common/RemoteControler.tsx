@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 // import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 // import { BiShareAlt } from 'react-icons/bi'

@@ -11,6 +11,9 @@ const nextConfig = {
         });
         return config;
     },
+    experimental: {
+        appDir: true,
+    },
 };
 
 module.exports = removeImports(nextConfig);

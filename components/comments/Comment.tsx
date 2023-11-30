@@ -1,3 +1,5 @@
+'use client';
+
 import { CAvatar, CCard, CButton } from '@/components/common';
 import { comment } from '@/interface/post';
 import { dateToHowover } from '@/lib/helper';

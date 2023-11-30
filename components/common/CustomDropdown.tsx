@@ -1,16 +1,18 @@
+'use client';
+
 import { createContext, useContext, useState, useRef, useEffect } from 'react';
 
 interface cDropdownProps {
-	className?: string;
-	onClick?: React.MouseEventHandler<HTMLDivElement>;
-	children?: React.ReactNode;
+    className?: string;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    children?: React.ReactNode;
 }
 
 interface cDropdownChildrenProps {
-	className?: string;
-	icon?: React.ReactNode;
-	onClick?: React.MouseEventHandler<HTMLDivElement>;
-	children?: React.ReactNode;
+    className?: string;
+    icon?: React.ReactNode;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
+    children?: React.ReactNode;
 }
 
 const DropdownContext = createContext<{
@@ -22,73 +24,72 @@ const DropdownContext = createContext<{
 });
 
 export const CDropdown = (props: cDropdownProps) => {
-	const { className, children, onClick } = props;
-	const [isShow, setIsShow] = useState<boolean>(false);
-	const dropdownRef = useRef<HTMLDivElement>(null);
+    const { className, children, onClick } = props;
+    const [isShow, setIsShow] = useState<boolean>(false);
+    const dropdownRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+            if (
+                dropdownRef.current &&
+                !dropdownRef.current.contains(event.target as Node)
+            ) {
                 setIsShow(false);
             }
         };
 
-        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside);
         return () => {
-            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
 
-	return (
-		<DropdownContext.Provider value={{ isShow, setIsShow }}>
-			<div 
-				ref={dropdownRef}
-				className={`
+    return (
+        <DropdownContext.Provider value={{ isShow, setIsShow }}>
+            <div
+                ref={dropdownRef}
+                className={`
 					${className ?? ''}
 					relative
 				`}
-			>
-				{children}
-			</div>
-		</DropdownContext.Provider>
-	)
-}
+            >
+                {children}
+            </div>
+        </DropdownContext.Provider>
+    );
+};
 
 const Trigger = (props: cDropdownChildrenProps) => {
-	const { className, children, onClick } = props;
-	const { isShow, setIsShow } = useContext(DropdownContext);
+    const { className, children, onClick } = props;
+    const { isShow, setIsShow } = useContext(DropdownContext);
 
-	return (
-		<div onClick={() => setIsShow(!isShow)}>
-			{children}
-		</div>
-	)
-}
+    return <div onClick={() => setIsShow(!isShow)}>{children}</div>;
+};
 
 const Menu = (props: cDropdownChildrenProps) => {
-	const { className, children } = props;
-	const { isShow } = useContext(DropdownContext);
+    const { className, children } = props;
+    const { isShow } = useContext(DropdownContext);
 
-	return (
-		<div 
-			className={`
+    return (
+        <div
+            className={`
 				${className ?? ''}
 				flex flex-col py-2 px-3 border rounded-lg bg-white dark:bg-zinc-700
 				min-w-[15rem] w-auto h-auto absolute top-full mt-2 right-0
 				text-lg
 				${isShow ? '' : 'hidden'}
 			`}
-		>
-			{children}
-		</div>
-	)
-}
+        >
+            {children}
+        </div>
+    );
+};
 
 const Item = (props: cDropdownChildrenProps) => {
-	const { className, children, onClick, icon } = props;
-	return (
-		<div 
-			className={`
+    const { className, children, onClick, icon } = props;
+    return (
+        <div
+            className={`
 				${className ?? ''}
 				flex items-center
 				hover:bg-gray-100
@@ -96,20 +97,16 @@ const Item = (props: cDropdownChildrenProps) => {
 				cursor-pointer
 				rounded-lg px-2 py-1
 			`}
-			onClick={onClick}
-		>
-			<div className='mr-2'>
-				{icon}
-			</div>
-			{children}
-		</div>
-	)
-}
+            onClick={onClick}
+        >
+            <div className="mr-2">{icon}</div>
+            {children}
+        </div>
+    );
+};
 
 CDropdown.Menu = Menu;
 CDropdown.Item = Item;
 CDropdown.Trigger = Trigger;
 
-CDropdown.defalutProps = {
-
-}
+CDropdown.defalutProps = {};

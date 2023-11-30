@@ -1,3 +1,5 @@
+'use client';
+
 import { useTheme as useNextTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 // import { RiSunFill, RiMoonFill } from 'react-icons/ri'

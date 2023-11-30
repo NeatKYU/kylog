@@ -1,4 +1,5 @@
-// import Image from 'next/image'
+'use client';
+
 import { sizeType } from '@/interface/common';
 
 interface cAvatarProps {
