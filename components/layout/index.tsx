@@ -1,3 +1,4 @@
+'use client';
 // lib
 import React from 'react';
 import { useSession, signIn, signOut } from 'next-auth/react';
@@ -31,27 +32,19 @@ export const Layout = (props: LayoutProps) => {
         console.log('check');
     };
 
-    const authMenuList = (
-        status: 'authenticated' | 'loading' | 'unauthenticated'
-    ) => {
+    const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
         return status === 'authenticated' ? (
             <CDropdown.Menu>
                 <CDropdown.Item icon={<UserCircleIcon className="w-5" />}>
                     <span>프로필</span>
                 </CDropdown.Item>
-                <CDropdown.Item
-                    icon={<ArrowRightOnRectangleIcon className="w-5" />}
-                    onClick={() => signOut()}
-                >
+                <CDropdown.Item icon={<ArrowRightOnRectangleIcon className="w-5" />} onClick={() => signOut()}>
                     <div>로그아웃</div>
                 </CDropdown.Item>
             </CDropdown.Menu>
         ) : (
             <CDropdown.Menu>
-                <CDropdown.Item
-                    icon={<UserGroupIcon className="w-5" />}
-                    onClick={() => router.push('/register')}
-                >
+                <CDropdown.Item icon={<UserGroupIcon className="w-5" />} onClick={() => router.push('/register')}>
                     <div>회원가입</div>
                 </CDropdown.Item>
                 <CDropdown.Item
@@ -67,10 +60,7 @@ export const Layout = (props: LayoutProps) => {
     return (
         <div>
             <Header logo="@/assets/img/logo.png" title="">
-                <CInput
-                    size="md"
-                    icon={<MagnifyingGlassIcon className="w-5" />}
-                />
+                <CInput size="md" icon={<MagnifyingGlassIcon className="w-5" />} />
                 <ThemeToggleButton />
                 <CButton
                     size="lg"
@@ -82,18 +72,14 @@ export const Layout = (props: LayoutProps) => {
                 <CDropdown>
                     <CDropdown.Trigger>
                         <CAvatar
-                            src={
-                                status === 'authenticated'
-                                    ? session.user.image
-                                    : '/defaultUser.jpeg'
-                            }
+                            src={status === 'authenticated' ? session.user.image : '/defaultUser.jpeg'}
                             size="lg"
                         />
                     </CDropdown.Trigger>
                     {authMenuList(status)}
                 </CDropdown>
             </Header>
-            <BodyLayout {...props}>{props.children}</BodyLayout>
+            <BodyLayout>{props.children}</BodyLayout>
         </div>
     );
 };

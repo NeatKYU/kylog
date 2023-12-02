@@ -13,8 +13,7 @@ interface cInputProps {
 }
 
 export const CInput = (props: cInputProps) => {
-    const { size, icon, onChange, placeHolder, fullWidth, type, className } =
-        props;
+    const { size, icon, onChange, placeHolder, fullWidth, type, className } = props;
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return fullWidth ? 'w-full h-8' : 'w-64 h-8';
@@ -34,7 +33,7 @@ export const CInput = (props: cInputProps) => {
 				${className ?? ''}
 			`}
         >
-            <div className="mr-2">{icon}</div>
+            <div className="mr-2 w-5">{icon}</div>
             <input
                 className="w-full outline-none bg-transparent"
                 type={type}
