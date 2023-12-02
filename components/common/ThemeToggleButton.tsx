@@ -2,7 +2,6 @@
 
 import { useTheme as useNextTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-// import { RiSunFill, RiMoonFill } from 'react-icons/ri'
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 import { CIconButton } from './CustomIconButton';
 
@@ -19,11 +18,7 @@ export const ThemeToggleButton = () => {
     };
 
     return loaded ? (
-        <CIconButton
-            onClick={handleTheme}
-            size="sm"
-            icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />}
-        />
+        <CIconButton onClick={handleTheme} size="sm" icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />} />
     ) : (
         <CIconButton onClick={handleTheme} size="sm" icon={<SunIcon />} />
     );
