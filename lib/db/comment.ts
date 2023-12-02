@@ -1,21 +1,21 @@
 // postFunctions.js
-import prisma from '@/pages/api/prismaClient';
+import prisma from '@/app/api/prismaClient';
 
 async function createComment(authorId: string, postId: string, content: string) {
-	try {
-		const newComment = await prisma.comment.create({
-			data: {
-				authorId,
-				postId,
-				content,
-			},
-		});
+    try {
+        const newComment = await prisma.comment.create({
+            data: {
+                authorId,
+                postId,
+                content,
+            },
+        });
 
-		return newComment;
-	} catch (error) {
-		console.error("Error creating commnet", error);
-		throw error;
-	}
+        return newComment;
+    } catch (error) {
+        console.error('Error creating commnet', error);
+        throw error;
+    }
 }
 
 // async function incrementLike(userId: string, postId: string) {
@@ -59,7 +59,7 @@ async function createComment(authorId: string, postId: string, content: string) 
 // 			console.log('Like not found or already deleted');
 // 			return 0;
 // 		}
-	  
+
 // 		await prisma.like.delete({
 // 			where: {
 // 				id: likeToDelete.id,

@@ -1,77 +1,77 @@
 // postFunctions.js
-import prisma from '@/pages/api/prismaClient';
+import prisma from '@/app/api/prismaClient';
 
 async function createPost(title: string, content: string, authorId: string, thumbnail: string) {
-	try {
-		const newPost = await prisma.post.create({
-			data: {
-				title,
-				content,
-				authorId,
-				thumbnail,
-			},
-		});
+    try {
+        const newPost = await prisma.post.create({
+            data: {
+                title,
+                content,
+                authorId,
+                thumbnail,
+            },
+        });
 
-		return newPost;
-	} catch (error) {
-		console.error("Error creating post:", error);
-		throw error;
-	}
+        return newPost;
+    } catch (error) {
+        console.error('Error creating post:', error);
+        throw error;
+    }
 }
 
 async function incrementLike(userId: string, postId: string) {
-	try {
-		const like = await prisma.like.findFirst({
-			where: {
-				userId,
-				postId,
-			},
-		});
+    try {
+        const like = await prisma.like.findFirst({
+            where: {
+                userId,
+                postId,
+            },
+        });
 
-		// already like
-		if (like) {
-			return await deleteLike(userId, postId)
-		}
+        // already like
+        if (like) {
+            return await deleteLike(userId, postId);
+        }
 
-		await prisma.like.create({
-			data: {
-				userId,
-				postId,
-			},
-		});
+        await prisma.like.create({
+            data: {
+                userId,
+                postId,
+            },
+        });
 
-		return 1;
-	} catch (error) {
-		console.error("Error increment like", error);
-		throw error;
-	}
+        return 1;
+    } catch (error) {
+        console.error('Error increment like', error);
+        throw error;
+    }
 }
 
 async function deleteLike(userId: string, postId: string) {
-	try {
-		const likeToDelete = await prisma.like.findFirst({
-			where: {
-				userId,
-				postId,
-			},
-		});
+    try {
+        const likeToDelete = await prisma.like.findFirst({
+            where: {
+                userId,
+                postId,
+            },
+        });
 
-		if (!likeToDelete) {
-			console.log('Like not found or already deleted');
-			return 0;
-		}
-	  
-		await prisma.like.delete({
-			where: {
-				id: likeToDelete.id,
-			},
-		});
+        if (!likeToDelete) {
+            console.log('Like not found or already deleted');
+            return 0;
+        }
 
-		return -1;
-	} catch (error) {
-		console.error("Error delete like:", error);
-		throw error;
-	}
+        await prisma.like.delete({
+            where: {
+                id: likeToDelete.id,
+            },
+        });
+
+        return -1;
+    } catch (error) {
+        console.error('Error delete like:', error);
+        throw error;
+    }
 }
 
 export { createPost, incrementLike, deleteLike };

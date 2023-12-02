@@ -6,9 +6,6 @@ import { useRouter } from 'next/navigation';
 
 // components
 import { Header } from '@/components/layout/header/Header';
-// import { IoLogOutOutline } from 'react-icons/io5'
-// import { BiEdit, BiLogIn, BiSearch } from 'react-icons/bi'
-// import { BsPersonCircle, BsFillPersonBadgeFill } from 'react-icons/bs'
 import {
     ArrowRightOnRectangleIcon,
     ArrowLeftOnRectangleIcon,
