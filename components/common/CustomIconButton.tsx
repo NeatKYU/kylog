@@ -3,13 +3,13 @@
 type sizeType = 'sm' | 'md' | 'lg' | 'xl';
 
 interface cIconButtonProps {
-    size: sizeType;
+    size?: sizeType;
     icon: React.ReactNode;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
 }
 
 export const CIconButton = (props: cIconButtonProps) => {
-    const { size, icon, onClick } = props;
+    const { size = 'md', icon, onClick } = props;
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return 'w-8 h-8';
@@ -36,8 +36,4 @@ export const CIconButton = (props: cIconButtonProps) => {
             {icon}
         </div>
     );
-};
-
-CIconButton.defaultProps = {
-    size: 'md',
 };

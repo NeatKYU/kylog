@@ -3,11 +3,7 @@
 import { useState } from 'react';
 // import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
 // import { BiShareAlt } from 'react-icons/bi'
-import {
-    HandThumbUpIcon,
-    ChatBubbleLeftRightIcon,
-    ShareIcon,
-} from '@heroicons/react/24/solid';
+import { HandThumbUpIcon, ChatBubbleLeftRightIcon, ShareIcon } from '@heroicons/react/24/solid';
 import usePostLike from '@/hooks/usePostLike';
 import { useSession } from 'next-auth/react';
 import { Sidebar } from '@/components/common/Sidebar';
@@ -23,11 +19,7 @@ interface RemoteControlerProps {
     postId: string;
 }
 
-export const RemoteControler = ({
-    likes,
-    comments,
-    postId,
-}: RemoteControlerProps) => {
+export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteControlerProps) => {
     const { data: session } = useSession();
     const { like, handleLike } = usePostLike(likes);
     const [isOpen, setIsOpen] = useState(false);
@@ -54,10 +46,7 @@ export const RemoteControler = ({
                     <div className="w-[1px] h-full flex items-center mx-1">
                         <div className="w-full h-1/2 bg-black"></div>
                     </div>
-                    <CButton
-                        onClick={handleComment}
-                        leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}
-                    >
+                    <CButton onClick={handleComment} leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}>
                         {currentComments.length}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
@@ -67,11 +56,7 @@ export const RemoteControler = ({
                 </div>
             </div>
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
-                <CommentBox
-                    postId={postId}
-                    comments={currentComments}
-                    setComments={setCurrentComment}
-                />
+                <CommentBox postId={postId} comments={currentComments} setComments={setCurrentComment} />
                 {currentComments.map((commentObj: comment, index) => {
                     return (
                         <div key={commentObj.id}>
@@ -83,9 +68,4 @@ export const RemoteControler = ({
             </Sidebar>
         </>
     );
-};
-
-RemoteControler.defaultProps = {
-    likes: 0,
-    comments: 0,
 };

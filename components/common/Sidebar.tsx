@@ -3,13 +3,13 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import { ThemeToggleButton } from './ThemeToggleButton';
 
 interface SidebarProps {
-    isOpen: boolean;
+    isOpen?: boolean;
     setIsOpen: (state: boolean) => void;
     children?: React.ReactNode;
 }
 // TODO 무한 스크롤 구현
 export const Sidebar = (props: SidebarProps) => {
-    const { isOpen, setIsOpen, children } = props;
+    const { isOpen = false, setIsOpen, children } = props;
 
     const handleClose = () => {
         setIsOpen(false);
@@ -60,8 +60,4 @@ export const Sidebar = (props: SidebarProps) => {
             </div>
         </div>
     );
-};
-
-Sidebar.defaultProps = {
-    isOpen: false,
 };

@@ -3,7 +3,7 @@
 type sizeType = 'sm' | 'md' | 'lg' | 'xl';
 
 interface cButtonProps {
-    size: sizeType;
+    size?: sizeType;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     children?: React.ReactNode;
     leftIcon?: React.ReactNode;
@@ -12,7 +12,7 @@ interface cButtonProps {
 }
 
 export const CButton = (props: cButtonProps) => {
-    const { size, children, onClick, leftIcon, rightIcon, className } = props;
+    const { size = 'md', children, onClick, leftIcon, rightIcon, className } = props;
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return 'min-w-[3.5rem] h-6';
@@ -43,8 +43,4 @@ export const CButton = (props: cButtonProps) => {
             {rightIcon ? <div className="ml-1">{rightIcon}</div> : ''}
         </div>
     );
-};
-
-CButton.defaultProps = {
-    size: 'md',
 };

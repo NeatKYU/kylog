@@ -10,7 +10,7 @@ interface cAvatarProps {
 }
 
 export const CAvatar = (props: cAvatarProps) => {
-    const { size, src, onClick, children } = props;
+    const { size = 'md', src, onClick, children } = props;
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return 'min-w-[1.5rem] w-6 h-6';
@@ -43,9 +43,4 @@ export const CAvatar = (props: cAvatarProps) => {
             {children}
         </div>
     );
-};
-
-CAvatar.defaultProps = {
-    size: 'md',
-    //TODO 기본이미지 설정
 };
