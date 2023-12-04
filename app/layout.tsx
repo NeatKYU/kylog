@@ -7,6 +7,7 @@ import TanstackProvider from '@/components/providers/TanstackProvider';
 import { Layout } from '@/components/layout/index';
 
 import '@/styles/globals.css';
+import { PostCardList } from '@/components/post/PostCardList';
 
 export const metadata: Metadata = {
     title: 'kylog',
@@ -21,7 +22,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                     <RecoilProvider>
                         <ThemeProvider attribute="class">
                             <AuthSession>
-                                <Layout>{children}</Layout>
+                                <Layout>
+                                    {children}
+                                    <PostCardList />
+                                </Layout>
                             </AuthSession>
                         </ThemeProvider>
                     </RecoilProvider>
