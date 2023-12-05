@@ -2,18 +2,22 @@
 
 import { PostCard } from '@/components/post/PostCard'
 import { post } from '@/interface/post'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 
 export const PostCardList = () => {
     const router = useRouter()
-    const { data, isLoading } = useQuery({
+    const path = usePathname()
+    const isHome = path === '/'
+
+    const { data: post, isLoading } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
             const response = await axios.get('/api/posts')
             return response.data
         },
+        enabled: isHome,
     })
 
     const handleDetailPage = (postId: string) => {
@@ -27,5 +31,7 @@ export const PostCardList = () => {
         )
     }
 
-    return <div className="flex flex-wrap">{isLoading ? 'loading...' : postListElement(data)}</div>
+    return isHome ? (
+        <div className="flex flex-wrap">{isLoading ? <div>loading...</div> : postListElement(post)}</div>
+    ) : null
 }
