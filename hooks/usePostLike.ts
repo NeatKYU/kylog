@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { useMutation } from '@tanstack/react-query'
 
 function usePostLike(initLike: number) {
     const rotuer = useRouter()
@@ -15,6 +16,8 @@ function usePostLike(initLike: number) {
             rotuer.push('/login')
             return
         }
+
+        const likeCount = await useMutation({})
 
         const likeCount = await axios.post('/api/post/like', {
             userId,

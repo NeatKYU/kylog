@@ -10,6 +10,7 @@ import 'react-markdown-editor-lite/lib/index.css'
 import ReactMarkdown from 'react-markdown'
 import dynamic from 'next/dynamic'
 import { useSession } from 'next-auth/react'
+import { useMutation } from '@tanstack/react-query'
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
     ssr: false,
@@ -20,6 +21,18 @@ export default function Write() {
     const [title, setTitle] = useState('')
     const [editorValue, setEditorValue] = useState<string | undefined>('')
     const { data: session } = useSession()
+    const createPostMutation = useMutation({
+        mutationFn: async () => {
+            const response = await axios.post('/api/post', {
+                title,
+                content: editorValue,
+                email: session!.user.email,
+                // TODO 썸네일 기능 추가
+                thumbnail: '',
+            })
+            return response.data
+        },
+    })
 
     const handleTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setTitle(e.target.value)
@@ -29,25 +42,30 @@ export default function Write() {
         router.push('/')
     }
 
-    const createPost = () => {
-        axios
-            .post('/api/post', {
-                title: title,
-                content: editorValue,
-                email: session!.user.email,
-                thumbnail: '',
-            })
-            .then((res) => {
-                if (res.status === 200) {
-                    router.push('/')
-                } else {
-                    // TODO go to error page
-                }
-            })
-            .catch((err) => {
-                console.log(err)
-                // TODO go to error page OR alert error message
-            })
+    // TODO change tanstack query
+    // const createPost = () => {
+    //     axios
+    //         .post('/api/post', {
+    //             title: title,
+    //             content: editorValue,
+    //             email: session!.user.email,
+    //             thumbnail: '',
+    //         })
+    //         .then((res) => {
+    //             if (res.status === 200) {
+    //                 router.push('/')
+    //             } else {
+    //                 // TODO go to error page
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //             // TODO go to error page OR alert error message
+    //         })
+    // }
+
+    const handleCreatePost = () => {
+        createPostMutation.mutate()
     }
 
     const uploadFile = async (file: File) => {
