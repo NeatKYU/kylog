@@ -1,33 +1,33 @@
-'use client';
+'use client'
 
-import { CButton, CTextarea } from '@/components/common';
-import React, { useState } from 'react';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { CButton, CTextarea } from '@/components/common'
+import React, { useState } from 'react'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
 // editor
-import 'react-markdown-editor-lite/lib/index.css';
-import ReactMarkdown from 'react-markdown';
-import dynamic from 'next/dynamic';
-import { useSession } from 'next-auth/react';
+import 'react-markdown-editor-lite/lib/index.css'
+import ReactMarkdown from 'react-markdown'
+import dynamic from 'next/dynamic'
+import { useSession } from 'next-auth/react'
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
     ssr: false,
-});
+})
 
 export default function Write() {
-    const router = useRouter();
-    const [title, setTitle] = useState('');
-    const [editorValue, setEditorValue] = useState<string | undefined>('');
-    const { data: session } = useSession();
+    const router = useRouter()
+    const [title, setTitle] = useState('')
+    const [editorValue, setEditorValue] = useState<string | undefined>('')
+    const { data: session } = useSession()
 
     const handleTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-        setTitle(e.target.value);
-    };
+        setTitle(e.target.value)
+    }
 
     const handleGoBack = () => {
-        router.push('/');
-    };
+        router.push('/')
+    }
 
     const createPost = () => {
         axios
@@ -39,32 +39,32 @@ export default function Write() {
             })
             .then((res) => {
                 if (res.status === 200) {
-                    router.push('/');
+                    router.push('/')
                 } else {
                     // TODO go to error page
                 }
             })
             .catch((err) => {
-                console.log(err);
+                console.log(err)
                 // TODO go to error page OR alert error message
-            });
-    };
+            })
+    }
 
     const uploadFile = async (file: File) => {
         const { data } = await axios.post('/api/s3/upload', {
             name: file.name,
             type: file.type,
-        });
+        })
 
         await axios.put(data.signedUrl, file, {
             headers: {
                 'Content-Type': file.type,
                 'Access-Control-Allow-Origin': '*',
             },
-        });
+        })
 
-        return data.cleanUrl;
-    };
+        return data.cleanUrl
+    }
 
     return (
         <div className="w-full">
@@ -93,5 +93,5 @@ export default function Write() {
                 </CButton>
             </div>
         </div>
-    );
+    )
 }

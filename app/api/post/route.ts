@@ -1,38 +1,54 @@
-import prisma from '../prismaClient';
-import { NextResponse } from 'next/server';
+import prisma from '../prismaClient'
+import { NextResponse, NextRequest } from 'next/server'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+    const { searchParams } = new URL(req.url)
+    const postId: string | null = searchParams.get('id')
+
+    if (!postId) return NextResponse.json({ message: 'please input post id' }, { status: 500 })
     try {
-        const posts = await prisma.post.findMany({
+        const post = await prisma.post.findUnique({
+            where: {
+                id: postId,
+            },
             include: {
                 author: true,
-                comments: true,
                 likes: true,
+                comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
+                    include: {
+                        author: true,
+                    },
+                },
             },
-        });
-        return NextResponse.json(posts, { status: 200 });
+        })
+        return NextResponse.json(post, { status: 200 })
     } catch (error) {
-        return NextResponse.json({ message: error }, { status: 500 });
+        return NextResponse.json({ message: error }, { status: 500 })
     }
 }
 
-interface postBody {
-    title: string;
-    content: string;
-    email: string;
-    thumbnail: string;
+type POSTtRequestBody = {
+    email: string
+    title: string
+    content: string
+    thumbnail: string
 }
-export async function POST(body: postBody) {
-    const { title, content, email, thumbnail } = body;
+
+// write post api
+export async function POST(req: NextRequest) {
+    const { email, title, content, thumbnail }: POSTtRequestBody = await req.json()
 
     try {
         const author = await prisma.user.findUnique({
             where: {
                 email: email,
             },
-        });
+        })
         if (!author) {
-            return NextResponse.json({ message: 'Author not found' }, { status: 400 });
+            return NextResponse.json({ message: 'Author not found' }, { status: 400 })
         }
 
         await prisma.post.create({
@@ -42,10 +58,10 @@ export async function POST(body: postBody) {
                 authorId: author.id,
                 thumbnail,
             },
-        });
+        })
 
-        return NextResponse.json(200);
+        return NextResponse.json(200)
     } catch (error) {
-        return NextResponse.json({ message: 'fail create post' }, { status: 500 });
+        return NextResponse.json({ message: 'fail create post' }, { status: 500 })
     }
 }
