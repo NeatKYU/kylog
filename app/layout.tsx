@@ -1,18 +1,18 @@
-import React from 'react';
-import { Metadata } from 'next';
-import AuthSession from '@/app/api/auth/AuthSession';
-import RecoilProvider from '@/components/providers/RecoilProvider';
-import ThemeProvider from '@/components/providers/NextThemesProvider';
-import TanstackProvider from '@/components/providers/TanstackProvider';
-import { Layout } from '@/components/layout/index';
+import React from 'react'
+import { Metadata } from 'next'
+import AuthSession from '@/app/api/auth/AuthSession'
+import RecoilProvider from '@/components/providers/RecoilProvider'
+import ThemeProvider from '@/components/providers/ThemeProvider'
+import TanstackProvider from '@/components/providers/TanstackProvider'
+import { Layout } from '@/components/layout/index'
 
-import '@/styles/globals.css';
-import { PostCardList } from '@/components/post/PostCardList';
+import '@/styles/globals.css'
+import { PostCardList } from '@/components/post/PostCardList'
 
 export const metadata: Metadata = {
     title: 'kylog',
     description: 'blog powered by kyu',
-};
+}
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
@@ -32,5 +32,5 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </TanstackProvider>
             </body>
         </html>
-    );
+    )
 }

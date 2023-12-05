@@ -9,6 +9,9 @@ type ThemeProviderProps = Parameters<typeof NextThemesProvider>[0];
  * 'use client' is essential for next-themes to work with app-dir.
  * https://github.com/pacocoursey/next-themes/tree/main/examples/with-app-dir
  */
-export default function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+export default function ThemeProvider({
+    children,
+    ...props
+}: ThemeProviderProps) {
     return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
 }
