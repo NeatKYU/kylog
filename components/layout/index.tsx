@@ -1,11 +1,11 @@
-'use client';
+'use client'
 // lib
-import React from 'react';
-import { useSession, signIn, signOut } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import React from 'react'
+import { useSession, signIn, signOut } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 // components
-import { Header } from '@/components/layout/header/Header';
+import { Header } from '@/components/layout/header/Header'
 import {
     ArrowRightOnRectangleIcon,
     ArrowLeftOnRectangleIcon,
@@ -13,21 +13,18 @@ import {
     MagnifyingGlassIcon,
     UserCircleIcon,
     UserGroupIcon,
-} from '@heroicons/react/24/solid';
-import { BodyLayout } from '@/components/layout/body/Body';
-import { ThemeToggleButton } from '../common/ThemeToggleButton';
-import { CButton, CAvatar, CInput, CDropdown } from '@/components/common';
+} from '@heroicons/react/24/solid'
+import { BodyLayout } from '@/components/layout/body/Body'
+import { ThemeToggleButton } from '../common/ThemeToggleButton'
+import { CButton, CAvatar, CInput, CDropdown } from '@/components/common'
 
 interface LayoutProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export const Layout = (props: LayoutProps) => {
-    const { data: session, status } = useSession();
-    const router = useRouter();
-    const onClickcheck = () => {
-        console.log('check');
-    };
+    const { data: session, status } = useSession()
+    const router = useRouter()
 
     const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
         return status === 'authenticated' ? (
@@ -51,8 +48,8 @@ export const Layout = (props: LayoutProps) => {
                     <div>로그인</div>
                 </CDropdown.Item>
             </CDropdown.Menu>
-        );
-    };
+        )
+    }
 
     return (
         <div>
@@ -78,5 +75,5 @@ export const Layout = (props: LayoutProps) => {
             </Header>
             <BodyLayout>{props.children}</BodyLayout>
         </div>
-    );
-};
+    )
+}
