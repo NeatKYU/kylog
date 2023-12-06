@@ -11,7 +11,7 @@ export const PostCardList = () => {
     const path = usePathname()
     const isHome = path === '/'
 
-    const { data: post, isLoading } = useQuery({
+    const { data: post, isFetching } = useQuery({
         queryKey: ['posts'],
         queryFn: async () => {
             const response = await axios.get('/api/posts')
@@ -32,6 +32,6 @@ export const PostCardList = () => {
     }
 
     return isHome ? (
-        <div className="flex flex-wrap">{isLoading ? <div>loading...</div> : postListElement(post)}</div>
+        <div className="flex flex-wrap">{isFetching ? <div>loading...</div> : postListElement(post)}</div>
     ) : null
 }
