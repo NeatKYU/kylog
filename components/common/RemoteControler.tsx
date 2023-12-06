@@ -37,18 +37,23 @@ export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteCont
 
     return (
         <>
-            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-gray-600 shadow-2xl">
+            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-zinc-600 shadow-2xl">
                 <div className="flex justify-center items-center">
                     <CButton
                         onClick={() => handleLike(session?.user.id, postId)}
                         leftIcon={<HandThumbUpIcon className="w-5" />}
+                        className="!h-10"
                     >
                         {like}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
                         <div className="w-full h-1/2 bg-black"></div>
                     </div>
-                    <CButton onClick={handleComment} leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}>
+                    <CButton
+                        onClick={handleComment}
+                        leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}
+                        className="!h-10"
+                    >
                         {currentComments.length}
                     </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
