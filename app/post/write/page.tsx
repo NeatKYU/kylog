@@ -32,6 +32,9 @@ export default function Write() {
             })
             return response.data
         },
+        onSuccess() {
+            router.push('/')
+        },
     })
 
     const handleTitle = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -42,32 +45,11 @@ export default function Write() {
         router.push('/')
     }
 
-    // TODO change tanstack query
-    // const createPost = () => {
-    //     axios
-    //         .post('/api/post', {
-    //             title: title,
-    //             content: editorValue,
-    //             email: session!.user.email,
-    //             thumbnail: '',
-    //         })
-    //         .then((res) => {
-    //             if (res.status === 200) {
-    //                 router.push('/')
-    //             } else {
-    //                 // TODO go to error page
-    //             }
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //             // TODO go to error page OR alert error message
-    //         })
-    // }
-
     const handleCreatePost = () => {
         createPostMutation.mutate()
     }
 
+    // TODO change tanstack query
     const uploadFile = async (file: File) => {
         const { data } = await axios.post('/api/s3/upload', {
             name: file.name,
@@ -103,7 +85,7 @@ export default function Write() {
                 />
             </div>
             <div className="w-full flex justify-end my-5 gap-3">
-                <CButton size="xl" onClick={createPost}>
+                <CButton size="xl" onClick={handleCreatePost}>
                     저장하기
                 </CButton>
                 <CButton size="xl" onClick={handleGoBack}>

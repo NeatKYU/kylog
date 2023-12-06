@@ -1,37 +1,39 @@
-'use client';
+'use client'
 
-import { useState } from 'react';
-// import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
-// import { BiShareAlt } from 'react-icons/bi'
-import { HandThumbUpIcon, ChatBubbleLeftRightIcon, ShareIcon } from '@heroicons/react/24/solid';
-import usePostLike from '@/hooks/usePostLike';
-import { useSession } from 'next-auth/react';
-import { Sidebar } from '@/components/common/Sidebar';
-import { CommentBox } from '@/components/comments/CommentBox';
-import { Comment } from '@/components/comments/Comment';
-import { comment } from '@/interface/post';
-import { CButton } from './CustomButton';
-import { CIconButton } from './CustomIconButton';
+import { useEffect, useState } from 'react'
+import { HandThumbUpIcon, ChatBubbleLeftRightIcon, ShareIcon } from '@heroicons/react/24/solid'
+import usePostLike from '@/hooks/usePostLike'
+import { useSession } from 'next-auth/react'
+import { Sidebar } from '@/components/common/Sidebar'
+import { CommentBox } from '@/components/comments/CommentBox'
+import { Comment } from '@/components/comments/Comment'
+import { comment } from '@/interface/post'
+import { CButton } from './CustomButton'
+import { CIconButton } from './CustomIconButton'
 
 interface RemoteControlerProps {
-    likes: number;
-    comments: comment[];
-    postId: string;
+    likes: number
+    comments: comment[]
+    postId: string
 }
 
 export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteControlerProps) => {
-    const { data: session } = useSession();
-    const { like, handleLike } = usePostLike(likes);
-    const [isOpen, setIsOpen] = useState(false);
-    const [currentComments, setCurrentComment] = useState<comment[]>(comments);
+    const { data: session } = useSession()
+    const { like, handleLike } = usePostLike(likes)
+    const [isOpen, setIsOpen] = useState(false)
+    const [currentComments, setCurrentComment] = useState<comment[]>(comments)
+
+    useEffect(() => {
+        setCurrentComment(comments)
+    }, [comments])
 
     const handleShared = () => {
         // TODO
-    };
+    }
 
     const handleComment = () => {
-        setIsOpen(!isOpen);
-    };
+        setIsOpen(!isOpen)
+    }
 
     return (
         <>
@@ -63,9 +65,9 @@ export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteCont
                             <div className="w-full mt-4" />
                             <Comment comment={commentObj} />
                         </div>
-                    );
+                    )
                 })}
             </Sidebar>
         </>
-    );
-};
+    )
+}

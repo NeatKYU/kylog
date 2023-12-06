@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const { authorId, postId, content }: POSTRequestBody = await req.json()
 
     try {
-        await prisma.comment.create({
+        const comment = await prisma.comment.create({
             data: {
                 authorId,
                 postId,
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
             },
         })
 
-        return NextResponse.json({ message: 'Success create comment' }, { status: 200 })
+        return NextResponse.json({ message: 'Success create comment', ...comment }, { status: 200 })
     } catch (error) {
         return NextResponse.json({ message: 'Fail create comment' }, { status: 500 })
     }

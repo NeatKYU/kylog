@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation'
 import axios from 'axios'
 import { comment } from '@/interface/post'
 import { CAvatar, CButton, CCard, CTextarea } from '@/components/common'
+import { useMutation } from '@tanstack/react-query'
 
 interface commentBoxProps {
     postId: string
@@ -15,9 +16,30 @@ interface commentBoxProps {
 
 export const CommentBox = (props: commentBoxProps) => {
     const { postId, comments, setComments } = props
-    const { data: session } = useSession()
     const router = useRouter()
+    const { data: session } = useSession()
     const [content, setContent] = useState<string>('')
+    const submitCommentMutation = useMutation({
+        mutationFn: async () => {
+            const comment = await axios.post('/api/post/comment', {
+                authorId: session?.user.id,
+                postId,
+                content,
+            })
+            return comment
+        },
+        onSuccess(comment) {
+            const tempData = {
+                ...comment.data,
+                author: {
+                    name: session?.user.name,
+                    image: session?.user.image,
+                },
+            }
+            setComments([tempData, ...comments])
+            setContent('')
+        },
+    })
 
     // 댓글 기능은 로그인 후 사용 가능
     const loginCheck = () => {
@@ -28,26 +50,6 @@ export const CommentBox = (props: commentBoxProps) => {
 
     const handleContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
         setContent(e.target.value)
-    }
-
-    const submitComment = async (authorId: string, postId: string, content: string) => {
-        if (!content) {
-            return
-        }
-        const comment = await axios.post('/api/', {
-            authorId,
-            postId,
-            content,
-        })
-        comment.data = {
-            ...comment.data,
-            author: {
-                name: session?.user.name,
-                image: session?.user.image,
-            },
-        }
-        setComments([comment.data, ...comments])
-        setContent('')
     }
 
     return (
@@ -68,7 +70,7 @@ export const CommentBox = (props: commentBoxProps) => {
                         />
                     </CCard.Body>
                     <CCard.Footer className="justify-end gap-1">
-                        <CButton size="sm" onClick={() => submitComment(session?.user.id, postId, content)}>
+                        <CButton size="sm" onClick={() => submitCommentMutation.mutate()}>
                             제출
                         </CButton>
                         <CButton size="sm">취소</CButton>
