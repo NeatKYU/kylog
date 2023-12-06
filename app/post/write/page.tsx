@@ -4,13 +4,15 @@ import { CButton, CTextarea } from '@/components/common'
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import { useMutation } from '@tanstack/react-query'
 
 // editor
 import 'react-markdown-editor-lite/lib/index.css'
 import ReactMarkdown from 'react-markdown'
 import dynamic from 'next/dynamic'
-import { useSession } from 'next-auth/react'
-import { useMutation } from '@tanstack/react-query'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
     ssr: false,
@@ -80,7 +82,11 @@ export default function Write() {
                     placeholder="내용을 입력해주세요."
                     value={editorValue}
                     onChange={(v) => setEditorValue(v.text)}
-                    renderHTML={(text) => <ReactMarkdown>{text}</ReactMarkdown>}
+                    renderHTML={(text) => (
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                            {text}
+                        </ReactMarkdown>
+                    )}
                     onImageUpload={uploadFile}
                 />
             </div>

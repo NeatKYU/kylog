@@ -6,6 +6,8 @@ import { CAvatar } from '@/components/common/CustomAvatar'
 import { useParams } from 'next/navigation'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 // TODO post 디테일 스타일 변경해야함
 export default function Detail() {
@@ -32,8 +34,10 @@ export default function Detail() {
                     </div>
                 </div>
                 <div className="w-10/12 mb-8 font-bold text-4xl">{data.title}</div>
-                <div className="w-full">
-                    <ReactMarkdown>{data.content}</ReactMarkdown>
+                <div className="prose dark:prose-invert">
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
+                        {data.content}
+                    </ReactMarkdown>
                 </div>
                 <RemoteControler postId={data.id} likes={data.likes.length} comments={data.comments} />
             </div>
