@@ -53,7 +53,7 @@ export default function Write() {
 
     // TODO change tanstack query
     const uploadFile = async (file: File) => {
-        const { data } = await axios.post('/api/s3/upload', {
+        const { data } = await axios.post('/api/image', {
             name: file.name,
             type: file.type,
         })
