@@ -8,6 +8,18 @@ import { useMutation } from '@tanstack/react-query'
 function usePostLike(initLike: number) {
     const rotuer = useRouter()
     const [like, setLike] = useState(initLike)
+    const likeMutation = useMutation({
+        mutationFn: async (data: { userId: string; postId: string }) => {
+            const response = await axios.post('/api/post/like', {
+                uesrId: data.userId,
+                postId: data.postId,
+            })
+            return response.data
+        },
+        onSuccess(data) {
+            setLike((prev) => prev + data.like)
+        },
+    })
 
     const handleLike = async (userId: string, postId: string) => {
         if (!userId) {
@@ -16,16 +28,7 @@ function usePostLike(initLike: number) {
             rotuer.push('/login')
             return
         }
-
-        const likeCount = await useMutation({})
-
-        const likeCount = await axios.post('/api/post/like', {
-            userId,
-            postId,
-        })
-        if (likeCount.status === 200) {
-            setLike((prev) => prev + likeCount.data.like)
-        }
+        likeMutation.mutate({ userId, postId })
     }
 
     return {
