@@ -26,13 +26,17 @@ export const Layout = (props: LayoutProps) => {
     const { data: session, status } = useSession()
     const router = useRouter()
 
+    const handleSignOut = () => {
+        signOut().then(() => router.push('/'))
+    }
+
     const authMenuList = (status: 'authenticated' | 'loading' | 'unauthenticated') => {
         return status === 'authenticated' ? (
             <CDropdown.Menu>
                 <CDropdown.Item icon={<UserCircleIcon className="w-5" />} onClick={() => router.push('/profile')}>
                     <span>프로필</span>
                 </CDropdown.Item>
-                <CDropdown.Item icon={<ArrowRightOnRectangleIcon className="w-5" />} onClick={() => signOut()}>
+                <CDropdown.Item icon={<ArrowRightOnRectangleIcon className="w-5" />} onClick={handleSignOut}>
                     <div>로그아웃</div>
                 </CDropdown.Item>
             </CDropdown.Menu>
