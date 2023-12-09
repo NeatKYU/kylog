@@ -1,3 +1,5 @@
+'use client'
+
 interface DividerProps {
     vertical?: boolean
     className?: string
@@ -8,11 +10,11 @@ export const Divider = (props: DividerProps) => {
     return (
         <div
             className={`
-			${className}
-			${vertical ? 'h-auto w-[1px]' : 'w-full h-[1px]'}
-			bg-black dark:bg-white
-		`}
-        ></div>
+                ${className}
+                ${vertical ? 'h-auto w-[1px]' : 'w-full h-[1px]'}
+                bg-black dark:bg-white
+		    `}
+        />
     )
 }
 
