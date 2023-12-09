@@ -6,7 +6,7 @@ import ThemeProvider from '@/components/providers/ThemeProvider'
 import TanstackProvider from '@/components/providers/TanstackProvider'
 import { Layout } from '@/components/layout/index'
 
-import '@/styles/globals.css'
+import '@/styles/globals.scss'
 import { PostCardList } from '@/components/post/PostCardList'
 
 export const metadata: Metadata = {
