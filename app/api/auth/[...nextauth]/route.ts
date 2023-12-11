@@ -1,10 +1,11 @@
-import NextAuth from 'next-auth';
-import GithubProvider from 'next-auth/providers/github';
+import NextAuth from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
 
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient();
+const prisma = new PrismaClient()
 
 const handler = NextAuth({
     adapter: PrismaAdapter(prisma),
@@ -18,31 +19,35 @@ const handler = NextAuth({
             clientId: process.env.GITHUB_ID,
             clientSecret: process.env.GITHUB_SECRET,
         }),
+        GoogleProvider({
+            clientId: process.env.GOOGLE_ID,
+            clientSecret: process.env.GOOGLE_SECRET,
+        }),
         // ...add more providers here
     ],
     callbacks: {
         async jwt({ token, account, user }) {
             // Persist the OAuth access_token to the token right after signin
             if (account) {
-                token.accessToken = account.access_token;
+                token.accessToken = account.access_token
             }
             if (user) {
-                token.uid = user.id;
+                token.uid = user.id
             }
-            return token;
+            return token
         },
         async session({ session, token }) {
             // Send properties to the client, like an access_token from a provider.
-            session.accessToken = token.accessToken;
+            session.accessToken = token.accessToken
             if (session?.user) {
-                session.user.id = token.uid;
+                session.user.id = token.uid
             }
-            return session;
+            return session
         },
     },
     pages: {
         signIn: '/login',
     },
-});
+})
 
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }
