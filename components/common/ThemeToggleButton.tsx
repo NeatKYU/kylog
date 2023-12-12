@@ -18,8 +18,11 @@ export const ThemeToggleButton = () => {
     }
 
     return loaded ? (
-        <CIconButton onClick={handleTheme} size="sm" icon={theme === 'dark' ? <MoonIcon /> : <SunIcon />} />
+        <CIconButton
+            onClick={handleTheme}
+            icon={theme === 'dark' ? <MoonIcon className="w-6" /> : <SunIcon className="w-6" />}
+        />
     ) : (
-        <CIconButton onClick={handleTheme} size="sm" icon={<SunIcon />} />
+        <CIconButton onClick={handleTheme} size="sm" icon={<SunIcon className="w-6" />} />
     )
 }
