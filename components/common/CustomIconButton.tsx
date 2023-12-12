@@ -23,8 +23,6 @@ export const CIconButton = (props: cIconButtonProps) => {
             className={`
 				flex p-1 justify-center items-center 
 				rounded cursor-pointer 
-				bg-slate-200
-				dark:bg-zinc-600
 				text-black
 				dark:text-white
 				hover:bg-slate-300

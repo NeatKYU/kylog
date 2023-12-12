@@ -1,7 +1,7 @@
 import { calculateReadingTime, dateToHowover } from '@/lib/helper'
 import { post } from '@/interface/post'
-import { HeartIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline'
-import { CCard, CAvatar } from '@/components/common'
+import { HeartIcon, ChatBubbleBottomCenterTextIcon, BookmarkIcon } from '@heroicons/react/24/outline'
+import { CCard, CAvatar, CIconButton } from '@/components/common'
 // import { useSession } from 'next-auth/react'
 // import usePostLike from '@/hooks/usePostLike'
 
@@ -20,15 +20,7 @@ export const PostCard = ({ post, onClick }: postCardProps) => {
     // }
 
     return (
-        <CCard
-            className="
-				relative 
-				rounded
-				h-56
-				cursor-pointer
-			"
-            onClick={onClick}
-        >
+        <CCard className="relative rounded h-56 cursor-pointer" onClick={onClick}>
             <CCard.Header>
                 <CAvatar size="lg" src={post.author!.image} />
                 <div className="mr-3" />
@@ -37,6 +29,9 @@ export const PostCard = ({ post, onClick }: postCardProps) => {
                     <div className="text-xs mt-auto">
                         {dateToHowover(post.createdAt)} · {calculateReadingTime(post.content)} min read
                     </div>
+                </div>
+                <div className="ml-auto">
+                    <CIconButton size="sm" icon={<BookmarkIcon className="w-5" />} />
                 </div>
             </CCard.Header>
             <CCard.Body className="p-0">
@@ -66,11 +61,14 @@ export const PostCard = ({ post, onClick }: postCardProps) => {
             <CCard.Footer>
                 <div className="flex items-center w-full">
                     <div className="flex gap-1">
+                        {/* TODO 조회수 추가 */}
                         <HeartIcon className="w-5" />
                         {post.likes.length}
                         <div className="mr-2" />
                         <ChatBubbleBottomCenterTextIcon className="w-5" />
                         {post.comments ? post.comments.length : 0}
+                        {/* TODO 해시 태그 추가 */}
+                        {/* TODO 북마크 추가 */}
                     </div>
                 </div>
             </CCard.Footer>
