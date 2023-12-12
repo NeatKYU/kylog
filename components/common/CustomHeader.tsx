@@ -14,18 +14,19 @@ export const CHeader = (props: cHeaderProps) => {
     return (
         <div
             className={`
-				bg-white
-				dark:bg-zinc-800
+				bg-white/20
+				dark:bg-transparent
 				w-full 
 				h-[75px] 
 				flex 
 				justify-center 
-				items-center 
+				items-center
 				sticky
 				top-0
 				border-b
-				dark:border-zinc-600
+				dark:border-indigo-500/10
 				z-[99]
+                backdrop-blur-sm
 			`}
         >
             <div
@@ -49,7 +50,7 @@ export const CHeader = (props: cHeaderProps) => {
 const Brand = (props: cHeaderChildrenProps) => {
     const { children, onClick, className } = props
     return (
-        <div className={'flex justify-center items-center px-2 ' + className} onClick={onClick}>
+        <div className={'flex justify-center items-center px-2' + className} onClick={onClick}>
             {children}
         </div>
     )

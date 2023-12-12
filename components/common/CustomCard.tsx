@@ -17,12 +17,12 @@ export const CCard = (props: cCardProps) => {
     return (
         <div
             className={`
-				bg-zinc-50
-				dark:bg-zinc-800
+				bg-indigo-50/30
+				dark:bg-indigo-950/20
 				flex flex-col
 				rounded-lg
 				border
-				dark:border-zinc-500
+				dark:border-indigo-500/30
                 px-5 py-5
                 gap-2
 				${className ?? ''}

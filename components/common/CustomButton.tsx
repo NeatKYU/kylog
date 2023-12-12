@@ -28,11 +28,11 @@ export const CButton = (props: cButtonProps) => {
 				flex px-2 py-1 justify-center items-center
 				text-sm
 				rounded cursor-pointer 
-				bg-slate-200
-				dark:bg-zinc-600
+				bg-slate-50
+				dark:bg-zinc-800
 				text-black
 				dark:text-white
-				hover:bg-slate-300
+				hover:bg-slate-200
 				dark:hover:bg-zinc-900
 				${sizeClasses(size)}
 				${className ?? ''}

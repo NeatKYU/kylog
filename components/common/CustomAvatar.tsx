@@ -37,6 +37,7 @@ export const CAvatar = (props: cAvatarProps) => {
                 alt="Avatar"
                 src={src}
                 className={`
+					w-full
 					rounded-full
 					cursor-pointer
 				`}

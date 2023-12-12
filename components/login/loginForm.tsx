@@ -44,12 +44,6 @@ export const LoginForm = () => {
 
     return (
         <div className="w-80 m-auto mt-24">
-            {/* <Input 
-				fullWidth 
-				size='lg' 
-				placeholder='아이디를 입력해주세요.' 
-				onInput={handleId}
-			/> */}
             <CInput size="lg" fullWidth onChange={handleId} placeHolder="아이디를 입력해주세요." />
             <div className="my-3" />
             <CInput
@@ -60,32 +54,28 @@ export const LoginForm = () => {
                 placeHolder="비밀번호를 입력해주세요."
             />
             <div className="my-8" />
-            <CButton className="w-full shadow-lg" size="xl" onClick={handleLogin}>
+            <CButton className="w-full" size="xl" onClick={handleLogin}>
                 로그인
             </CButton>
             <div className="my-3" />
-            <CButton
-                size="xl"
-                className="w-full shadow border bg-transparent dark:bg-transparent"
-                onClick={handleRegister}
-            >
+            <CButton size="xl" className="w-full border" onClick={handleRegister}>
                 회원가입
             </CButton>
             <div className="my-10" />
             <CButton
-                className="w-full bg-[#333] dark:bg-[#333] text-white hover:bg-[#434343] dark:hover:bg-[#434343]"
+                className="w-full border"
                 size="xl"
                 onClick={() => signIn('github', { callbackUrl: '/' })}
-                leftIcon={<Github className="mr-2" />}
+                leftIcon={<Github className="mr-5" />}
             >
                 Sign in with Github
             </CButton>
             <div className="my-3" />
             <CButton
-                className="w-full bg-[#fff] dark:bg-[#fff] text-black hover:bg-[#fff] dark:hover:bg-[#fff] border"
+                className="w-full border"
                 size="xl"
                 onClick={() => signIn('google', { callbackUrl: '/' })}
-                leftIcon={<Google className="mr-2" />}
+                leftIcon={<Google className="mr-5" />}
             >
                 Sign in with Google
             </CButton>
