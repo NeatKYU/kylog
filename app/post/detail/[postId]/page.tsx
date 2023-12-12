@@ -33,7 +33,7 @@ export default function Detail() {
                     </div>
                 </div>
             </div>
-            <div className="w-10/12 mb-8 font-bold text-4xl">{data.title}</div>
+            <div className="w-10/12 mb-8 font-bold text-4xl break-words">{data.title}</div>
             <div className="prose dark:prose-invert">
                 <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
                     {data.content}
