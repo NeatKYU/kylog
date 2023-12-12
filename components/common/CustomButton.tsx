@@ -29,11 +29,11 @@ export const CButton = (props: cButtonProps) => {
 				text-sm
 				rounded cursor-pointer 
 				bg-slate-50
-				dark:bg-zinc-800
+				dark:bg-indigo-800
 				text-black
 				dark:text-white
 				hover:bg-slate-200
-				dark:hover:bg-zinc-900
+				dark:hover:bg-indigo-900
 				${sizeClasses(size)}
 				${className ?? ''}
                 ${bordered ? 'border' : ''}

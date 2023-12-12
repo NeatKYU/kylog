@@ -1,6 +1,6 @@
 'use client'
 // lib
-import React, { useState } from 'react'
+import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
@@ -61,7 +61,7 @@ export const Layout = (props: LayoutProps) => {
                 <CInput size="md" icon={<MagnifyingGlassIcon className="w-5" />} />
                 <ThemeToggleButton />
                 <CButton
-                    size="lg"
+                    size="xl"
                     onClick={() => router.push('/post/write')}
                     leftIcon={<PencilSquareIcon className="w-5" />}
                 >
