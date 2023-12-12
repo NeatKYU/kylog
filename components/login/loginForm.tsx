@@ -5,6 +5,7 @@ import cutsomAxios from '@/lib/customAxios'
 import { useRouter } from 'next/navigation'
 // import { BsGithub, BsEyeFill, BsEyeSlashFill } from 'react-icons/bs'
 import Github from '@/assets/providers/github.svg'
+import Google from '@/assets/providers/google.svg'
 import { signIn } from 'next-auth/react'
 import { CInput, CButton } from '@/components/common'
 
@@ -78,6 +79,15 @@ export const LoginForm = () => {
                 leftIcon={<Github className="mr-2" />}
             >
                 Sign in with Github
+            </CButton>
+            <div className="my-3" />
+            <CButton
+                className="w-full bg-[#fff] dark:bg-[#fff] text-black hover:bg-[#fff] dark:hover:bg-[#fff] border"
+                size="xl"
+                onClick={() => signIn('google', { callbackUrl: '/' })}
+                leftIcon={<Google className="mr-2" />}
+            >
+                Sign in with Google
             </CButton>
         </div>
     )
