@@ -18,7 +18,7 @@ export const Header = ({ logo, title, children }: HeaderProps) => {
     return (
         <CHeader>
             <CHeader.Brand onClick={goHome} className="cursor-pointer">
-                <span>KYLOG</span>
+                <img className="w-14 h-14" src="/kylogo.png" />
             </CHeader.Brand>
             <CHeader.Content>{children}</CHeader.Content>
         </CHeader>
