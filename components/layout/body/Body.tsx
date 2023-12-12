@@ -1,5 +1,5 @@
 interface BodyLayoutProps {
-    children: React.ReactNode;
+    children: React.ReactNode
 }
 
 export const BodyLayout = ({ children }: BodyLayoutProps) => {
@@ -13,9 +13,9 @@ export const BodyLayout = ({ children }: BodyLayoutProps) => {
     return (
         <div
             className="
-				flex 
+				flex
 				justify-center 
-				lg:mx-auto
+				mx-auto
 				my-5
 				w-full
 				lg:w-[840px]
@@ -25,5 +25,5 @@ export const BodyLayout = ({ children }: BodyLayoutProps) => {
         >
             {children}
         </div>
-    );
-};
+    )
+}

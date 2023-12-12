@@ -1,10 +1,9 @@
-import { dateToHowover } from '@/lib/helper'
+import { calculateReadingTime, dateToHowover } from '@/lib/helper'
 import { post } from '@/interface/post'
-// import { AiOutlineLike, AiOutlineComment } from 'react-icons/ai'
-import { HandThumbUpIcon, ChatBubbleLeftRightIcon } from '@heroicons/react/24/solid'
-import { CCard, CButton, CAvatar } from '@/components/common'
-import { useSession } from 'next-auth/react'
-import usePostLike from '@/hooks/usePostLike'
+import { HeartIcon, ChatBubbleBottomCenterTextIcon } from '@heroicons/react/24/outline'
+import { CCard, CAvatar } from '@/components/common'
+// import { useSession } from 'next-auth/react'
+// import usePostLike from '@/hooks/usePostLike'
 
 interface postCardProps {
     post: post
@@ -12,62 +11,66 @@ interface postCardProps {
 }
 
 export const PostCard = ({ post, onClick }: postCardProps) => {
-    const { data: session } = useSession()
-    const { like, handleLike } = usePostLike(post.likes.length)
+    // const { data: session } = useSession()
+    // const { like, handleLike } = usePostLike(post.likes.length)
 
-    const handleLikeNoneEvent = (e: React.MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation()
-        handleLike(session?.user.id, post.id)
-    }
+    // const handleLikeNoneEvent = (e: React.MouseEvent<HTMLDivElement>) => {
+    //     e.stopPropagation()
+    //     handleLike(session?.user.id, post.id)
+    // }
 
     return (
         <CCard
             className="
 				relative 
 				rounded
-				w-[calc(33.3%-10px)]
-				lg:w-[270px]
-				h-80 
-				m-[5px]
+				h-56
 				cursor-pointer
 			"
             onClick={onClick}
         >
-            <CCard.Image>
-                <img
-                    src={post.thumbnail === '' ? '/example.jpeg' : post.thumbnail}
-                    alt="CCard image background"
-                    className="absolute top-0 left-0 w-full h-full rounded-t-lg"
-                />
-            </CCard.Image>
+            <CCard.Header>
+                <CAvatar size="lg" src={post.author!.image} />
+                <div className="mr-3" />
+                <div className="flex flex-col gap-1">
+                    <div>{post.author!.name}</div>
+                    <div className="text-xs mt-auto">
+                        {dateToHowover(post.createdAt)} · {calculateReadingTime(post.content)} min read
+                    </div>
+                </div>
+            </CCard.Header>
             <CCard.Body className="p-0">
-                <section className="grow flex flex-col line-clamp-1">
-                    <div className="truncate font-bold my-1">{post.title}</div>
-                    <div className="line-clamp-2 my-1">{post.content}</div>
-                    <div className="text-xs text-right mt-auto">{dateToHowover(post.createdAt)}</div>
-                </section>
+                <div className="flex w-full gap-8 justify-between">
+                    <section className="flex flex-col line-clamp-1">
+                        <div className="truncate font-bold my-1 text-2xl">{post.title}</div>
+                        <div className="line-clamp-2 my-1">{post.content}</div>
+                    </section>
+                    <div className="w-44 min-w-[11rem] h-full relative">
+                        <img
+                            src={'/example.jpeg'}
+                            alt="CCard image background"
+                            className="absolute top-0 left-0 w-full h-full rounded"
+                        />
+                    </div>
+                    {/* {!!post.thumbnail && (
+                        <div className="w-44 h-full relative">
+                            <img
+                                src={post.thumbnail}
+                                alt="CCard image background"
+                                className="absolute top-0 left-0 w-full h-full rounded"
+                            />
+                        </div>
+                    )} */}
+                </div>
             </CCard.Body>
             <CCard.Footer>
                 <div className="flex items-center w-full">
-                    <CAvatar size="sm" src={post.author!.image} />
-                    <div className="mr-1" />
-                    <div>{post.author!.name}</div>
-                    <div className="flex justify-end ml-auto gap-1">
-                        <CButton
-                            size="sm"
-                            className="dark:bg-zinc-800"
-                            leftIcon={<HandThumbUpIcon className="w-5" />}
-                            onClick={handleLikeNoneEvent}
-                        >
-                            {like}
-                        </CButton>
-                        <CButton
-                            size="sm"
-                            className="dark:bg-zinc-800"
-                            leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}
-                        >
-                            {post.comments ? post.comments.length : 0}
-                        </CButton>
+                    <div className="flex gap-1">
+                        <HeartIcon className="w-5" />
+                        {post.likes.length}
+                        <div className="mr-2" />
+                        <ChatBubbleBottomCenterTextIcon className="w-5" />
+                        {post.comments ? post.comments.length : 0}
                     </div>
                 </div>
             </CCard.Footer>

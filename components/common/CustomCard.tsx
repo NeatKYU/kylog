@@ -23,6 +23,8 @@ export const CCard = (props: cCardProps) => {
 				rounded-lg
 				border
 				dark:border-zinc-500
+                px-5 py-5
+                gap-2
 				${className ?? ''}
 			`}
             onClick={onClick}
@@ -37,7 +39,7 @@ const Header = (props: cCardChildrenProps) => {
     return (
         <div
             className={`
-				flex p-3 items-center basis-3/12
+				flex items-center basis-3/12
 				${className ?? ''}
 			`}
             style={{ flex: 3 }}
@@ -67,7 +69,7 @@ const Body = (props: cCardChildrenProps) => {
     return (
         <div
             className={`
-				flex px-3 py-2
+				flex
 				${className ?? ''}
 			`}
             style={{ flex: 7 }}
@@ -82,7 +84,7 @@ const Footer = (props: cCardChildrenProps) => {
     return (
         <div
             className={`
-				flex px-3 pb-2 pt-1
+				flex
 				${className ?? ''}
 			`}
             style={{ flex: 1 }}

@@ -32,6 +32,6 @@ export const PostCardList = () => {
     }
 
     return isHome ? (
-        <div className="flex flex-wrap">{isFetching ? <div>loading...</div> : postListElement(post)}</div>
+        <div className="flex flex-col w-full gap-2">{isFetching ? <div>loading...</div> : postListElement(post)}</div>
     ) : null
 }
