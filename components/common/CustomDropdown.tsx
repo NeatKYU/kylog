@@ -71,9 +71,9 @@ const Menu = (props: cDropdownChildrenProps) => {
         <div
             className={`
 				${className ?? ''}
-				flex flex-col py-2 px-3 border rounded-lg bg-white dark:bg-zinc-700
+				flex flex-col py-2 px-3 border dark:border-none rounded-lg bg-white dark:bg-indigo-500
 				min-w-[15rem] w-auto h-auto absolute top-full mt-2 right-0
-				text-lg
+				text-lg dark:text-white
 				${isShow ? '' : 'hidden'}
 			`}
             onClick={() => setIsShow(false)}
@@ -91,7 +91,7 @@ const Item = (props: cDropdownChildrenProps) => {
 				${className ?? ''}
 				flex items-center
 				hover:bg-gray-100
-				dark:hover:bg-zinc-900
+				dark:hover:bg-indigo-700
 				cursor-pointer
 				rounded-lg px-2 py-1
 			`}

@@ -36,8 +36,8 @@ export const Sidebar = (props: SidebarProps) => {
 					top-0
 					w-[500px] 
 					h-full 
-					dark:bg-zinc-700
-					bg-slate-200
+					dark:bg-indigo-950
+					bg-white
 					transition 
 					duration-500
 					px-2

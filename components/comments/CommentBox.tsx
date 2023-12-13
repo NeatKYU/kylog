@@ -70,12 +70,10 @@ export const CommentBox = (props: commentBoxProps) => {
                         />
                     </CCard.Body>
                     <CCard.Footer className="justify-end gap-1">
-                        <CButton bordered size="sm" onClick={() => submitCommentMutation.mutate()}>
+                        <CButton size="sm" onClick={() => submitCommentMutation.mutate()}>
                             제출
                         </CButton>
-                        <CButton bordered size="sm">
-                            취소
-                        </CButton>
+                        <CButton size="sm">취소</CButton>
                     </CCard.Footer>
                 </>
             ) : (

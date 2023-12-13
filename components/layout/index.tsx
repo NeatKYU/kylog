@@ -42,9 +42,9 @@ export const Layout = (props: LayoutProps) => {
             </CDropdown.Menu>
         ) : (
             <CDropdown.Menu>
-                <CDropdown.Item icon={<UserGroupIcon className="w-5" />} onClick={() => router.push('/register')}>
+                {/* <CDropdown.Item icon={<UserGroupIcon className="w-5" />} onClick={() => router.push('/register')}>
                     <div>회원가입</div>
-                </CDropdown.Item>
+                </CDropdown.Item> */}
                 <CDropdown.Item
                     icon={<ArrowLeftOnRectangleIcon className="w-5" />}
                     onClick={() => router.push('/login')}

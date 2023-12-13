@@ -18,11 +18,11 @@ export const CCard = (props: cCardProps) => {
         <div
             className={`
 				bg-indigo-50/30
-				dark:bg-indigo-950/20
+				dark:bg-transparent
 				flex flex-col
 				rounded-lg
 				border
-				dark:border-indigo-500/30
+				dark:border-indigo-900/70
                 px-5 py-5
                 gap-2
 				${className ?? ''}

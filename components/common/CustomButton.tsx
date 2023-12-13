@@ -9,11 +9,11 @@ interface cButtonProps {
     leftIcon?: React.ReactNode
     rightIcon?: React.ReactNode
     className?: string
-    bordered?: boolean
+    outlined?: boolean
 }
 
 export const CButton = (props: cButtonProps) => {
-    const { size = 'md', children, onClick, leftIcon, rightIcon, className, bordered } = props
+    const { size = 'md', children, onClick, leftIcon, rightIcon, className, outlined } = props
 
     const sizeClasses = (size: sizeType) => {
         if (size === 'sm') return 'min-w-[3.5rem] h-8'
@@ -22,21 +22,22 @@ export const CButton = (props: cButtonProps) => {
         if (size === 'xl') return 'min-w-[5rem] h-14'
     }
 
+    const outlinedClasses = (bool: boolean | undefined) => {
+        if (bool) return 'bg-transparent hover:bg-slate-200 dark:hover:bg-indigo-700'
+        else return 'bg-indigo-50 dark:bg-indigo-500 hover:bg-slate-200 dark:hover:bg-indigo-700'
+    }
+
     return (
         <div
             className={`
 				flex px-2 py-1 justify-center items-center
 				text-sm
 				rounded cursor-pointer 
-				bg-indigo-50
-				dark:bg-indigo-500
 				text-black
 				dark:text-white
-				hover:bg-slate-200
-				dark:hover:bg-indigo-700
 				${sizeClasses(size)}
+                ${outlinedClasses(outlined)}
 				${className ?? ''}
-                ${bordered ? 'border' : ''}
 			`}
             onClick={onClick}
         >

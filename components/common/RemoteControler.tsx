@@ -43,7 +43,7 @@ export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteCont
                             icon={<HeartIcon className="w-6" />}
                             onClick={() => handleLike(session?.user.id, postId)}
                         />
-                        <div className="mr-1">{like}</div>
+                        <div className="mr-1 dark:text-white">{like}</div>
                     </div>
                     <div className="w-[1px] h-full flex items-center mx-2">
                         <div className="w-full h-1/2 bg-black dark:bg-indigo-300"></div>
