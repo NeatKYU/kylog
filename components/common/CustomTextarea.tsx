@@ -12,10 +12,10 @@ export const CTextarea = (props: cTextareaProps) => {
     const { rows, onChange, className, value, placeHolder } = props
     return (
         <textarea
-            className={`resize-none rounded bg-white dark:bg-indigo-900 dark:border-none outline-none border p-2 ${
+            className={`resize-none rounded bg-white dark:bg-transparent dark:border-none outline-none border p-2 ${
                 className ?? ''
             }`}
-            rows={rows}
+            // rows={rows}
             onChange={onChange}
             value={value}
             placeholder={placeHolder}

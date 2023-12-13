@@ -53,39 +53,50 @@ export const CommentBox = (props: commentBoxProps) => {
     }
 
     return (
-        <CCard className={`${session ? 'min-h-[204px]' : 'min-h-[110px]'}`}>
-            {session ? (
-                <>
-                    <CCard.Header className="gap-2 font-bold">
-                        <CAvatar src={session?.user.image || '/defaultUser.jpeg'} />
-                        <span>{session?.user.name}</span>
-                    </CCard.Header>
-                    <CCard.Body>
-                        <CTextarea
-                            rows={3}
-                            value={content}
-                            className="w-full"
-                            onChange={handleContent}
-                            placeHolder="내용을 입력하세요."
-                        />
-                    </CCard.Body>
-                    <CCard.Footer className="justify-end gap-1">
-                        <CButton size="sm" onClick={() => submitCommentMutation.mutate()}>
-                            제출
-                        </CButton>
-                        <CButton size="sm">취소</CButton>
-                    </CCard.Footer>
-                </>
-            ) : (
-                <div onClick={() => router.push('/login')}>
-                    <CCard.Header>
-                        <span>댓글</span>
-                    </CCard.Header>
-                    <CCard.Body>
-                        <CTextarea className="px-[20px] w-full" rows={1} placeHolder="로그인이 필요한 서비스입니다." />
-                    </CCard.Body>
-                </div>
-            )}
-        </CCard>
+        <div className="w-full min-h-14 flex flex-col gap-2">
+            <CTextarea
+                value={content}
+                className="w-full border-none"
+                onChange={handleContent}
+                placeHolder="내용을 입력하세요."
+            />
+            <div className="flex justify-end">
+                <CButton onClick={() => submitCommentMutation.mutate()}>요청</CButton>
+            </div>
+        </div>
+        // <CCard className={`${session ? 'min-h-[204px]' : 'min-h-[110px]'} !border-none`}>
+        //     {session ? (
+        //         <>
+        //             <CCard.Header className="gap-2 font-bold">
+        //                 <CAvatar src={session?.user.image || '/defaultUser.jpeg'} />
+        //                 <span>{session?.user.name}</span>
+        //             </CCard.Header>
+        //             <CCard.Body>
+        //                 <CTextarea
+        //                     rows={3}
+        //                     value={content}
+        //                     className="w-full"
+        //                     onChange={handleContent}
+        //                     placeHolder="내용을 입력하세요."
+        //                 />
+        //             </CCard.Body>
+        //             <CCard.Footer className="justify-end gap-1">
+        //                 <CButton size="sm" onClick={() => submitCommentMutation.mutate()}>
+        //                     제출
+        //                 </CButton>
+        //                 <CButton size="sm">취소</CButton>
+        //             </CCard.Footer>
+        //         </>
+        //     ) : (
+        //         <div onClick={() => router.push('/login')}>
+        //             <CCard.Header>
+        //                 <span>댓글</span>
+        //             </CCard.Header>
+        //             <CCard.Body>
+        //                 <CTextarea className="px-[20px] w-full" rows={1} placeHolder="로그인이 필요한 서비스입니다." />
+        //             </CCard.Body>
+        //         </div>
+        //     )}
+        // </CCard>
     )
 }

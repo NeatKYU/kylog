@@ -1,6 +1,7 @@
 // import { AiOutlineClose } from 'react-icons/ai'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ThemeToggleButton } from './ThemeToggleButton'
+import { CIconButton } from './CustomIconButton'
 
 interface SidebarProps {
     isOpen?: boolean
@@ -48,12 +49,10 @@ export const Sidebar = (props: SidebarProps) => {
 					${isOpen ? 'translate-left-full' : ''}`}
             >
                 {/* header */}
-                <div className="header w-full h-[30px] flex justify-end items-center mb-2">
-                    <div
-                        onClick={handleClose}
-                        className="w-[20px] h-[20px] flex items-center justify-center cursor-pointer m-1"
-                    >
-                        <XMarkIcon className="w-5" />
+                <div className="header w-full flex justify-between items-center mb-2">
+                    <div className="text-lg font-bold ml-2">만남의 광장</div>
+                    <div onClick={handleClose}>
+                        <CIconButton icon={<XMarkIcon className="w-5" />} />
                     </div>
                 </div>
                 {children}
