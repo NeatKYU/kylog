@@ -7,7 +7,7 @@ import { useRouter } from 'next/navigation'
 import Github from '@/assets/providers/github.svg'
 import Google from '@/assets/providers/google.svg'
 import { signIn } from 'next-auth/react'
-import { CInput, CButton } from '@/components/common'
+import { CInput, CButton, CIconButton } from '@/components/common'
 
 export const LoginForm = () => {
     const [id, setId] = useState('')
@@ -44,7 +44,7 @@ export const LoginForm = () => {
 
     return (
         <div className="w-80 m-auto mt-24">
-            <CInput size="lg" fullWidth onChange={handleId} placeHolder="아이디를 입력해주세요." />
+            {/* <CInput size="lg" fullWidth onChange={handleId} placeHolder="아이디를 입력해주세요." />
             <div className="my-3" />
             <CInput
                 size="lg"
@@ -61,9 +61,9 @@ export const LoginForm = () => {
             <CButton size="xl" className="w-full border" onClick={handleRegister}>
                 회원가입
             </CButton>
-            <div className="my-10" />
+            <div className="my-10" /> */}
             <CButton
-                className="w-full border"
+                className="w-full border !bg-white !text-black"
                 size="xl"
                 onClick={() => signIn('github', { callbackUrl: '/' })}
                 leftIcon={<Github className="mr-5" />}
@@ -72,7 +72,7 @@ export const LoginForm = () => {
             </CButton>
             <div className="my-3" />
             <CButton
-                className="w-full border"
+                className="w-full border !bg-white !text-black"
                 size="xl"
                 onClick={() => signIn('google', { callbackUrl: '/' })}
                 leftIcon={<Google className="mr-5" />}
