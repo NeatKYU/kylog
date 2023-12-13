@@ -28,7 +28,7 @@ export const CInput = (props: cInputProps) => {
 				flex justify-center items-center
 				rounded-lg 
 				py-2 px-3 border
-				dark:border-zinc-600
+				dark:border-indigo-900/70
 				${sizeClasses(size)}
 				${className ?? ''}
 			`}

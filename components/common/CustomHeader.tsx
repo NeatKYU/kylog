@@ -50,7 +50,7 @@ export const CHeader = (props: cHeaderProps) => {
 const Brand = (props: cHeaderChildrenProps) => {
     const { children, onClick, className } = props
     return (
-        <div className={'flex justify-center items-center px-2' + className} onClick={onClick}>
+        <div className={'flex justify-center items-center ' + className} onClick={onClick}>
             {children}
         </div>
     )
