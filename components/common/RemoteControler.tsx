@@ -1,14 +1,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { HandThumbUpIcon, ChatBubbleLeftRightIcon, ShareIcon } from '@heroicons/react/24/solid'
+import { HeartIcon, ChatBubbleBottomCenterTextIcon, ShareIcon } from '@heroicons/react/24/outline'
 import usePostLike from '@/hooks/usePostLike'
 import { useSession } from 'next-auth/react'
 import { Sidebar } from '@/components/common/Sidebar'
 import { CommentBox } from '@/components/comments/CommentBox'
 import { Comment } from '@/components/comments/Comment'
 import { comment } from '@/interface/post'
-import { CButton } from './CustomButton'
 import { CIconButton } from './CustomIconButton'
 
 interface RemoteControlerProps {
@@ -37,29 +36,23 @@ export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteCont
 
     return (
         <>
-            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-200 dark:bg-zinc-600 shadow-2xl">
+            <div className="flex fixed bottom-0 left-1/2 translate-center p-2 rounded-lg bg-slate-100 dark:bg-indigo-500 border dark:border-indigo-500">
                 <div className="flex justify-center items-center">
-                    <CButton
-                        onClick={() => handleLike(session?.user.id, postId)}
-                        leftIcon={<HandThumbUpIcon className="w-5" />}
-                        className="!h-10"
-                    >
-                        {like}
-                    </CButton>
-                    <div className="w-[1px] h-full flex items-center mx-1">
-                        <div className="w-full h-1/2 bg-black"></div>
+                    <div className="flex justify-center items-center">
+                        <CIconButton
+                            icon={<HeartIcon className="w-6" />}
+                            onClick={() => handleLike(session?.user.id, postId)}
+                        />
+                        <div className="mr-1">{like}</div>
                     </div>
-                    <CButton
-                        onClick={handleComment}
-                        leftIcon={<ChatBubbleLeftRightIcon className="w-5" />}
-                        className="!h-10"
-                    >
-                        {currentComments.length}
-                    </CButton>
                     <div className="w-[1px] h-full flex items-center mx-1">
-                        <div className="w-full h-1/2 bg-black"></div>
+                        <div className="w-full h-1/2 bg-black dark:bg-indigo-300"></div>
                     </div>
-                    <CIconButton icon={<ShareIcon className="w-5" />} />
+                    <CIconButton icon={<ChatBubbleBottomCenterTextIcon className="w-6" />} onClick={handleComment} />
+                    <div className="w-[1px] h-full flex items-center mx-1">
+                        <div className="w-full h-1/2 bg-black dark:bg-indigo-300"></div>
+                    </div>
+                    <CIconButton icon={<ShareIcon className="w-6" />} />
                 </div>
             </div>
             <Sidebar isOpen={isOpen} setIsOpen={setIsOpen}>
