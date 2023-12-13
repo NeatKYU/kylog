@@ -60,11 +60,7 @@ export const Layout = (props: LayoutProps) => {
             <Header logo="@/assets/img/logo.png" title="">
                 <CInput size="md" icon={<MagnifyingGlassIcon className="w-5" />} />
                 <ThemeToggleButton />
-                <CButton
-                    size="xl"
-                    onClick={() => router.push('/post/write')}
-                    leftIcon={<PencilSquareIcon className="w-5" />}
-                >
+                <CButton onClick={() => router.push('/post/write')} leftIcon={<PencilSquareIcon className="w-5" />}>
                     글쓰기
                 </CButton>
                 <CDropdown>

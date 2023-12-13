@@ -26,7 +26,7 @@ export const CIconButton = (props: cIconButtonProps) => {
 				text-black
 				dark:text-white
 				hover:bg-slate-300
-				dark:hover:bg-indigo-900
+				dark:hover:bg-indigo-700
 				${sizeClasses(size)}
 			`}
             onClick={onClick}
