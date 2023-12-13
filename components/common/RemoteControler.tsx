@@ -45,11 +45,11 @@ export const RemoteControler = ({ likes = 0, comments = [], postId }: RemoteCont
                         />
                         <div className="mr-1">{like}</div>
                     </div>
-                    <div className="w-[1px] h-full flex items-center mx-1">
+                    <div className="w-[1px] h-full flex items-center mx-2">
                         <div className="w-full h-1/2 bg-black dark:bg-indigo-300"></div>
                     </div>
                     <CIconButton icon={<ChatBubbleBottomCenterTextIcon className="w-6" />} onClick={handleComment} />
-                    <div className="w-[1px] h-full flex items-center mx-1">
+                    <div className="w-[1px] h-full flex items-center mx-2">
                         <div className="w-full h-1/2 bg-black dark:bg-indigo-300"></div>
                     </div>
                     <CIconButton icon={<ShareIcon className="w-6" />} />
